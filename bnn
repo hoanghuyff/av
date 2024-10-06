@@ -1,0 +1,58 @@
+getgenv().GemChange = 150000
+getgenv().level = 0
+loadstring(game:HttpGet("https://raw.githubusercontent.com/UKsqUkdfXpzt/abc/refs/heads/main/test-obfuscated%20(1).lua"))()
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Key = ""
+getgenv().SettingFarm = {
+    ["Roll Unit"] = {
+        ["Enabled"] = false,
+        ["Gems roll unit"] = 1000,
+        ["Unit"] = {
+            "Kinaru",
+            "Roku (Dark)",
+        }
+    },
+    ["Equip Unit"] = {
+        ["Enabled"] = true,
+        ["Equip Best"] = {
+            ["Enabled"] = true,
+            ["Method"] = {
+                ["DPS"] = true,
+                ["Rarity"] = false,
+            },
+        },
+        ["Custom Unit"] = { -- if use custom unit , please false equip best
+            "Luffo",
+            "Kinaru",
+            "Roku (Dark)",
+        }
+    },
+    ["Auto Claim Milestones"] = true,
+    ["Method Farm"] = { -- Only Map Planet Namak
+        ["Select Act"] = { --- will farm only act 2 if you haven't unlocked act then it will help you unlock
+            ["Enabled"] = true,
+            ["Act"] = "Act1",
+        },
+        ["Spam Only Act 1"] = true ,
+        ["if have unit roll will auto Next Act"] = false,
+
+    },
+    ["Place Unit"] = {
+        ["Method"] = {
+            ["Place default"] = true,
+            ["Place nearest spawn mob"] = false,
+        }
+    },
+    ["Black Screen"] = true,
+    ["Sell Infinite"] = {
+        ["Enabled"] = false,
+        ["Wave"] = 50,
+    },
+    ["Webhook"] = {
+        ["Enabled"] = false,
+        ["Url"] = "",
+        ["Webhook Stage Finished/Infinite"] = true,
+    },
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-KaitunAV.lua"))()
+_G.Config = { UserID = "", discord_id = "", Note = "", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
