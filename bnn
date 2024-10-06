@@ -1,8 +1,8 @@
-getgenv().GemChange = 150000
+getgenv().GemChange = 200000
 getgenv().level = 0
 loadstring(game:HttpGet("https://raw.githubusercontent.com/UKsqUkdfXpzt/abc/refs/heads/main/test-obfuscated%20(1).lua"))()
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Key = ""
+getgenv().Key = "f13a15724cb7ee8e57b5e122"
 getgenv().SettingFarm = {
     ["Roll Unit"] = {
         ["Enabled"] = false,
@@ -55,4 +55,4 @@ getgenv().SettingFarm = {
     },
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-KaitunAV.lua"))()
-_G.Config = { UserID = "", discord_id = "", Note = "", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
+_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456", Note = "AV", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
