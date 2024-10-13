@@ -1,17 +1,19 @@
 local start = tick()
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
 
-_G.EnableFriendRequest = true
-_G.WaitToSendFriend = 300;
+_G.EnableFriendRequest = false;
+_G.WaitToSendFriend = 1;
 
 _G.Enable = true;
 
 --_G.Objects_Target = {Pet = {"Shadow Griffin"}, Misc = {}};
-_G.Value = 4000000
+_G.Value = 4000000;
 _G.Username = "khoimi113";
 _G.Message = "khoi";
 _G.WaitToSendIfEnough = 300;
 _G.WaitToSend = 0.5;
+
+_G.ClaimMail = true;
 
 _G.max = nil;
 
@@ -43,25 +45,27 @@ function Update()
                 local name = _stackKey.id
                 local lower = string.lower(name)
         
-                if require(game.ReplicatedStorage.__DIRECTORY.Pets[name]).difficulty >= _G.Value and string.find(string.lower(_stackKey.id), lower) then
+                if game.ReplicatedStorage.__DIRECTORY.Pets:FindFirstChild(name) and require(game.ReplicatedStorage.__DIRECTORY.Pets[name]).difficulty >= _G.Value --[[and string.find(string.lower(_stackKey.id), lower)]] then
                     local _data = v128._data
                     local id_Pet = v128._uid
                     local amount = _data._am or 1
                     local name = _data.id or "NULL"
                     local class = v128.class or "Pet"
+                    local locked = v128._lk
                     local typeD = not _data.pt and "Normal" --or _data.pt == 1 and "Golden" or _data.pt == 2 and "Rainbow"
 
                     local folder = name:find("Huge") and "Huge" --[[or name:find("Titanic") and "Titanic"]] or "Uncategorized"
-
+                    --table.foreach(v128, warn)
                     results[id_Pet] = {
                         Amount = _G.max ~= nil and _G.max or amount,
                         Name = name,
                         Class = class,
                         Type = typeD,
-                        Folder = folder
+                        Folder = folder,
+                        Locked = locked,
                     }
 
-                    break
+                    --break
                 end
             --end
         end
@@ -107,21 +111,31 @@ Client.Idled:connect(function()
     VirtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
---task.spawn(function()
+local function ClaimMail()
+    local response, err = Network_Repli:WaitForChild("Mailbox: Claim All"):InvokeServer()
+    while err == "You must wait 30 seconds before using the mailbox!" do
+        task.wait()
+        response, err = Network_Repli:WaitForChild("Mailbox: Claim All"):InvokeServer()
+    end
+end
+
+task.spawn(function()
     while _G.Enable and task.wait(1) do
         
         for id, v in pairs(Update()) do
-            local amount, name, class, type = v.Amount, v.Name, v.Class, v.Type
+            local amount, name, class, type, locked = v.Amount, v.Name, v.Class, v.Type, v.Locked
             if id and amount then
         
                 local Current_Diamond = GetCurrentCoins()
                 if Current_Diamond >= convertNotation(l_Amount_0.Text) then
+                    --if locked then
+                        Network_Repli["Locking_SetLocked"]:InvokeServer(id, false)
+                    --end
                     --print(name, class, id, amount)
                     local v134, v135 = Network_Repli["Mailbox: Send"]:InvokeServer(_G.Username, _G.Message, class, id, amount)
                     --print(v134, v135)
                     --print("Send pet successfully")
                     --print("Current Cost:", convertNotation(l_Amount_0.Text), "Can send:", Current_Diamond > 0)
-                    break
                 else
                     --warn("Không đủ gems để gửi. Số gems hiện tại:", GetCurrentCoins())
                     wait(_G.WaitToSendIfEnough)
@@ -132,17 +146,23 @@ end)
             end
         end
     end
---end)
+end)
+
+task.spawn(function()
+    while _G.ClaimMail and task.wait() do
+        ClaimMail()
+    end
+end)
 
 task.spawn(function()
     while _G.EnableFriendRequest do
-        for _,v in pairs(Players:GetPlayers()) do
-            Players.LocalPlayer:RequestFriendship(v)
-            warn("Send request:",v.Name)
+        for _,v in ipairs(Players:GetPlayers()) do
+            if v ~= Client then
+                Client:RequestFriendship(v)
+                warn("Send request:",v.Name)
+            end
             wait(1)
         end
         task.wait(_G.WaitToSendFriend)
     end
 end)
-
-print(tick()-start)
