@@ -1,8 +1,8 @@
 local start = tick()
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
 
-_G.EnableFriendRequest = false;
-_G.WaitToSendFriend = 1;
+_G.EnableFriendRequest = true;
+_G.WaitToSendFriend = 300;
 
 _G.Enable = true;
 
@@ -13,7 +13,7 @@ _G.Message = "khoi";
 _G.WaitToSendIfEnough = 300;
 _G.WaitToSend = 0.5;
 
-_G.ClaimMail = true;
+_G.ClaimMail = false;
 
 _G.max = nil;
 
