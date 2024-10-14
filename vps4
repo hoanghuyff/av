@@ -70,4 +70,4 @@ getgenv().Config = {
 }
 getgenv().Key = "k2f41b580906dda0f193c3d4"
 repeat wait()spawn(function()loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
-_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456", Note = "VPS4", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
+_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456", Note = "VPS01", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/main/animevanguard"))()
