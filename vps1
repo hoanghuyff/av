@@ -1,5 +1,5 @@
 getgenv().Config = {
-    ["AutoSave"] = true,
+    ["AutoSave"] = false,
     ["Webhook"] = {
         ["Minimum Chance"] = 1000000,
         ["Pet Rolled"] = true,
