@@ -1,4 +1,51 @@
-repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
-script_key="kEqAUEixABrDUkLTLCPGurBYQCmbBzrd";
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/b22aae7d03041699ada62f6a4fb519fd.lua"))()
+getgenv().Config = {
+    ["Webhook"] = {
+        ["Pet Rolled"] = true,
+        ["Minimum Chance"] = 1000000,
+        ["URL"] = "https://discord.com/api/webhooks/1294687235379036292/9bhqSMfMfJf5GqiiMBzu_87455h9h4UYCv42fgPGEGJGW6WWx5m3Zc_amkY-tO8kzSed"
+    },
+    ["Consumer"] = {
+        ["Potion"] = {
+            ["Enable"] = true
+        },
+        ["Fruit"] = {
+            ["Enable"] = true,
+            ["Fruit"] = {
+                ["Watermelon"] = true,
+                ["Pineapple"] = true,
+                ["Rainbow"] = true,
+                ["Apple"] = true,
+                ["Orange"] = true,
+                ["Banana"] = true
+            }
+        }
+    },
+    ["Upgrader"] = {
+        ["Enable"] = true,
+        ["Keep Amount"] = 100
+    },
+    ["Crafter"] = {
+        ["Enable"] = true
+    },
+    ["Resource"] = {
+        ["Auto Farm"] = true,
+        ["Auto Hidden Gift"] = true
+    },
+    ["Performance"] = {
+        ["Boost FPS"] = true
+    },
+    ["Sender"] = {
+        ["Minimum Chance"] = 1000000
+    },
+    ["Buyer"] = {
+        ["Potion Vending"] = true
+    },
+    ["Interface"] = {
+        ["Auto Upgrade"] = true,
+        ["Auto Roll"] = true,
+        ["Fast Roll"] = true
+    }
+}
+getgenv().Key = "kbbf5f01ca9ce76adb0fff25"
+repeat wait()spawn(function()loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/rng.lua"))()
