@@ -10,7 +10,6 @@ _G.Enable = true;
 _G.Value = 4000000;
 _G.Username = "khoimi113";
 _G.Message = "khoi";
-_G.WaitToClaim = 30;
 _G.WaitToSendIfEnough = 300;
 _G.WaitToSend = 0.5;
 
@@ -22,18 +21,17 @@ local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game.ReplicatedStorage
 local Players = game:GetService('Players')
 local Client = Players.LocalPlayer
-local VirtualUser = game:GetService('VirtualUser')
+local Network_Repli = ReplicatedStorage:WaitForChild("Network")
 
 local v5 = require(ReplicatedStorage.Library.Items.Types);
-local v22 = require(ReplicatedStorage.Library.Client.Network);
-local v13 = require(ReplicatedStorage.Library.Client.GUI);
 
+local VirtualUser = game:GetService('VirtualUser')
+
+local v13 = require(ReplicatedStorage.Library.Client.GUI);
 local v37 = v13.MailboxMachine();
 local l_Frame_0 = v37.Frame;
-local l_GiftsFrame_0 = l_Frame_0:FindFirstChild("GiftsFrame");
 local l_SendFrame_0 = l_Frame_0:FindFirstChild("SendFrame");
 
-local l_ItemsFrame_1 = l_GiftsFrame_0.ItemsFrame;
 local l_Amount_0 = l_SendFrame_0.Bottom.Coins.Frame.Amount;
 
 function Update()
@@ -47,7 +45,7 @@ function Update()
                 local name = _stackKey.id
                 local lower = string.lower(name)
         
-                if ReplicatedStorage.__DIRECTORY.Pets:FindFirstChild(name) and require(ReplicatedStorage.__DIRECTORY.Pets[name]).difficulty >= _G.Value --[[and string.find(string.lower(_stackKey.id), lower)]] then
+                if game.ReplicatedStorage.__DIRECTORY.Pets:FindFirstChild(name) and require(game.ReplicatedStorage.__DIRECTORY.Pets[name]).difficulty >= _G.Value --[[and string.find(string.lower(_stackKey.id), lower)]] then
                     local _data = v128._data
                     local id_Pet = v128._uid
                     local amount = _data._am or 1
@@ -114,16 +112,11 @@ Client.Idled:connect(function()
 end)
 
 local function ClaimMail()
-    local l_l_ItemsFrame_1_Children_0 = l_ItemsFrame_1:GetChildren();
-
-    local readytoClaim = {}
-    for _, v150 in ipairs(l_l_ItemsFrame_1_Children_0) do
-        if not v150:isA("UIPadding") and not v150:isA("UIGridLayout") then
-            table.insert(readytoClaim, v150.Name)
-        end;
-    end;
-    
-    v22.Invoke("Mailbox: Claim", readytoClaim)
+    local response, err = Network_Repli:WaitForChild("Mailbox: Claim All"):InvokeServer()
+    while err == "You must wait 30 seconds before using the mailbox!" do
+        task.wait()
+        response, err = Network_Repli:WaitForChild("Mailbox: Claim All"):InvokeServer()
+    end
 end
 
 task.spawn(function()
@@ -136,10 +129,10 @@ task.spawn(function()
                 local Current_Diamond = GetCurrentCoins()
                 if Current_Diamond >= convertNotation(l_Amount_0.Text) then
                     --if locked then
-                        v22.Invoke("Locking_SetLocked", id, false)
+                        Network_Repli["Locking_SetLocked"]:InvokeServer(id, false)
                     --end
                     --print(name, class, id, amount)
-                    local v134, v135 = v22.Invoke("Mailbox: Send", _G.Username, _G.Message, class, id, amount)
+                    local v134, v135 = Network_Repli["Mailbox: Send"]:InvokeServer(_G.Username, _G.Message, class, id, amount)
                     --print(v134, v135)
                     --print("Send pet successfully")
                     --print("Current Cost:", convertNotation(l_Amount_0.Text), "Can send:", Current_Diamond > 0)
@@ -156,53 +149,20 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while _G.ClaimMail do
+    while _G.ClaimMail and task.wait() do
         ClaimMail()
-        task.wait(_G.WaitToClaim)
     end
 end)
 
 task.spawn(function()
     while _G.EnableFriendRequest do
-        for _,v in pairs(Players:GetChildren()) do
+        for _,v in ipairs(Players:GetPlayers()) do
             if v ~= Client then
                 Client:RequestFriendship(v)
                 warn("Send request:",v.Name)
             end
-            --wait(1)
+            wait(1)
         end
         task.wait(_G.WaitToSendFriend)
     end
 end)
-
-task.spawn(function()
-    while task.wait() do
-        local confirmButton = game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame
-        .ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton.HoverBackground.ButtonContainer.ConfirmButton
-    
-        if game:GetService("CoreGui").PlayerList.Children.OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.PlayerDropDown.InnerFrame.FriendButton.CurrentButtonContainer.DropDownButton.HoverBackground.Text.Text == "Accept" then
-            for _, connection in ipairs(getconnections(confirmButton.Activated)) do
-                if connection.Function then
-                    connection:Fire()
-                    print("Accepted Successfully")
-                end
-            end
-        end
-    end
-end)
-
--- local l_ClaimAll_0 = l_Frame_0.OptionsFrame.ClaimAll;
-
--- table.foreach(getconnections(l_ClaimAll_0.Activated), function(_,v)
---     v.Function();
--- end)
--- spawn(function()
---     local v22 = require(ReplicatedStorage.Library.Client.Network);
---     local v23 = require(ReplicatedStorage.Library.Signal);
---     local v60 = v22.Invoke("Mailbox: Request");
-    
---     warn(v22.Invoke("Mailbox: Request"))
--- end)
-
-local v21 = require(ReplicatedStorage.Library.Client.Message);
-print(v21.New("You can't send Diamonds with an Item!", true))
