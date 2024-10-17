@@ -1,7 +1,7 @@
 local start = tick()
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
 
-_G.EnableFriendRequest = true;
+_G.EnableFriendRequest = false;
 _G.WaitToSendFriend = 300;
 
 _G.Enable = true;
