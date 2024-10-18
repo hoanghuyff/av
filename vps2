@@ -52,6 +52,6 @@ getgenv().Config = {
 		["Fast Roll"] = true
 	}
 }
-getgenv().Key = "kf86c0da9573df601e0961fe"
+getgenv().Key = "k2f41b580906dda0f193c3d4"
 repeat wait()spawn(function()loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/cac"))()
