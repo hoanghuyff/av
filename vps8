@@ -1,1 +1,57 @@
-
+getgenv().Config = {
+	["Webhook"] = {
+		["Pet Rolled"] = true,
+		["Minimum Chance"] = 4000000,
+		["Mail Sent"] = true,
+		["URL"] = "https://discord.com/api/webhooks/1296711589587718205/FBjghQkj2rgtmKwWBfuvOiZnUqoMfGXL4RByol25Y6adxZqRkz3sE7HB_-Bi-eiWUM68"
+	},
+	["Consumer"] = {
+		["Potion"] = {
+			["Enable"] = true
+		},
+		["Fruit"] = {
+			["Enable"] = true,
+			["Fruit"] = {
+				["Watermelon"] = true,
+				["Pineapple"] = true,
+				["Rainbow"] = true,
+				["Apple"] = true,
+				["Orange"] = true,
+				["Banana"] = true
+			}
+		}
+	},
+	["Upgrader"] = {
+		["Enable"] = true,
+		["Keep Amount"] = 100
+	},
+	["Crafter"] = {
+		["Enable"] = true
+	},
+	["Resource"] = {
+		["Auto Farm"] = true,
+		["Auto Hidden Gift"] = true
+	},
+	["Performance"] = {
+		["Boost FPS"] = true
+	},
+	["Sender"] = {
+		["Auto Send Mail"] = true,
+		["Minimum Chance"] = 4000000,
+		["Receiver Name"] = "khoimi113"
+	},
+	["Buyer"] = {
+		["Potion Vending"] = true,
+		["Index Shop"] = {
+			["Enable"] = true
+		}
+	},
+	["Interface"] = {
+		["Auto Upgrade"] = true,
+		["Auto Roll"] = true,
+		["Fast Roll"] = true
+	}
+}
+getgenv().Key = "kacb9535c62b7993df8375f9"
+repeat wait()spawn(function()loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()end)wait(10)until Joebiden
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/cac"))()
