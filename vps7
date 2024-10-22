@@ -1,6 +1,158 @@
-getgenv().LoadSettings = {["Items"] = {["Fruits"] = {["Max"] = 30, ["Fruits"] = {"Watermelon", "Apple", "Rainbow", "Pineapple", "Orange", "Banana"}, ["Craft"] = true, ["Use"] = true}, ["Potions"] = {["Potions"] = {"Golden Dice Potion", "The Cocktail", "Rainbow Dice Potion", "Walkspeed Potion", "Coins Potion", "Instant Luck Potion", "Items Potion", "Faster Rolls Potion", "Lucky Potion", "Breakables Potion"}, ["CraftPotions"] = {"Lucky Potion", "Coins Potion", "Breakables Potion", "Faster Rolls Potion", "Items Potion", "Walkspeed Potion", "Golden Dice Potion", "Rainbow Dice Potion", "Instant Luck Potion", "The Cocktail"}, ["Tier"] = 0, ["Craft"] = true, ["Use"] = true}, ["Relics"] = true}, ["Farming"] = {["UpgradeGroups"] = {"Luckier", "Root", "Trading", "Fruit", "Hoverboard", "Leveling", "Lucky Potion", "Small Coin Piles"}, ["Index"] = true, ["Upgrades"] = true, ["RAPToMail"] = 10000, ["Rarities"] = {"Exclusive"}, ["Balloons"] = true, ["IndexWebhook"] = "", ["MailWebhook"] = "Enter your Discord Webhook", ["IndexOffers"] = {"IndexMerchant - Lucky Potion III", "IndexMerchant - Coins Potion III", "IndexMerchant - Breakables Potion II", "IndexMerchant - Faster Rolls Potion", "IndexMerchant - Lucky Potion II", "IndexMerchant - Coins Potion II", "IndexMerchant - Breakables Potion I", "IndexMerchant - Lucky Potion I", "IndexMerchant - Coins Potion I", "AdvancedIndexMerchant - Ice Cream Hoverboard", "AdvancedIndexMerchant - Ice Cream Booth", "AdvancedIndexMerchant - Rave Crab Booth", "AdvancedIndexMerchant - Rave Crab Hoverboard", "AdvancedIndexMerchant - Instant Luck Potion III", "AdvancedIndexMerchant - Instant Luck Potion II", "AdvancedIndexMerchant - Instant Luck Potion I", "AdvancedIndexMerchant - Lucky Potion V", "AdvancedIndexMerchant - Rainbow Dice Potion", "AdvancedIndexMerchant - Coins Potion V", "AdvancedIndexMerchant - Breakables Potion II", "AdvancedIndexMerchant - Lucky Potion IV", "AdvancedIndexMerchant - Golden Dice Potion", "AdvancedIndexMerchant - Faster Rolls Potion", "AdvancedIndexMerchant - Coins Potion IV"}, ["Gifts"] = true, ["Digging"] = true, ["Vending"] = true, ["Custom"] = true, ["SendIndex"] = false, ["Method"] = "Multi", ["Username"] = "thienfaker14", ["InstaLucks"] = {"Insta Luck I", "Insta Luck II", "Insta Luck III"}, ["DifficultyToMail"] = 5000000, ["UseInstaLuckForCombo"] = true, ["PetsPerBreakable"] = 1, ["Webhook"] = "https://discord.com/api/webhooks/1200472646060613803/KcyfZ3CsGd6QNMCooPygaoJsn2hSuI4SBTMH-gI3vywuvHQDbGr9id8T2Y6t5TbmMQZj", ["MailHatches"] = false, ["ForceComboForInstaLuck"] = true, ["Roll"] = true, ["Start"] = true, ["Prio"] = false, ["SendHatches"] = false, ["CustomOffers"] = {"StandardMerchant - Instant Luck Potion III", "StandardMerchant - The Cocktail", "StandardMerchant - Instant Luck Potion II", "StandardMerchant - Instant Luck Potion I", "StandardMerchant - Blazing Dice Potion", "StandardMerchant - Rainbow Dice Potion", "StandardMerchant - Golden Dice Potion", "StandardMerchant - Faster Rolls Potion II", "StandardMerchant - Faster Rolls Potion I", "StandardMerchant - Items Potion II", "StandardMerchant - Breakables Potion II", "StandardMerchant - Coins Potion V", "StandardMerchant - Coins Potion IV", "StandardMerchant - Coins Potion III", "StandardMerchant - Coins Potion II", "StandardMerchant - Lucky Potion V", "StandardMerchant - Lucky Potion IV", "StandardMerchant - Lucky Potion III", "StandardMerchant - Lucky Potion II", "StandardMerchant - Items Potion I", "StandardMerchant - Breakables Potion I", "StandardMerchant - Lucky Potion I", "StandardMerchant - Coins Potion I"}}, ["ForceVIP"] = false, ["UIScale"] = 0.75, ["LoadSettings"] = true, ["Optimize"] = {["Pets"] = true, ["Drops"] = true, ["Breakables"] = true, ["Scripts"] = false, ["GUIs"] = false, ["World"] = true}}
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
-script_key="kEqAUEixABrDUkLTLCPGurBYQCmbBzrd";
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/b22aae7d03041699ada62f6a4fb519fd.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/rng.lua"))()
+getgenv().Config = {
+	["Sender"] = {
+		["Minimum Chance"] = 10000000,
+		["Auto Send Mail"] = true,
+		["Receiver Name"] = "KennedyBilly8"
+	},
+	["Webhook"] = {
+		["Mention"] = "@everyone",
+		["URL"] = "https://discord.com/api/webhooks/1298238594309292032/ekejlGecYXjOCKb7m4fQjcMumXMPzuVx0eGXyZttSz6BPgo7aWoIA7rJYYWEbGCUXCXK",
+		["Minimum Chance"] = 100000000,
+		["Pet Rolled"] = true
+	},
+	["Consumer"] = {
+		["Potion"] = {
+			["Enable"] = true,
+			["Potion"] = {
+				["Coins Potion VII"] = true,
+				["Walkspeed Potion III"] = true,
+				["Instant Luck Potion III"] = true,
+				["The Cocktail"] = true,
+				["Faster Rolls Potion II"] = true,
+				["Lucky Potion VII"] = true,
+				["Blazing Dice Potion"] = true,
+				["Breakables Potion III"] = true
+			}
+		},
+		["Fruit"] = {
+			["Enable"] = true,
+			["Fruit"] = {
+				["Watermelon"] = true,
+				["Pineapple"] = true,
+				["Rainbow"] = true,
+				["Apple"] = true,
+				["Orange"] = true,
+				["Banana"] = true
+			},
+			["Consume Shiny"] = true
+		}
+	},
+	["Interface"] = {
+		["Auto Upgrade"] = true,
+		["Auto Roll"] = true,
+		["Fast Roll"] = true
+	},
+	["Upgrader"] = {
+		["Rainbow"] = true,
+		["Shiny"] = true,
+		["Keep Amount"] = 100
+	},
+	["Resource"] = {
+		["Auto Farm"] = true,
+		["Auto Hidden Gift"] = true
+	},
+	["Receiver"] = {
+		["Auto Claim Mail"] = true
+	},
+	["Performance"] = {
+		["Disable LocalScript"] = true,
+		["Boost FPS"] = true
+	},
+	["Buyer"] = {
+		["Merchant"] = {
+			["Enable"] = true,
+			["Item"] = {
+				["Coins Potion II"] = true,
+				["The Cocktail"] = true,
+				["Lucky Potion V"] = true,
+				["Faster Rolls Potion I"] = true,
+				["Faster Rolls Potion II"] = true,
+				["Instant Luck Potion I"] = true,
+				["Coins Potion I"] = true,
+				["Breakables Potion I"] = true,
+				["Golden Dice Potion"] = true,
+				["Items Potion II"] = true,
+				["Coins Potion III"] = true,
+				["Coins Potion V"] = true,
+				["Rainbow Dice Potion"] = true,
+				["Instant Luck Potion II"] = true,
+				["Lucky Potion I"] = true,
+				["Breakables Potion II"] = true,
+				["Lucky Potion III"] = true,
+				["Blazing Dice Potion"] = true,
+				["Coins Potion IV"] = true,
+				["Instant Luck Potion III"] = true,
+				["Lucky Potion IV"] = true,
+				["Items Potion I"] = true,
+				["Lucky Potion II"] = true
+			}
+		},
+		["Potion Vending"] = true,
+		["Index Shop"] = {
+			["Enable"] = true,
+			["Item"] = {
+				["Coins Potion II"] = true,
+				["Lucky Potion IV"] = true,
+				["Rainbow Dice Potion"] = true,
+				["Faster Rolls Potion I"] = true,
+				["Instant Luck Potion I"] = true,
+				["Coins Potion I"] = true,
+				["Breakables Potion I"] = true,
+				["Golden Dice Potion"] = true,
+				["Ice Cream Hoverboard"] = true,
+				["Coins Potion III"] = true,
+				["Coins Potion V"] = true,
+				["Instant Luck Potion II"] = true,
+				["Instant Luck Potion III"] = true,
+				["Lucky Potion I"] = true,
+				["Breakables Potion II"] = true,
+				["Lucky Potion III"] = true,
+				["Coins Potion IV"] = true,
+				["Lucky Potion II"] = true,
+				["Ice Cream Booth"] = true,
+				["Rave Crab Booth"] = true,
+				["Lucky Potion V"] = true,
+				["Rave Crab Hoverboard"] = true
+			}
+		}
+	},
+	["Crafter"] = {
+		["Enable"] = true,
+		["Potion"] = {
+			["Coins Potion II"] = true,
+			["Lucky Potion VI"] = true,
+			["Lucky Potion II"] = true,
+			["Coins Potion VI"] = true,
+			["Walkspeed Potion II"] = true,
+			["Faster Rolls Potion I"] = true,
+			["Coins Potion VII"] = true,
+			["Lucky Potion VII"] = true,
+			["Lucky Potion V"] = true,
+			["Coins Potion V"] = true,
+			["Faster Rolls Potion II"] = true,
+			["Instant Luck Potion I"] = true,
+			["Golden Dice Potion"] = true,
+			["Coins Potion III"] = true,
+			["Breakables Potion I"] = true,
+			["Instant Luck Potion II"] = true,
+			["Items Potion II"] = true,
+			["Coins Potion IV"] = true,
+			["Items Potion IV"] = true,
+			["Walkspeed Potion III"] = true,
+			["Walkspeed Potion I"] = true,
+			["Breakables Potion III"] = true,
+			["Items Potion III"] = true,
+			["Breakables Potion II"] = true,
+			["Lucky Potion III"] = true,
+			["Blazing Dice Potion"] = true,
+			["Lucky Potion IV"] = true,
+			["Instant Luck Potion III"] = true,
+			["Rainbow Dice Potion"] = true,
+			["Items Potion I"] = true,
+			["The Cocktail"] = true
+		}
+	}
+}
+getgenv().Key = "k47a64505e90ce5dc281dc87"
+loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/cac"))()
