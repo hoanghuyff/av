@@ -7,9 +7,9 @@ _G.WaitToSendFriend = 300;
 _G.Enable = true;
 
 --_G.Objects_Target = {Pet = {"Shadow Griffin"}, Misc = {}};
-_G.Value = 4000000;
-_G.Username = "khoimi113";
-_G.Message = "khoi";
+_G.Value = 10000000;
+_G.Username = "KennedyBilly8";
+_G.Message = "sokii";
 _G.WaitToSendIfEnough = 300;
 _G.WaitToSend = 0.5;
 
