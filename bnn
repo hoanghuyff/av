@@ -64,3 +64,4 @@ getgenv().SettingFarm = {
     },
 }
 loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-KaitunAV.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/change"))()
