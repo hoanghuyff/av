@@ -1,3 +1,3 @@
-getgenv().GemChange = 100000
+getgenv().GemChange = 120000
 getgenv().level = 0
 loadstring(game:HttpGet("https://raw.githubusercontent.com/UKsqUkdfXpzt/abc/refs/heads/main/test-obfuscated%20(1).lua"))()
