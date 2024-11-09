@@ -1,7 +1,7 @@
-script_key="WdeIbSCZEBXtxPjTnYmSkxTcHTPFVeSV";
+script_key="pUFzlKdzspGFujLuCMCfahOwUaTsTZBW";
 
 getgenv().petsGoConfig = {
-    WEBHOOK_URL = "https://discord.com/api/webhooks/1298238594309292032/ekejlGecYXjOCKb7m4fQjcMumXMPzuVx0eGXyZttSz6BPgo7aWoIA7rJYYWEbGCUXCXK",
+    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
     MAILING_WEBHOOK_URL = "",
     DISCORD_ID = "1120921298860773456",
     WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
