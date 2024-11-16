@@ -1,0 +1,61 @@
+local Players = game:GetService("Players")
+local Client = Players.LocalPlayer
+
+-- Cấu hình
+_G.EnableFriendRequest = true
+_G.EnableAutoAcceptFriendRequest = true
+local interval = 60 -- Khoảng thời gian giữa các lần gửi yêu cầu (giây)
+local sentRequests = 0
+local maxRequests = 50 -- Giới hạn số yêu cầu gửi trong mỗi phiên chơi
+
+-- Kiểm tra danh sách bạn bè trước khi gửi yêu cầu
+local function SendFriendRequests()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if sentRequests >= maxRequests then
+            warn("Đã đạt giới hạn yêu cầu kết bạn cho phiên chơi này.")
+            break
+        end
+
+        if player ~= Client and not Client:IsFriendsWith(player.UserId) then
+            if #Client:GetFriends() < 200 then
+                Client:RequestFriendship(player)
+                sentRequests = sentRequests + 1
+                warn("Đã gửi yêu cầu kết bạn tới:", player.Name)
+                wait(1) -- Tránh gửi quá nhanh
+            else
+                warn("Danh sách bạn bè đã đầy.")
+                break
+            end
+        end
+    end
+end
+
+-- Tự động chấp nhận yêu cầu kết bạn
+local function AutoAcceptFriendRequests()
+    Players.PlayerAdded:Connect(function(player)
+        player.FriendRequestEvent.OnClientEvent:Connect(function(requestingPlayer)
+            if _G.EnableAutoAcceptFriendRequest and not Client:IsFriendsWith(requestingPlayer.UserId) then
+                if #Client:GetFriends() < 200 then
+                    Client:RequestFriendship(requestingPlayer)
+                    warn("Đã chấp nhận yêu cầu kết bạn từ:", requestingPlayer.Name)
+                else
+                    warn("Danh sách bạn bè đã đầy. Không thể chấp nhận yêu cầu từ:", requestingPlayer.Name)
+                end
+            end
+        end)
+    end)
+end
+
+-- Vòng lặp chính
+local function MainLoop()
+    while true do
+        if _G.EnableFriendRequest then
+            SendFriendRequests()
+        end
+        wait(interval) -- Đảm bảo có khoảng thời gian nghỉ giữa các lần gửi yêu cầu
+    end
+end
+
+-- Kích hoạt các chức năng
+task.spawn(AutoAcceptFriendRequests)
+task.spawn(MainLoop)
