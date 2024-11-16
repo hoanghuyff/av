@@ -1,31 +1,62 @@
 local Players = game:GetService('Players')
 local Client = Players.LocalPlayer
 
-_G.EnableFriendRequest = true  -- Bật tính năng gửi yêu cầu kết bạn
-_G.WaitToSendFriend = 300  -- Thời gian chờ giữa các vòng gửi yêu cầu kết bạn
+-- Cấu hình
+_G.EnableFriendRequest = true  -- Bật/tắt tính năng
+_G.WaitToSendFriend = 300     -- Thời gian chờ giữa các vòng (giây)
+_G.RequestDelay = 1           -- Thời gian chờ giữa mỗi yêu cầu (giây)
 
-local AlreadySent = {}  -- Danh sách lưu trữ người đã gửi yêu cầu
+-- Danh sách người chơi đã gửi yêu cầu
+local AlreadySent = {}
 
--- Gửi yêu cầu kết bạn
+-- Hàm kiểm tra xem đã là bạn bè chưa
+local function isAlreadyFriend(player)
+    return Client:IsFriendsWith(player.UserId)
+end
+
+-- Hàm gửi yêu cầu kết bạn
 local function AutoAddFriends()
-    while _G.EnableFriendRequest do
+    while _G.EnableFriendRequest and task.wait() do
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= Client and not AlreadySent[player.Name] then
+            -- Kiểm tra điều kiện trước khi gửi
+            if player ~= Client                    -- Không phải là client
+                and not AlreadySent[player.Name]   -- Chưa gửi yêu cầu trước đó
+                and not isAlreadyFriend(player)    -- Chưa là bạn bè
+            then
                 local success, err = pcall(function()
                     Client:RequestFriendship(player)
                 end)
+                
                 if success then
-                    warn("Sent friend request to:", player.Name)
-                    AlreadySent[player.Name] = true  -- Đánh dấu người chơi đã gửi yêu cầu
+                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
+                    AlreadySent[player.Name] = true
                 else
-                    warn("Failed to send friend request to:", player.Name, "Error:", err)
+                    warn("❌ Lỗi khi gửi yêu cầu tới:", player.Name, "Error:", err)
                 end
+                
+                task.wait(_G.RequestDelay) -- Chờ giữa các lần gửi
             end
-            wait(1)  -- Thời gian chờ giữa các lần gửi yêu cầu
         end
-        task.wait(_G.WaitToSendFriend)  -- Thời gian chờ giữa các vòng lặp
+        
+        -- Chờ trước khi bắt đầu vòng mới
+        print("⏳ Đợi", _G.WaitToSendFriend, "giây trước vòng tiếp theo...")
+        task.wait(_G.WaitToSendFriend)
     end
 end
 
--- Khởi chạy tính năng auto add friend
+-- Xử lý khi có người chơi mới vào game
+Players.PlayerAdded:Connect(function(player)
+    if _G.EnableFriendRequest and not AlreadySent[player.Name] and not isAlreadyFriend(player) then
+        task.wait(_G.RequestDelay)
+        local success = pcall(function()
+            Client:RequestFriendship(player)
+        end)
+        if success then
+            print("✅ Đã gửi yêu cầu kết bạn tới người chơi mới:", player.Name)
+            AlreadySent[player.Name] = true
+        end
+    end
+end)
+
+-- Khởi chạy script
 task.spawn(AutoAddFriends)
