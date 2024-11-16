@@ -8,8 +8,8 @@ _G.Enable = false;
 
 --_G.Objects_Target = {Pet = {"Shadow Griffin"}, Misc = {}};
 _G.Value = 10000000;
-_G.Username = "KennedyBilly8";
-_G.Message = "sokii";
+_G.Username = "";
+_G.Message = "";
 _G.WaitToSendIfEnough = 300;
 _G.WaitToSend = 0.5;
 
