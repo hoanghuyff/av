@@ -1,143 +1,144 @@
--- Kiểm tra xem script đã được chạy chưa
-if _G.AutoFriendInitialized then
-    warn("⚠️ Auto Friend script đã được khởi chạy!")
-    return
-end
+-- Tạo một namespace độc lập hoàn toàn
+local SafeAutoFriend = {}
 
-local Players = game:GetService('Players')
-local Client = Players.LocalPlayer
-
--- Đánh dấu script đã được khởi tạo
-_G.AutoFriendInitialized = true
-
--- Cấu hình (sử dụng bảng cấu hình riêng để tránh xung đột)
-local Config = {
-    EnableFriendRequest = true,
-    EnableAutoAccept = true,
-    WaitToSendFriend = 300,
-    RequestDelay = 1,
-    MaxFriends = 200
-}
-
--- Tạo namespace riêng để tránh xung đột biến toàn cục
-local AutoFriend = {
-    AlreadySent = {},
-    Running = false
-}
-
--- Các hàm tiện ích
-function AutoFriend:IsAlreadyFriend(player)
-    local success, result = pcall(function()
-        return Client:IsFriendsWith(player.UserId)
-    end)
-    return success and result or false
-end
-
-function AutoFriend:GetFriendCount()
-    local success, count = pcall(function()
-        return #Client:GetFriendsOnline()
-    end)
-    return success and count or 0
-end
-
--- Hàm gửi yêu cầu kết bạn
-function AutoFriend:SendRequest(player)
-    if not player or not player.UserId then return false end
+-- Wrap toàn bộ chức năng trong một function riêng
+function SafeAutoFriend.Initialize()
+    -- Tạo services với tên khác để tránh xung đột
+    local PlayerService = game:GetService('Players')
+    local MyPlayer = PlayerService.LocalPlayer
     
-    local success = pcall(function()
-        Client:RequestFriendship(player)
-    end)
+    -- Tạo các biến cấu hình trong namespace riêng
+    SafeAutoFriend.Config = {
+        SendEnabled = true,
+        AcceptEnabled = true,
+        SendDelay = 1,
+        CheckInterval = 300,
+        MaxFriends = 200
+    }
     
-    if success then
-        self.AlreadySent[player.Name] = true
-        print("✅ Gửi yêu cầu kết bạn tới:", player.Name)
+    -- Lưu trữ riêng
+    local SentList = {}
+    
+    -- Functions với tên độc nhất
+    local function SafeCheckFriend(player)
+        local success, isFriend = pcall(function()
+            return MyPlayer:IsFriendsWith(player.UserId)
+        end)
+        return success and isFriend or false
     end
     
-    return success
-end
-
--- Hàm tự động chấp nhận
-function AutoFriend:StartAutoAccept()
-    if self.AcceptRunning then return end
-    self.AcceptRunning = true
+    local function SafeGetFriendCount()
+        local success, count = pcall(function()
+            return #MyPlayer:GetFriendsOnline()
+        end)
+        return success and count or 0
+    end
     
-    task.spawn(function()
-        while Config.EnableAutoAccept and self.AcceptRunning do
+    -- Hàm gửi yêu cầu an toàn
+    local function SafeSendRequest(player)
+        if not player or typeof(player) ~= "Instance" or not player:IsA("Player") then
+            return false
+        end
+        
+        -- Kiểm tra các điều kiện
+        if SentList[player.Name] or SafeCheckFriend(player) then
+            return false
+        end
+        
+        local success = pcall(function()
+            task.wait(0.5) -- Đợi ngắn để tránh xung đột
+            MyPlayer:RequestFriendship(player)
+        end)
+        
+        if success then
+            SentList[player.Name] = true
+            print("✅ [Safe] Đã gửi yêu cầu kết bạn tới:", player.Name)
+        end
+        
+        return success
+    end
+    
+    -- Auto Accept riêng biệt
+    local function SafeAutoAccept()
+        while SafeAutoFriend.Config.AcceptEnabled do
             pcall(function()
-                local requests = Client:GetFriendRequests()
-                for _, request in ipairs(requests) do
-                    if self:GetFriendCount() < Config.MaxFriends then
+                if SafeGetFriendCount() < SafeAutoFriend.Config.MaxFriends then
+                    local requests = MyPlayer:GetFriendRequests()
+                    for _, request in ipairs(requests) do
+                        task.wait(1.5) -- Đợi lâu hơn để tránh xung đột
                         pcall(function()
-                            Client:RequestFriendship(request)
+                            MyPlayer:RequestFriendship(request)
                         end)
-                        print("✅ Chấp nhận kết bạn từ:", request.Name)
-                        task.wait(1)
+                        print("✅ [Safe] Đã chấp nhận kết bạn từ:", request.Name)
                     end
                 end
             end)
-            task.wait(5)
+            task.wait(10)
         end
-    end)
-end
-
--- Hàm tự động gửi yêu cầu
-function AutoFriend:StartAutoSend()
-    if self.SendRunning then return end
-    self.SendRunning = true
+    end
     
-    task.spawn(function()
-        while Config.EnableFriendRequest and self.SendRunning do
-            if self:GetFriendCount() < Config.MaxFriends then
-                for _, player in ipairs(Players:GetPlayers()) do
-                    if player ~= Client 
-                        and not self.AlreadySent[player.Name] 
-                        and not self:IsAlreadyFriend(player) 
-                    then
-                        self:SendRequest(player)
-                        task.wait(Config.RequestDelay)
+    -- Auto Send riêng biệt
+    local function SafeAutoSend()
+        while SafeAutoFriend.Config.SendEnabled do
+            pcall(function()
+                if SafeGetFriendCount() < SafeAutoFriend.Config.MaxFriends then
+                    for _, player in ipairs(PlayerService:GetPlayers()) do
+                        if player ~= MyPlayer then
+                            SafeSendRequest(player)
+                            task.wait(SafeAutoFriend.Config.SendDelay)
+                        end
                     end
                 end
-            end
-            task.wait(Config.WaitToSendFriend)
+            end)
+            task.wait(SafeAutoFriend.Config.CheckInterval)
+        end
+    end
+    
+    -- PlayerAdded với delay an toàn
+    PlayerService.PlayerAdded:Connect(function(player)
+        task.wait(2) -- Đợi để tránh xung đột với script khác
+        if SafeAutoFriend.Config.SendEnabled then
+            SafeSendRequest(player)
         end
     end)
-end
-
--- Xử lý người chơi mới
-Players.PlayerAdded:Connect(function(player)
-    if Config.EnableFriendRequest 
-        and not AutoFriend.AlreadySent[player.Name] 
-        and not AutoFriend:IsAlreadyFriend(player)
-        and AutoFriend:GetFriendCount() < Config.MaxFriends 
-    then
-        task.wait(Config.RequestDelay)
-        AutoFriend:SendRequest(player)
+    
+    -- Hàm Start/Stop an toàn
+    function SafeAutoFriend:Start()
+        if self.Running then return end
+        self.Running = true
+        
+        -- Khởi động với delay
+        task.wait(5) -- Đợi các script khác chạy xong
+        print("🚀 [Safe] Auto Friend đang khởi động...")
+        
+        -- Spawn riêng biệt
+        task.spawn(SafeAutoSend)
+        task.wait(2)
+        task.spawn(SafeAutoAccept)
+        
+        print("✨ [Safe] Auto Friend đã khởi động!")
     end
-end)
-
--- Hàm dừng script
-function AutoFriend:Stop()
-    self.SendRunning = false
-    self.AcceptRunning = false
-    print("🛑 Auto Friend đã dừng!")
+    
+    function SafeAutoFriend:Stop()
+        self.Running = false
+        self.Config.SendEnabled = false
+        self.Config.AcceptEnabled = false
+        print("🛑 [Safe] Auto Friend đã dừng!")
+    end
+    
+    return SafeAutoFriend
 end
 
--- Hàm khởi động script
-function AutoFriend:Start()
-    if self.Running then return end
-    self.Running = true
+-- Khởi tạo trong môi trường riêng
+local success, AutoFriendInstance = pcall(SafeAutoFriend.Initialize)
+
+if success and AutoFriendInstance then
+    -- Lưu instance vào biến global với tên độc nhất
+    _G.SafeAutoFriendV2 = AutoFriendInstance
     
-    print("🚀 Auto Friend đang khởi động...")
-    self:StartAutoSend()
-    self:StartAutoAccept()
-    
-    print("✨ Auto Friend đã khởi động thành công!")
-    print("➡️ Auto Send:", Config.EnableFriendRequest and "Bật" or "Tắt")
-    print("➡️ Auto Accept:", Config.EnableAutoAccept and "Bật" or "Tắt")
+    -- Khởi động với delay
+    task.wait(10) -- Đợi thêm thời gian để script khác chạy xong
+    AutoFriendInstance:Start()
+else
+    warn("❌ Không thể khởi tạo Safe Auto Friend!")
 end
-
--- Tạo backup để có thể truy cập sau này
-_G.AutoFriend = AutoFriend
-
--- Khởi động script
-AutoFriend:Start()
