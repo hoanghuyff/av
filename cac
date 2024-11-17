@@ -2,52 +2,27 @@
 local Players = game:GetService('Players')
 local Client = Players.LocalPlayer
 
--- Config
-local Config = {
-    SendDelay = 2,       -- Thời gian chờ giữa mỗi lần gửi yêu cầu (giây)
-    MaxRequests = 10,    -- Giới hạn số lượng yêu cầu gửi trong một phiên
-}
-
--- Biến lưu trạng thái
-local SentList = {}      -- Danh sách người đã gửi yêu cầu
-local RequestCount = 0   -- Số lượng yêu cầu đã gửi
+-- Thời gian chờ giữa mỗi lần gửi yêu cầu
+local SendDelay = 2
 
 -- Hàm gửi yêu cầu kết bạn
-local function SafeSendRequest(player)
-    if RequestCount >= Config.MaxRequests then return end -- Đạt giới hạn yêu cầu
-    if player == Client or SentList[player.UserId] then return end -- Không gửi trùng lặp
-
-    local success = pcall(function()
-        Client:RequestFriendship(player)
-    end)
-
-    if success then
-        SentList[player.UserId] = true
-        RequestCount = RequestCount + 1
-        print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
-    else
-        warn("⚠️ Không thể gửi yêu cầu tới:", player.Name)
-    end
-end
-
--- Main loop để tự động gửi yêu cầu
-local function AutoFriendLoop()
+local function AutoAddFriends()
     while true do
         for _, player in ipairs(Players:GetPlayers()) do
-            SafeSendRequest(player)
-            task.wait(Config.SendDelay) -- Chờ trước khi gửi yêu cầu tiếp theo
+            if player ~= Client then
+                -- Gửi yêu cầu kết bạn
+                pcall(function()
+                    Client:RequestFriendship(player)
+                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
+                end)
+            end
+            task.wait(SendDelay) -- Chờ giữa mỗi lần gửi
         end
-        task.wait(300) -- Chờ một khoảng thời gian giữa các vòng quét
+        task.wait(300) -- Chờ trước khi quét lại danh sách người chơi
     end
 end
 
--- Khởi chạy Auto Friend
-task.spawn(AutoFriendLoop)
+-- Khởi động tính năng tự động kết bạn
+task.spawn(AutoAddFriends)
 
--- Xử lý người chơi mới vào game
-Players.PlayerAdded:Connect(function(player)
-    task.wait(3) -- Đợi để đảm bảo người chơi đã tải đầy đủ
-    SafeSendRequest(player)
-end)
-
-print("🚀 Auto Add Friend đã khởi động thành công!")
+print("🚀 Auto Add Friend đã khởi động!")
