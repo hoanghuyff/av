@@ -1,28 +1,31 @@
 -- Core Services
-local Players = game:GetService('Players')
+local Players = game:GetService("Players")
 local Client = Players.LocalPlayer
 
--- Thời gian chờ giữa mỗi lần gửi yêu cầu
+-- Thời gian chờ giữa các lần gửi yêu cầu
 local SendDelay = 2
 
--- Hàm gửi yêu cầu kết bạn
+-- Hàm tự động gửi yêu cầu kết bạn
 local function AutoAddFriends()
     while true do
         for _, player in ipairs(Players:GetPlayers()) do
-            if player ~= Client then
-                -- Gửi yêu cầu kết bạn
-                pcall(function()
+            if player ~= Client then -- Chỉ gửi yêu cầu đến người khác
+                local success, err = pcall(function()
                     Client:RequestFriendship(player)
-                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
                 end)
+                if success then
+                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
+                else
+                    warn("⚠️ Lỗi khi gửi yêu cầu đến:", player.Name, err)
+                end
             end
-            task.wait(SendDelay) -- Chờ giữa mỗi lần gửi
+            task.wait(SendDelay) -- Chờ giữa các lần gửi yêu cầu
         end
         task.wait(300) -- Chờ trước khi quét lại danh sách người chơi
     end
 end
 
--- Khởi động tính năng tự động kết bạn
+-- Bắt đầu chạy tính năng tự động gửi yêu cầu kết bạn
 task.spawn(AutoAddFriends)
 
-print("🚀 Auto Add Friend đã khởi động!")
+print("🚀 Auto Friend Request đã khởi động thành công!")
