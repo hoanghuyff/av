@@ -1,164 +1,53 @@
--- Khởi tạo an toàn với CoreGui
-local success, result = pcall(function()
-    -- Core Services
-    local Players = game:GetService('Players')
-    local RunService = game:GetService('RunService')
-    
-    -- Biến local để tránh xung đột
-    local Client = Players.LocalPlayer
-    local SentList = {}
-    local IsRunning = false
-    
-    -- Config an toàn
-    local Config = {
-        SendDelay = 2,        -- Tăng delay để tránh xung đột
-        CheckInterval = 300,
-        MaxRequests = 10      -- Giới hạn số lượng request mỗi phiên
-    }
-    
-    -- Kiểm tra an toàn
-    local function SafeCheck()
-        if not Client or not Client.Character then
-            return false
-        end
-        return true
-    end
-    
-    -- Đếm số request đã gửi
-    local RequestCount = 0
-    
-    -- Hàm gửi yêu cầu an toàn
-    local function SafeSendRequest(player)
-        if not SafeCheck() then return false end
-        if RequestCount >= Config.MaxRequests then return false end
-        
-        -- Kiểm tra player hợp lệ
-        if not player or not player.Parent or not player:IsA("Player") then
-            return false
-        end
-        
-        -- Kiểm tra điều kiện
-        if player == Client or SentList[player.UserId] then
-            return false
-        end
-        
-        -- Thử gửi yêu cầu
-        local success = pcall(function()
-            Client:RequestFriendship(player)
-        end)
-        
-        if success then
-            SentList[player.UserId] = true
-            RequestCount = RequestCount + 1
-            print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
-        end
-        
-        return success
-    end
-    
-    -- Hàm chấp nhận yêu cầu an toàn
-    local function SafeAcceptRequest(request)
-        if not SafeCheck() then return false end
-        
-        local success = pcall(function()
-            Client:RequestFriendship(request)
-        end)
-        
-        if success then
-            print("✅ Đã chấp nhận kết bạn từ:", request.Name)
-        end
-        
-        return success
-    end
-    
-    -- Hàm chính để auto friend
-    local function AutoFriend()
-        if IsRunning then return end
-        IsRunning = true
-        
-        -- Reset counter mỗi phiên
-        RequestCount = 0
-        
-        -- Main loop
-        task.spawn(function()
-            while IsRunning do
-                if SafeCheck() then
-                    -- Gửi yêu cầu
-                    if RequestCount < Config.MaxRequests then
-                        for _, player in ipairs(Players:GetPlayers()) do
-                            if IsRunning then
-                                SafeSendRequest(player)
-                                task.wait(Config.SendDelay)
-                            end
-                        end
-                    end
-                    
-                    -- Chấp nhận yêu cầu
-                    pcall(function()
-                        local requests = Client:GetFriendRequests()
-                        for _, request in ipairs(requests) do
-                            if IsRunning then
-                                SafeAcceptRequest(request)
-                                task.wait(1)
-                            end
-                        end
-                    end)
-                end
-                
-                task.wait(Config.CheckInterval)
-            end
-        end)
-    end
-    
-    -- Xử lý player mới
-    Players.PlayerAdded:Connect(function(player)
-        if IsRunning and RequestCount < Config.MaxRequests then
-            task.wait(3) -- Đợi để tránh xung đột
-            SafeSendRequest(player)
-        end
+-- Core Services
+local Players = game:GetService('Players')
+local Client = Players.LocalPlayer
+
+-- Config
+local Config = {
+    SendDelay = 2,       -- Thời gian chờ giữa mỗi lần gửi yêu cầu (giây)
+    MaxRequests = 10,    -- Giới hạn số lượng yêu cầu gửi trong một phiên
+}
+
+-- Biến lưu trạng thái
+local SentList = {}      -- Danh sách người đã gửi yêu cầu
+local RequestCount = 0   -- Số lượng yêu cầu đã gửi
+
+-- Hàm gửi yêu cầu kết bạn
+local function SafeSendRequest(player)
+    if RequestCount >= Config.MaxRequests then return end -- Đạt giới hạn yêu cầu
+    if player == Client or SentList[player.UserId] then return end -- Không gửi trùng lặp
+
+    local success = pcall(function()
+        Client:RequestFriendship(player)
     end)
-    
-    -- API an toàn
-    local SafeAutoFriend = {
-        Start = function()
-            if not SafeCheck() then
-                warn("⚠️ Không thể khởi động Auto Friend - Kiểm tra lại nhân vật!")
-                return
-            end
-            
-            print("🚀 Đang khởi động Auto Friend...")
-            AutoFriend()
-            print("✨ Auto Friend đã khởi động!")
-        end,
-        
-        Stop = function()
-            IsRunning = false
-            print("🛑 Auto Friend đã dừng!")
-        end,
-        
-        GetStatus = function()
-            return {
-                Running = IsRunning,
-                RequestsSent = RequestCount,
-                MaxRequests = Config.MaxRequests
-            }
+
+    if success then
+        SentList[player.UserId] = true
+        RequestCount = RequestCount + 1
+        print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
+    else
+        warn("⚠️ Không thể gửi yêu cầu tới:", player.Name)
+    end
+end
+
+-- Main loop để tự động gửi yêu cầu
+local function AutoFriendLoop()
+    while true do
+        for _, player in ipairs(Players:GetPlayers()) do
+            SafeSendRequest(player)
+            task.wait(Config.SendDelay) -- Chờ trước khi gửi yêu cầu tiếp theo
         end
-    }
-    
-    return SafeAutoFriend
+        task.wait(300) -- Chờ một khoảng thời gian giữa các vòng quét
+    end
+end
+
+-- Khởi chạy Auto Friend
+task.spawn(AutoFriendLoop)
+
+-- Xử lý người chơi mới vào game
+Players.PlayerAdded:Connect(function(player)
+    task.wait(3) -- Đợi để đảm bảo người chơi đã tải đầy đủ
+    SafeSendRequest(player)
 end)
 
--- Khởi động an toàn
-if success and result then
-    _G.SafeAutoFriend = result
-    
-    -- Đợi character load
-    task.wait(5)
-    
-    -- Thử khởi động
-    pcall(function()
-        _G.SafeAutoFriend.Start()
-    end)
-else
-    warn("❌ Không thể khởi tạo Auto Friend:", result)
-end
+print("🚀 Auto Add Friend đã khởi động thành công!")
