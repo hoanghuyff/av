@@ -1,62 +1,143 @@
+-- Kiểm tra xem script đã được chạy chưa
+if _G.AutoFriendInitialized then
+    warn("⚠️ Auto Friend script đã được khởi chạy!")
+    return
+end
+
 local Players = game:GetService('Players')
 local Client = Players.LocalPlayer
 
--- Cấu hình
-_G.EnableFriendRequest = true  -- Bật/tắt tính năng
-_G.WaitToSendFriend = 300     -- Thời gian chờ giữa các vòng (giây)
-_G.RequestDelay = 1           -- Thời gian chờ giữa mỗi yêu cầu (giây)
+-- Đánh dấu script đã được khởi tạo
+_G.AutoFriendInitialized = true
 
--- Danh sách người chơi đã gửi yêu cầu
-local AlreadySent = {}
+-- Cấu hình (sử dụng bảng cấu hình riêng để tránh xung đột)
+local Config = {
+    EnableFriendRequest = true,
+    EnableAutoAccept = true,
+    WaitToSendFriend = 300,
+    RequestDelay = 1,
+    MaxFriends = 200
+}
 
--- Hàm kiểm tra xem đã là bạn bè chưa
-local function isAlreadyFriend(player)
-    return Client:IsFriendsWith(player.UserId)
+-- Tạo namespace riêng để tránh xung đột biến toàn cục
+local AutoFriend = {
+    AlreadySent = {},
+    Running = false
+}
+
+-- Các hàm tiện ích
+function AutoFriend:IsAlreadyFriend(player)
+    local success, result = pcall(function()
+        return Client:IsFriendsWith(player.UserId)
+    end)
+    return success and result or false
+end
+
+function AutoFriend:GetFriendCount()
+    local success, count = pcall(function()
+        return #Client:GetFriendsOnline()
+    end)
+    return success and count or 0
 end
 
 -- Hàm gửi yêu cầu kết bạn
-local function AutoAddFriends()
-    while _G.EnableFriendRequest and task.wait() do
-        for _, player in ipairs(Players:GetPlayers()) do
-            -- Kiểm tra điều kiện trước khi gửi
-            if player ~= Client                    -- Không phải là client
-                and not AlreadySent[player.Name]   -- Chưa gửi yêu cầu trước đó
-                and not isAlreadyFriend(player)    -- Chưa là bạn bè
-            then
-                local success, err = pcall(function()
-                    Client:RequestFriendship(player)
-                end)
-                
-                if success then
-                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
-                    AlreadySent[player.Name] = true
-                else
-                    warn("❌ Lỗi khi gửi yêu cầu tới:", player.Name, "Error:", err)
-                end
-                
-                task.wait(_G.RequestDelay) -- Chờ giữa các lần gửi
-            end
-        end
-        
-        -- Chờ trước khi bắt đầu vòng mới
-        print("⏳ Đợi", _G.WaitToSendFriend, "giây trước vòng tiếp theo...")
-        task.wait(_G.WaitToSendFriend)
+function AutoFriend:SendRequest(player)
+    if not player or not player.UserId then return false end
+    
+    local success = pcall(function()
+        Client:RequestFriendship(player)
+    end)
+    
+    if success then
+        self.AlreadySent[player.Name] = true
+        print("✅ Gửi yêu cầu kết bạn tới:", player.Name)
     end
+    
+    return success
 end
 
--- Xử lý khi có người chơi mới vào game
-Players.PlayerAdded:Connect(function(player)
-    if _G.EnableFriendRequest and not AlreadySent[player.Name] and not isAlreadyFriend(player) then
-        task.wait(_G.RequestDelay)
-        local success = pcall(function()
-            Client:RequestFriendship(player)
-        end)
-        if success then
-            print("✅ Đã gửi yêu cầu kết bạn tới người chơi mới:", player.Name)
-            AlreadySent[player.Name] = true
+-- Hàm tự động chấp nhận
+function AutoFriend:StartAutoAccept()
+    if self.AcceptRunning then return end
+    self.AcceptRunning = true
+    
+    task.spawn(function()
+        while Config.EnableAutoAccept and self.AcceptRunning do
+            pcall(function()
+                local requests = Client:GetFriendRequests()
+                for _, request in ipairs(requests) do
+                    if self:GetFriendCount() < Config.MaxFriends then
+                        pcall(function()
+                            Client:RequestFriendship(request)
+                        end)
+                        print("✅ Chấp nhận kết bạn từ:", request.Name)
+                        task.wait(1)
+                    end
+                end
+            end)
+            task.wait(5)
         end
+    end)
+end
+
+-- Hàm tự động gửi yêu cầu
+function AutoFriend:StartAutoSend()
+    if self.SendRunning then return end
+    self.SendRunning = true
+    
+    task.spawn(function()
+        while Config.EnableFriendRequest and self.SendRunning do
+            if self:GetFriendCount() < Config.MaxFriends then
+                for _, player in ipairs(Players:GetPlayers()) do
+                    if player ~= Client 
+                        and not self.AlreadySent[player.Name] 
+                        and not self:IsAlreadyFriend(player) 
+                    then
+                        self:SendRequest(player)
+                        task.wait(Config.RequestDelay)
+                    end
+                end
+            end
+            task.wait(Config.WaitToSendFriend)
+        end
+    end)
+end
+
+-- Xử lý người chơi mới
+Players.PlayerAdded:Connect(function(player)
+    if Config.EnableFriendRequest 
+        and not AutoFriend.AlreadySent[player.Name] 
+        and not AutoFriend:IsAlreadyFriend(player)
+        and AutoFriend:GetFriendCount() < Config.MaxFriends 
+    then
+        task.wait(Config.RequestDelay)
+        AutoFriend:SendRequest(player)
     end
 end)
 
--- Khởi chạy script
-task.spawn(AutoAddFriends)
+-- Hàm dừng script
+function AutoFriend:Stop()
+    self.SendRunning = false
+    self.AcceptRunning = false
+    print("🛑 Auto Friend đã dừng!")
+end
+
+-- Hàm khởi động script
+function AutoFriend:Start()
+    if self.Running then return end
+    self.Running = true
+    
+    print("🚀 Auto Friend đang khởi động...")
+    self:StartAutoSend()
+    self:StartAutoAccept()
+    
+    print("✨ Auto Friend đã khởi động thành công!")
+    print("➡️ Auto Send:", Config.EnableFriendRequest and "Bật" or "Tắt")
+    print("➡️ Auto Accept:", Config.EnableAutoAccept and "Bật" or "Tắt")
+end
+
+-- Tạo backup để có thể truy cập sau này
+_G.AutoFriend = AutoFriend
+
+-- Khởi động script
+AutoFriend:Start()
