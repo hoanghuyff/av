@@ -1,65 +1,3 @@
-local Players = game:GetService('Players')
-local Client = Players.LocalPlayer
-
--- Cấu hình
-_G.EnableFriendRequest = true  -- Bật/tắt tính năng
-_G.WaitToSendFriend = 300     -- Thời gian chờ giữa các vòng (giây)
-_G.RequestDelay = 1           -- Thời gian chờ giữa mỗi yêu cầu (giây)
-
--- Danh sách người chơi đã gửi yêu cầu
-local AlreadySent = {}
-
--- Hàm kiểm tra xem đã là bạn bè chưa
-local function isAlreadyFriend(player)
-    return Client:IsFriendsWith(player.UserId)
-end
-
--- Hàm gửi yêu cầu kết bạn
-local function AutoAddFriends()
-    while _G.EnableFriendRequest and task.wait() do
-        for _, player in ipairs(Players:GetPlayers()) do
-            -- Kiểm tra điều kiện trước khi gửi
-            if player ~= Client                    -- Không phải là client
-                and not AlreadySent[player.Name]   -- Chưa gửi yêu cầu trước đó
-                and not isAlreadyFriend(player)    -- Chưa là bạn bè
-            then
-                local success, err = pcall(function()
-                    Client:RequestFriendship(player)
-                end)
-                
-                if success then
-                    print("✅ Đã gửi yêu cầu kết bạn tới:", player.Name)
-                    AlreadySent[player.Name] = true
-                else
-                    warn("❌ Lỗi khi gửi yêu cầu tới:", player.Name, "Error:", err)
-                end
-                
-                task.wait(_G.RequestDelay) -- Chờ giữa các lần gửi
-            end
-        end
-        
-        -- Chờ trước khi bắt đầu vòng mới
-        print("⏳ Đợi", _G.WaitToSendFriend, "giây trước vòng tiếp theo...")
-        task.wait(_G.WaitToSendFriend)
-    end
-end
-
--- Xử lý khi có người chơi mới vào game
-Players.PlayerAdded:Connect(function(player)
-    if _G.EnableFriendRequest and not AlreadySent[player.Name] and not isAlreadyFriend(player) then
-        task.wait(_G.RequestDelay)
-        local success = pcall(function()
-            Client:RequestFriendship(player)
-        end)
-        if success then
-            print("✅ Đã gửi yêu cầu kết bạn tới người chơi mới:", player.Name)
-            AlreadySent[player.Name] = true
-        end
-    end
-end)
-
--- Khởi chạy script
-task.spawn(AutoAddFriends)
 script_key="pUFzlKdzspGFujLuCMCfahOwUaTsTZBW";
 
 getgenv().petsGoConfig = {
@@ -75,3 +13,4 @@ getgenv().petsGoConfig = {
 
 
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/cac"))()
