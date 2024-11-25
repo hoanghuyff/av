@@ -1,4 +1,4 @@
-script_key="pUFzlKdzspGFujLuCMCfahOwUaTsTZBW";
+script_key="gxFHOFElsnHQPDUsfoMZAUDDDZijiakc";
 
 getgenv().petsGoConfig = {
     WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
