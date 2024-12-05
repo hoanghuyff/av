@@ -7,7 +7,7 @@ getgenv().petsGoConfig = {
     WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
     MAIL_PET = true,  -- Mail Pet
     MAIL_PET_ODDS = 100000000,  -- Minimum Pet Odds To Mail
-    USERNAME_TO_MAIL = "CopelandCrab406" -- Mail Pet To Username
+    USERNAME_TO_MAIL = "ShermanHarold8" -- Mail Pet To Username
 }
 
 local Players = game:GetService('Players')
