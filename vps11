@@ -4,9 +4,9 @@ getgenv().petsGoConfig = {
     WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
     MAILING_WEBHOOK_URL = "",
     DISCORD_ID = "1120921298860773456",
-    WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
+    WEBHOOK_ODDS = 200000000, -- Minimum Pet Odds To Trigger Webhook
     MAIL_PET = true,  -- Mail Pet
-    MAIL_PET_ODDS = 100000000,  -- Minimum Pet Odds To Mail
+    MAIL_PET_ODDS = 200000000,  -- Minimum Pet Odds To Mail
     USERNAME_TO_MAIL = "RamosGerald760" -- Mail Pet To Username
 }
 
