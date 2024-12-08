@@ -10,26 +10,4 @@ getgenv().petsGoConfig = {
     USERNAME_TO_MAIL = "ShermanHarold8" -- Mail Pet To Username
 }
 
-local Players = game:GetService('Players')
-local Client = Players.LocalPlayer
-
-_G.EnableFriendRequest = true  -- Bật tính năng gửi yêu cầu kết bạn
-_G.WaitToSendFriend = 300  -- Thời gian chờ giữa các lần gửi yêu cầu kết bạn
-
-local function AutoAddFriends()
-    while _G.EnableFriendRequest do
-        for _, v in ipairs(Players:GetPlayers()) do
-            if v ~= Client then
-                Client:RequestFriendship(v)  -- Gửi yêu cầu kết bạn
-                warn("Send request:", v.Name)
-            end
-            wait(1)  -- Thời gian chờ giữa các lần gửi yêu cầu
-        end
-        task.wait(_G.WaitToSendFriend)  -- Thời gian chờ giữa các vòng lặp
-    end
-end
-
-task.spawn(AutoAddFriends)
-
-
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
