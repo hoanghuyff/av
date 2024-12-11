@@ -1,4 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/test"))()
 script_key = "nBTnaKUKWzcyRBNaKLuiZWxDxyomICWx"
 getgenv().SetFpsCap = true 
 getgenv().FpsCap = 15
