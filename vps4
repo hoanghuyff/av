@@ -1,13 +1,38 @@
-script_key="gxFHOFElsnHQPDUsfoMZAUDDDZijiakc";
-
-getgenv().petsGoConfig = {
-    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
-    MAILING_WEBHOOK_URL = "",
-    DISCORD_ID = "1120921298860773456",
-    WEBHOOK_ODDS = 200000000, -- Minimum Pet Odds To Trigger Webhook
-    MAIL_PET = true,  -- Mail Pet
-    MAIL_PET_ODDS = 200000000,  -- Minimum Pet Odds To Mail
-    USERNAME_TO_MAIL = "ShermanHarold8" -- Mail Pet To Username
-}
-
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
+script_key = "HsiccNbAmAhYlpLVlHHBqZuSOcyiwOMp"
+getgenv().SetFpsCap = true 
+getgenv().FpsCap = 10
+    getgenv().UiCheckItems = false
+    getgenv().WhiteScreen = true
+    getgenv().OneClickSetting = {
+        Enable=true,
+        UnlimitGetQuest=true,
+        TripleQuest=true,
+        AutoAddStats=true,
+        RedeemCode=true,
+        Sea2KeyHop=true,
+        FruitEat = { --Priority, Name, 
+            [1] = {"Dough-Dough"},
+            [2] = {"Ice-Ice","Magma-Magma","Flame-Flame"}
+        },
+        EatFruitFromStorage = true,
+        SnipeFruit = true,
+        SnipeFruitMirage = true,
+        HopIfFoundNearExploiter = true,
+        HopHakiColor =false,
+        HopTushita = true,
+        HopValkyriehelm = false,
+        HopMirrorFractal=false,
+        FarmPole = false, -- Turn off If Want Focus Level
+        FarmItems = false, --Turn off If Want Focus Level And CDK, THis Only get After You Get God Human
+        DisableSoulGuitar = false,
+        DisableCDK = false,
+        DisableRaceEvolve = false,
+         RollRace={
+            Enable = false,
+            Races = {"Mink","Fishman","Human","Skypiea"}
+        },
+       MinFragment = 30000, --Farm After Max Level
+    }
+getgenv().Team = "Pirates"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vinhuchi/rblx/main/W-azure/BloxFruit/OneClickLoader.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/test"))()
