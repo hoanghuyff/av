@@ -1,4 +1,3 @@
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 script_key = "oorkOUrJXBktEdljmFcSlGgeklNuoAJc"
 getgenv().SetFpsCap = true 
 getgenv().FpsCap = 10
