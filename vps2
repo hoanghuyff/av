@@ -38,13 +38,13 @@ getgenv().SettingFarm ={
     ["Farm Max All Mastery Sword"] = false, --- i need have cdk and godhuman
     ["Hop Fruit 1M Quest Third Sea"] = true,
     ["White Screen"] = false,
-    ["Hop if Near Farm Area"] = true,
+    ["Hop if Near Farm Area"] = false,
     ["Auto Race V2-V3"] = true,
     ["Auto Pull Lever"] = true,
     ["Auto Get Mirror Fractal"] = false,
     ["Lock Fragment"] = {
         ["Enabled"] = true,
-        ["Fragments"] = 30000
+        ["Fragments"] = 25000
     },
     ["Buy Haki Color Legendary"] = false, --- it will buy if u have sgt and godhuman and dont have Valkyrie Helm
     ["Select Hop"] = { -- 70% will have it
@@ -62,13 +62,13 @@ getgenv().SettingFarm ={
         ["Select Race"] =  "", -- Human, Mink, Fishman
     },
     ["Buy Haki"] = {
-        ["Enhancement"] = false,
+        ["Enhancement"] = true,
         ["Skyjump"] = true,
         ["Flash Step"] = true,
         ["Observation"] = true,
     },
     ["Blox Fruit Sniper"] = {},
-    ["Lock Fruit"] = {},
+    ["Lock Fruit"] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth','Dough-Dough','Leopard-Leopard','Dragon-Dragon'},
     ["Webhook"] = {
         ["Enabled"] = false,
         ["WebhookUrl"] = "",
