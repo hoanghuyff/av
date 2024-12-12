@@ -35,4 +35,3 @@ getgenv().FpsCap = 10
     }
 getgenv().Team = "Pirates"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/vinhuchi/rblx/main/W-azure/BloxFruit/OneClickLoader.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/test"))()
