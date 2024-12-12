@@ -1,39 +1,79 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-script_key = "DZdLaqhFcUoRczmLTVqSPskRsYOExDht"
-getgenv().SetFpsCap = true 
-getgenv().FpsCap = 10
-    getgenv().UiCheckItems = false
-    getgenv().WhiteScreen = true
-    getgenv().OneClickSetting = {
-        Enable=true,
-        UnlimitGetQuest=true,
-        TripleQuest=true,
-        AutoAddStats=true,
-        RedeemCode=true,
-        Sea2KeyHop=true,
-        FruitEat = { --Priority, Name, 
-            [1] = {"Dough-Dough"},
-            [2] = {"Ice-Ice","Magma-Magma","Flame-Flame"}
+getgenv().Key = "c52ae21656f4b2a521c6a8b2"
+getgenv().SettingFarm ={
+    ["Hide UI"] = false,
+    ["Fast Attack"] = {
+        ["Speed Attack"] = 0,
+        ["Attack Duration"] = 5,
+        ["Speed Attack if Cooldown"] = 0.25,
+        ["Attack Cooldown"] = 7,
+    },
+    ["Reset Teleport"] = {
+        ["Enabled"] = true,
+        ["Delay Reset"] = 3,
+        ["Item Dont Reset"] = {
+            ["Fruit"] = {
+                ["Enabled"] = true,
+                ["All Fruit"] = true, 
+                ["Select Fruit"] = {
+                    ["Enabled"] = false,
+                    ["Fruit"] = {},
+                },
+            },
         },
-        EatFruitFromStorage = true,
-        SnipeFruit = true,
-        SnipeFruitMirage = true,
-        HopIfFoundNearExploiter = true,
-        HopHakiColor =false,
-        HopTushita = true,
-        HopValkyriehelm = false,
-        HopMirrorFractal=false,
-        FarmPole = false, -- Turn off If Want Focus Level
-        FarmItems = false, --Turn off If Want Focus Level And CDK, THis Only get After You Get God Human
-        DisableSoulGuitar = false,
-        DisableCDK = false,
-        DisableRaceEvolve = false,
-         RollRace={
-            Enable = false,
-            Races = {"Mink","Fishman","Human","Skypiea"}
-        },
-       MinFragment = 30000, --Farm After Max Level
+    },
+    ["Lock FPS"] = {
+        ["Enabled"] = true,
+        ["FPS"] = 15,
+    },
+    ["Auto Awaken Fruit"] = false, -- dont support  phoenix
+    ["GodHuman"] = true,
+    ["Priority Get Melee Sea 3"] = true,
+    ["Auto Saber"] = false,
+    ["Auto Pole"] = false,
+    ["Cursed Dual Katana"] = false,
+    ["SoulGuitar"] = false,
+    ["Shark Anchor"] = false, --i have cdk and god and soulguitar
+    ["Farm Mastery Fruit If Lvl Max"] = false,
+    ["Farm Max All Mastery Sword"] = false, --- i need have cdk and godhuman
+    ["Hop Fruit 1M Quest Third Sea"] = true,
+    ["White Screen"] = true,
+    ["Hop if Near Farm Area"] = false,
+    ["Auto Race V2-V3"] = true,
+    ["Auto Pull Lever"] = true,
+    ["Auto Get Mirror Fractal"] = false,
+    ["Lock Fragment"] = {
+        ["Enabled"] = true,
+        ["Fragments"] = 25000
+    },
+    ["Buy Haki Color Legendary"] = false, --- it will buy if u have sgt and godhuman and dont have Valkyrie Helm
+    ["Select Hop"] = { -- 70% will have it
+        ["Hop Find Rip Indra Get Valkyrie Helm"] = false, -- u need have godhuman and max level
+        ["Hop Find Full Moon Soul Guitar"] = false,
+        ["Hop Find Rip Indra Get Tushita"] = false, --- u need have sgt and godhuman
+        ["Hop Find Raids Castle [CDK]"] = false,
+        ["Hop Find Cake Queen [CDK]"] = false,
+        ["Hop Find Soul Reaper [CDK]"] = false,
+        ["Hop Find Darkbeard [SG]"] = false,
+    },
+    ["Race"] = {
+        ["Enabled"] = false,
+        ["Auto Roll Race"] = false,
+        ["Select Race"] =  "", -- Human, Mink, Fishman
+    },
+    ["Buy Haki"] = {
+        ["Enhancement"] = true,
+        ["Skyjump"] = true,
+        ["Flash Step"] = true,
+        ["Observation"] = true,
+    },
+    ["Blox Fruit Sniper"] = {},
+    ["Lock Fruit"] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth','Dough-Dough','Leopard-Leopard','Dragon-Dragon'},
+    ["Webhook"] = {
+        ["Enabled"] = false,
+        ["WebhookUrl"] = "",
     }
-getgenv().Team = "Pirates"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/vinhuchi/rblx/main/W-azure/BloxFruit/OneClickLoader.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/test"))()
+}
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
