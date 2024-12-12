@@ -24,7 +24,7 @@ getgenv().SettingFarm ={
     },
     ["Lock FPS"] = {
         ["Enabled"] = true,
-        ["FPS"] = 15,
+        ["FPS"] = 12,
     },
     ["Auto Awaken Fruit"] = false, -- dont support  phoenix
     ["GodHuman"] = true,
