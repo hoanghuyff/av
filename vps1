@@ -34,7 +34,7 @@ getgenv().SettingFarm ={
         },
     },
     ["Lock FPS"] = {
-        ["Enabled"] = true,
+        ["Enabled"] = false,
         ["FPS"] = 12,
     },
     ["Auto Awaken Fruit"] = false, -- dont support  phoenix
