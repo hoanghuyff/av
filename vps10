@@ -10,7 +10,7 @@ Messages = "buy nick at sokiimarket ⊙ com"
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
 end
 end)
-getgenv().Key = "b15f518ad2d4c98c5165a6a3"
+getgenv().Key = "c52ae21656f4b2a521c6a8b2"
 getgenv().SettingFarm ={
     ["Hide UI"] = true,
     ["Fast Attack"] = {
