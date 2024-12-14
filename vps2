@@ -12,12 +12,12 @@ end
 end)
 getgenv().Key = "f13a15724cb7ee8e57b5e122"
 getgenv().SettingFarm ={
-    ["Hide UI"] = false,
+    ["Hide UI"] = true,
     ["Fast Attack"] = {
         ["Speed Attack"] = 0,
         ["Attack Duration"] = 5,
         ["Speed Attack if Cooldown"] = 0.25,
-        ["Attack Cooldown"] = 7,
+        ["Attack Cooldown"] = 1,
     },
     ["Reset Teleport"] = {
         ["Enabled"] = true,
@@ -35,13 +35,13 @@ getgenv().SettingFarm ={
     },
     ["Lock FPS"] = {
         ["Enabled"] = false,
-        ["FPS"] = 12,
+        ["FPS"] = 60,
     },
-    ["Auto Awaken Fruit"] = false, -- dont support  phoenix
+    ["Auto Awaken Fruit"] = true, -- dont support  phoenix
     ["GodHuman"] = true,
-    ["Priority Get Melee Sea 3"] = true,
-    ["Auto Saber"] = false,
-    ["Auto Pole"] = false,
+    ["Priority Get Melee Sea 3"] = false,
+    ["Auto Saber"] = true,
+    ["Auto Pole"] = true,
     ["Cursed Dual Katana"] = false,
     ["SoulGuitar"] = false,
     ["Shark Anchor"] = false, --i have cdk and god and soulguitar
@@ -52,7 +52,7 @@ getgenv().SettingFarm ={
     ["Hop if Near Farm Area"] = false,
     ["Auto Race V2-V3"] = true,
     ["Auto Pull Lever"] = true,
-    ["Auto Get Mirror Fractal"] = false,
+    ["Auto Get Mirror Fractal"] = true,
     ["Lock Fragment"] = {
         ["Enabled"] = true,
         ["Fragments"] = 25000
@@ -78,8 +78,8 @@ getgenv().SettingFarm ={
         ["Flash Step"] = true,
         ["Observation"] = true,
     },
-    ["Blox Fruit Sniper"] = {},
-    ["Lock Fruit"] = {'Kitsune-Kitsune','T-Rex-T-Rex','Mammoth-Mammoth','Dough-Dough','Leopard-Leopard','Dragon-Dragon'},
+    ["Blox Fruit Sniper"] = {'Flame-Flame','Ice-Ice','Quake-Quake','Light-Light','Dark-Dark','Magma-Magma','Sand-Sand','Ice-Ice'},
+    ["Lock Fruit"] = {'Kitsune-Kitsune','Dough-Dough','Leopard-Leopard','Dragon-Dragon'},
     ["Webhook"] = {
         ["Enabled"] = false,
         ["WebhookUrl"] = "",
