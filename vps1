@@ -1,3 +1,4 @@
+print('load')
 wait(15)
 repeat wait(1)
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") then
