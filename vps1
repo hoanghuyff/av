@@ -1,4 +1,5 @@
-repeat wait(15)
+wait(15)
+repeat wait(1)
     if game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") then
         game:GetService("ReplicatedStorage").Chest.Remotes.Functions.EtcFunction:InvokeServer("EnterTheGame", {})
     end
