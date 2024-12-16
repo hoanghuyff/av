@@ -5,11 +5,6 @@ repeat wait(1)
 until not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") and game.Players.LocalPlayer and workspace:WaitForChild('PlayerCharacters') and workspace.PlayerCharacters:WaitForChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart')
 
 print('eeee')
-spawn(function()
-while true do wait(300)
-Messages = "buy nick at sokiimarket ⊙ com"
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
-end
-end)
+
 _G.Kaitun = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/kilavn/vandoscript/refs/heads/main/main.lua"))()
