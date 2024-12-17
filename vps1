@@ -1,12 +1,3 @@
-print('load')
-wait(15)
-repeat wait(1)
-    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") then
-        game:GetService("ReplicatedStorage").Chest.Remotes.Functions.EtcFunction:InvokeServer("EnterTheGame", {})
-    end
-until not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") and game.Players.LocalPlayer and workspace:WaitForChild('PlayerCharacters') and workspace.PlayerCharacters:WaitForChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart')
+_G.Kaitun = false --// false / true (set config auto farm max level)
 
-print('eeee')
-
-_G.Kaitun = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/kilavn/vandoscript/refs/heads/main/main.lua"))()
