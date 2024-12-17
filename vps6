@@ -1,15 +1,20 @@
-repeat wait(1)
-    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") then
-        game:GetService("ReplicatedStorage").Chest.Remotes.Functions.EtcFunction:InvokeServer("EnterTheGame", {})
-    end
-until not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") and game.Players.LocalPlayer and workspace:WaitForChild('PlayerCharacters') and workspace.PlayerCharacters:WaitForChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart')
+getgenv().Config = {
+    ["EquipEnchants"] = {"Coins", "Diamonds", "Treasure Hunter", "Strong Pets", "Tap Power"},
+    ["KickWhenReachGoal"] = {
+        ["Rank"] = 8,
+        ["Rebirth"] = 9,
+        ["Area"] = 234
+    },
+    ["StopAt"] = {
+        ["Rank"] = 8, 
+        ["Area"] = 234
+    },
+    
+    ["AutoOpen"] = true,
+    ["AutoBalloon"] = true, -- WANT A BAN? REPORT A BUG IN THIS SCRIPT.
 
-print('eeee')
-spawn(function()
-while true do wait(300)
-Messages = "buy nick at sokiimarket ⊙ com"
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
-end
-end)
-_G.Kaitun = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/kilavn/vandoscript/refs/heads/main/main.lua"))()
+    ["FPSBooster"] = true, -- REPORT NO SCRIPT BUGS.
+    ["UltraFPS"] = true, -- I WILL BAN YOU IF YOU REPORT ANY SCRIPT BUGS.
+    ["Webhook"] = "", -- DO NOT REPORT ANY SCRIPT BUGS. WE KNOW ITS BUGGED.
+}
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/177d65e916988f4b84dd21ed33a2aa91.lua"))()
