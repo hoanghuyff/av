@@ -1,15 +1,45 @@
-repeat wait(1)
-    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") then
-        game:GetService("ReplicatedStorage").Chest.Remotes.Functions.EtcFunction:InvokeServer("EnterTheGame", {})
-    end
-until not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LoadingGUI") and game.Players.LocalPlayer and workspace:WaitForChild('PlayerCharacters') and workspace.PlayerCharacters:WaitForChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart')
-
-print('eeee')
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 spawn(function()
 while true do wait(300)
 Messages = "buy nick at sokiimarket ⊙ com"
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
 end
 end)
-_G.Kaitun = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/kilavn/vandoscript/refs/heads/main/main.lua"))()
+script_key = "oorkOUrJXBktEdljmFcSlGgeklNuoAJc"
+getgenv().SetFpsCap = false
+getgenv().FpsCap = 10
+getgenv().OneClickUi = false -- Only Open Necessacry Ui For One Click
+getgenv().FpsBoost1 = false
+    getgenv().WhiteScreen = true
+    getgenv().UiCheckItems = false
+    getgenv().OneClickSetting = {
+        Enable=true,
+        UnlimitGetQuest=true,
+        TripleQuest=true,
+        AutoAddStats=true,
+        RedeemCode=true,
+        Sea2KeyHop=true,
+        FruitEat = { --Priority, Name, 
+            [1] = {"Dough-Dough"},
+            [2] = {"Flame-Flame","Ice-Ice","Quake-Quake","Light-Light","Dark-Dark","Magma-Magma","Sand-Sand","Ice-Ice"}
+        },
+        EatFruitFromStorage = true,
+        SnipeFruit = true,
+        SnipeFruitMirage = true,
+        HopIfFoundNearExploiter = false,
+        HopHakiColor =false,
+        HopTushita = false,
+        HopValkyriehelm = false,
+        HopMirrorFractal=false,
+        FarmPole = false, -- Turn off If Want Focus Level
+        FarmItems = false, --Turn off If Want Focus Level And CDK, THis Only get After You Get God Human
+        DisableSoulGuitar = true,
+        DisableCDK = true,
+
+    }
+    getgenv().OneClickFarms = {
+        ["Shark Anchor"] = false,
+    }
+getgenv().Team = "Pirates"
+getgenv().AutoLoad = false --Will Load Script On Server Hop
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
