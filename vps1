@@ -1,39 +1,18 @@
-local Players = game:GetService("Players")
-local game = game:GetService("Game")
-local GuiService = game:GetService("GuiService")
-
-local LocalPlayer = Players.LocalPlayer
-
-local voluntaryKick = false -- Đánh dấu thoát game tự nguyện
-
-local function getLevel()
-    if LocalPlayer:FindFirstChild("Data") and LocalPlayer.Data:FindFirstChild("Level") then
-        return LocalPlayer.Data.Level.Value
-    end
-    return nil
-end
-
-local function checkFightingStyleByTool()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-
-    -- Kiểm tra nếu nhân vật có Tool
-    if character and character:FindFirstChildOfClass("Tool") then
-        local tool = character:FindFirstChildOfClass("Tool")
-        -- Kiểm tra nếu công cụ là "God Human"
-        if tool.Name == "God Human" then
-            return true
-        end
-    end
-    return false
-end
-
--- Kiểm tra điều kiện level >= 2600 và God Human, sau đó thoát game
 while true do
     local newLevel = getLevel()
 
+    -- Kiểm tra liên tục
     if newLevel then
-        -- Kiểm tra điều kiện level >= 2600 và God Human
+        if currentLevel == nil then
+            currentLevel = newLevel
+        elseif newLevel > currentLevel then
+            currentLevel = newLevel
+            lastUpdateTime = os.time()
+        elseif os.time() - lastUpdateTime >= maxIdleTime then
+            hopToServer()
+        end
+
+        -- Kiểm tra điều kiện đạt Level 2600 và sử dụng God Human
         if newLevel >= 2600 and checkFightingStyleByTool() then
             print("Level đạt 2600 và sử dụng God Human, thoát game trong 120 giây...")
             local countdown = 120
@@ -48,8 +27,17 @@ while true do
         end
     end
 
-    task.wait(5) -- Đảm bảo rằng vòng lặp chạy liên tục
-end 
+    -- Kiểm tra nếu có người chơi gần
+    if isNearPlayer() then
+        task.wait(math.random(60, 120))
+        hopToServer()
+        break
+    end
+
+    -- Kiểm tra trạng thái kẹt
+    checkStuck()
+    task.wait(checkDelay) -- Đảm bảo rằng vòng lặp chạy liên tục
+end
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 spawn(function()
 while true do wait(300)
