@@ -34,7 +34,7 @@ getgenv().FpsBoost1 = true
         FarmPole = false, -- Turn off If Want Focus Level
         FarmItems = false, --Turn off If Want Focus Level And CDK, THis Only get After You Get God Human
         DisableSoulGuitar = true,
-        DisableCDK = false,
+        DisableCDK = true,
 
     }
     getgenv().OneClickFarms = {
