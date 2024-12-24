@@ -38,7 +38,7 @@ getgenv().FpsBoost1 = true
 
     }
     getgenv().OneClickFarms = {
-        ["Shark Anchor"] = false,
+        ["Shark Anchor"] = true,
     }
 getgenv().Team = "Pirates"
 getgenv().AutoLoad = false --Will Load Script On Server Hop
