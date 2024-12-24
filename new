@@ -1,1 +1,198 @@
+repeat task.wait() until game:IsLoaded()
 
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local GuiService = game:GetService("GuiService")
+
+local LocalPlayer = Players.LocalPlayer
+local checkRadius = 100
+local positionCheckDelay = 180
+local checkDelay = 10
+local maxIdleTime = 600 -- Thời gian tối đa kiểm tra level là 600 giây
+local currentLevel = nil
+local lastUpdateTime = os.time()
+local lastPosition = nil
+local timeStuck = 0
+
+-- Biến đánh dấu thoát game tự nguyện
+local voluntaryKick = false
+
+local function getLevel()
+    if LocalPlayer:FindFirstChild("Data") and LocalPlayer.Data:FindFirstChild("Level") then
+        return LocalPlayer.Data.Level.Value
+    end
+    return nil
+end
+
+local function isNearPlayer()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local playerPosition = player.Character.HumanoidRootPart.Position
+            local myPosition = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character.HumanoidRootPart.Position
+            if myPosition and (playerPosition - myPosition).Magnitude <= checkRadius then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function hopToServer()
+    local success, result = pcall(function()
+        local url = "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+        local response = HttpService:JSONDecode(game:HttpGet(url))
+        for _, server in ipairs(response.data) do
+            if server.id ~= game.JobId and server.playing < server.maxPlayers then
+                TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, LocalPlayer)
+                return
+            end
+        end
+    end)
+    if not success then
+        TeleportService:Teleport(game.PlaceId)
+    end
+end
+
+local function checkStuck()
+    local myPosition = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character.HumanoidRootPart.Position
+    if myPosition then
+        if lastPosition and (myPosition - lastPosition).Magnitude < 1 then
+            timeStuck = timeStuck + checkDelay
+            if timeStuck >= positionCheckDelay then
+                hopToServer()
+            end
+        else
+            timeStuck = 0
+        end
+        lastPosition = myPosition
+    end
+end
+
+local function checkFightingStyleByTool()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    print("Hàm checkFightingStyleByTool được gọi.")
+
+    -- Print the contents of Character and Backpack
+    if character then
+        print("Danh sách Tool trong Character:")
+        for _, tool in pairs(character:GetChildren()) do
+            if tool:IsA("Tool") then
+                print("Tool trong Character: " .. tool.Name)
+            end
+        end
+    end
+
+    -- Print the contents of Backpack
+    if player.Backpack then
+        print("Danh sách Tool trong Backpack:")
+        for _, tool in pairs(player.Backpack:GetChildren()) do
+            if tool:IsA("Tool") then
+                print("Tool trong Backpack: " .. tool.Name)
+            end
+        end
+    end
+
+    -- Check if the tool is Godhuman in either the character or backpack
+    local tool = nil
+    if character then
+        tool = character:FindFirstChild("Godhuman")
+    end
+    if not tool then
+        tool = player.Backpack:FindFirstChild("Godhuman")
+    end
+
+    if tool then
+        print("Tool là God Human!")
+        return true
+    else
+        print("Tool không phải God Human.")
+    end
+
+    return false
+end
+print("Gọi hàm kiểm tra Fighting Style...")
+local result = checkFightingStyleByTool()
+print("Kết quả kiểm tra: " .. tostring(result))
+
+
+while true do
+    local newLevel = getLevel()
+
+    -- Kiểm tra liên tục
+    if newLevel then
+        if currentLevel == nil then
+            currentLevel = newLevel
+        elseif newLevel > currentLevel then
+            currentLevel = newLevel
+            lastUpdateTime = os.time()
+        elseif os.time() - lastUpdateTime >= maxIdleTime then
+            hopToServer()
+        end
+
+        -- Kiểm tra điều kiện level 2600 và God Human
+        if newLevel >= 2600 and checkFightingStyleByTool() then
+            print("Level đạt 2600 và sử dụng God Human, thoát game trong 120 giây...")
+            local countdown = 120
+            while countdown > 0 do
+                print("Thoát game sau " .. countdown .. " giây...")
+                task.wait(1)
+                countdown = countdown - 1
+            end
+            voluntaryKick = true -- Đánh dấu rằng thoát game là tự nguyện
+            game:Shutdown() -- Ngắt kết nối
+            break
+        end
+    end
+
+    if isNearPlayer() then
+        task.wait(math.random(60, 120))
+        hopToServer()
+        break
+    end
+
+    checkStuck()
+    task.wait(checkDelay) -- Đảm bảo rằng vòng lặp chạy liên tục
+end
+
+local reconnectDisabledList = {
+    [Enum.ConnectionError.DisconnectLuaKick] = true,
+    [Enum.ConnectionError.DisconnectSecurityKeyMismatch] = true,
+    [Enum.ConnectionError.DisconnectNewSecurityKeyMismatch] = true,
+    [Enum.ConnectionError.DisconnectDuplicateTicket] = true,
+    [Enum.ConnectionError.DisconnectWrongVersion] = true,
+    [Enum.ConnectionError.DisconnectProtocolMismatch] = true,
+    [Enum.ConnectionError.DisconnectBadhash] = true,
+    [Enum.ConnectionError.DisconnectIllegalTeleport] = true,
+    [Enum.ConnectionError.DisconnectDuplicatePlayer] = true,
+    [Enum.ConnectionError.DisconnectCloudEditKick] = true,
+    [Enum.ConnectionError.DisconnectOnRemoteSysStats] = true,
+    [Enum.ConnectionError.DisconnectRaknetErrors] = true,
+    [Enum.ConnectionError.PlacelaunchFlooded] = true,
+    [Enum.ConnectionError.PlacelaunchHashException] = true,
+    [Enum.ConnectionError.PlacelaunchHashExpired] = true,
+    [Enum.ConnectionError.PlacelaunchUnauthorized] = true,
+    [Enum.ConnectionError.PlacelaunchUserLeft] = true,
+    [Enum.ConnectionError.PlacelaunchRestricted] = true,
+    [267] = true,  -- Security kick error code,
+    [288] = true,  -- Shutdown sever
+}
+
+GuiService.ErrorMessageChanged:Connect(function()
+    local error_code = GuiService:GetErrorCode()
+    local error_type = GuiService:GetErrorType()
+    if voluntaryKick then
+        -- Không rejoin nếu thoát tự nguyện
+        print("Người chơi thoát tự nguyện, không thực hiện reconnect.")
+        return
+    end
+    if error_type == Enum.ConnectionError.DisconnectErrors and
+        not reconnectDisabledList[error_code] then
+        print('Disconnect registered!')
+        while task.wait(5) do
+            TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId)
+        end
+    end
+end)
