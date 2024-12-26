@@ -5,7 +5,7 @@ Messages = "buy nick at sokiimarket ⊙ com"
 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
 end
 end)
-script_key = "ftWZFhchJsqgjWWJCUEXMpOmHMWBxBbL"
+script_key = "hUmwOkVxvWQeykCfDVGtOBgjMNlIyGeB"
 getgenv().SetFpsCap = false
 getgenv().FpsCap = 15
 getgenv().OneClickUi = true -- Only Open Necessacry Ui For One Click
