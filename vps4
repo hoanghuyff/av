@@ -16,3 +16,4 @@ getgenv().Configs = {
     ["Cursed Dual Katana"] = false --Farm CDK First
 }
 repeat task.wait(6) pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/verudous/Xero-Hub/refs/heads/main/kaitun.lua"))()end) until getgenv().Check_Execute
+loadstring(game:HttpGet("https://raw.githubusercontent.com/fakerdz/blox/refs/heads/main/REJOIN"))()
