@@ -1,7 +1,7 @@
 script_key = "WOAIRBVJRODKJJUO433O77X27TQPP4PP7HF35KNXXI"
 getgenv().Configs = {
     ["Team"] = "Pirates",
-    ["Gun Farm"] = false, -- Fast farm level, BUT FARMING MELEE VERY SLOW GODHUMAN
+    ["Gun Farm"] = true, -- Fast farm level, BUT FARMING MELEE VERY SLOW GODHUMAN
     ["FPS Boost"] = {
         ["Enable"] = false, -- don't enable DON't ENABLE 
         ["FPS Cap"] = 15, --FPS  recommend 20
