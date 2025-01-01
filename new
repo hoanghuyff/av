@@ -81,7 +81,7 @@ end
 spawn(function()
     while true do 
         task.wait(300)
-        local Messages = "buy nick at fakervn ⊙ com"
+        local Messages = "buy nick at sokiimarket ⊙ com"
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
     end
 end)
