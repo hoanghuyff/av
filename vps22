@@ -1,4 +1,4 @@
-script_key = "WOAIRBVJRODKJJUO433O77X27TQPP4PP7HF35KNXXI"
+script_key = "VHUORM4YQORJRPNV433O77X27TW4X5PC73F35KNXXI"
 getgenv().Configs = {
     ["Team"] = "Pirates",
     ["Gun Farm"] = true, -- Fast farm level, BUT FARMING MELEE VERY SLOW GODHUMAN
