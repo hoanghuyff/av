@@ -4,7 +4,7 @@ getgenv().Configs = {
     ["Team"] = "Pirates",
     ["Gun Farm"] = false, -- get Banned Fast Farm level
     ["FPS Boost"] = {
-        ["Enable"] = false, -- tween?
+        ["Enable"] = true, -- tween?
         ["FPS Cap"] = 15, --FPS  recommend 15-20
     },
     ["Farm Boss Drops"] = {
@@ -15,7 +15,7 @@ getgenv().Configs = {
     ["Skull Guitar"] = false, -- Farm SG First
     ["Find Fruit"] = true, -- Will find 1m+ fruit BUT HOP GAME broken idk why
     ["Cursed Dual Katana"] = false, --  Finish  cdk
-    ["Switch Melee"] = false, -- that farm all mastery idk why him add shjt
+    ["Switch Melee"] = true, -- that farm all mastery idk why him add shjt
     ["Eat Fruit"] = "Magma-Magma", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
     ["Lock Fragment"] = 20000, --idk why it put number >0 then broken
     ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki
