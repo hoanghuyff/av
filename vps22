@@ -1,4 +1,4 @@
-script_key = "VHUORM4YQORJRPNV433O77X27TW4X5PC73F35KNXXI"
+script_key = "WOAIRBVJRODKJJUO433O77X27TQPP4PP7HF35KNXXI"
 getgenv().Shutdown = true -- shutdown server it fail hop
 getgenv().Configs = {
     ["Team"] = "Pirates",
