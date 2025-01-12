@@ -1,7 +1,7 @@
 script_key = "WS52FFU7T652DLHI433O77X27TQPB57J6LF35KNXXI"
 getgenv().Shutdown = true -- shutdown server it fail hop
 getgenv().Configs = {
-    ["Team"] = "Pirates",
+    ["Team"] = "Marines",
     ["Gun Farm"] = false, -- get Banned Fast Farm level
     ["FPS Boost"] = {
         ["Enable"] = true, -- tween?
