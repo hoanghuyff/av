@@ -20,5 +20,5 @@ getgenv().Configs = {
     ["Lock Fragment"] = 20000, --idk why it put number >0 then broken
     ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki
 }
-repeat task.wait(1) pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/verudous/Xero-Hub/refs/heads/main/kaitun.lua"))()end) until getgenv().Check_Execute
+repeat task.wait(5) pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/verudous/Xero-Hub/refs/heads/main/kaitun.lua"))()end) until getgenv().Check_Execute
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/new"))()
