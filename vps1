@@ -1,4 +1,38 @@
- -- Script Auto Add Friend và Auto Accept Friend Requests
+script_key = "WS52FFU7T652DLHI433O77X27TQPB57J6LF35KNXXI" -- premium only, u can leave it blank if ur not
+getgenv().Shutdown = true -- Turn on if u are farming bulk accounts
+getgenv().Configs = {
+    ["Team"] = "Marines",
+    ["Gun Farm"] = false, -- Fast farm level, but farming melee is slow
+    ["FPS Boost"] = {
+        ["Enable"] = false,
+        ["FPS Cap"] = 10,
+    },
+    ["Farm Boss Drops"] = {
+        ["Enable"] = false,
+        ["When x2 Exp Expired"] = false
+    },
+    ["Hop"] = {
+        ["Enable"] = true,
+        ["Hop Find Tushita"] = true
+    },
+    ["Auto Collect Berry"] = false,
+    ["Auto Evo Race"] = false,
+    ["Awaken Fruit"] = false,
+    ["Rainbow Haki"] = false,
+    ["Hop Player Near"] = false,
+    ["Skull Guitar"] = true,
+    ["Find Fruit"] = true, -- Will find 1m+ fruit to unlock swan door to access third sea
+    ["Cursed Dual Katana"] = true,
+    ["Switch Melee"] = true,
+    ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
+    ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
+    ["Lock Fragment"] = 0,
+    ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki, ...
+}
+
+repeat task.wait() pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/kaitun.lua"))() end) until getgenv().Check_Execute
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/new"))()
+-- Script Auto Add Friend và Auto Accept Friend Requests
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
@@ -28,7 +62,14 @@ while true do
     autoAcceptFriendRequests()
     task.wait(10) -- Lặp lại mỗi 10 giây
 end
-local messagesList = {"Hi!", "What is your name?", "How are you?", "What's up?", "Hello!", "Anyone here?", "Good game!"}
+local messagesList = {
+    "Hi!", "What is your name?", "How are you?", "What's up?", "Buy nick at fakervn ⊙ com", "Hello!", "Anyone here?", "Good game!",
+    "Want to team up?", "Add me as a friend!", "Let's play together!", "Can you teach me this game?", "Anyone want to chat?", "I just started, any tips?",
+    "Where are you from?", "Nice to meet you!", "What's your favorite game?", "Do you like this game?", "I'm having fun!",
+    "Do you want to join my squad?", "Hey, let's explore together!", "Can you show me around?", "I'm looking for a partner!",
+    "Add me and let's grind together!", "Anyone up for some fun?", "Let's be friends!", "Do you need help?", "I'm here to play!",
+    "Can you share some tricks?", "This game is awesome!", "Who's the best player here?"
+}
 
 spawn(function()
     while true do 
