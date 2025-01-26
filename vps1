@@ -12,17 +12,17 @@ getgenv().Configs = {
         ["When x2 Exp Expired"] = false
     },
     ["Hop"] = {
-        ["Enable"] = true,
-        ["Hop Find Tushita"] = true
+        ["Enable"] = false,
+        ["Hop Find Tushita"] = false
     },
     ["Auto Collect Berry"] = false,
     ["Auto Evo Race"] = false,
     ["Awaken Fruit"] = false,
     ["Rainbow Haki"] = false,
     ["Hop Player Near"] = false,
-    ["Skull Guitar"] = true,
+    ["Skull Guitar"] = false,
     ["Find Fruit"] = true, -- Will find 1m+ fruit to unlock swan door to access third sea
-    ["Cursed Dual Katana"] = true,
+    ["Cursed Dual Katana"] = false,
     ["Switch Melee"] = true,
     ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
     ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
