@@ -40,7 +40,7 @@ local messagesList = {
 spawn(function()
     while true do 
         -- Randomize the wait time between 100 and 500 seconds
-        local waitTime = math.random(100, 500)
+        local waitTime = math.random(100, 300)
         task.wait(waitTime)
 
         -- Randomize the message to send
