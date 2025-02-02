@@ -1,143 +1,152 @@
-repeat task.wait() until game:IsLoaded()
-
-local Players = game:GetService("Players")
+task.wait(20)
 local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local LocalPlayer = Players.LocalPlayer
 
-local checkRadius = 30
-local positionCheckDelay = 180
-local checkDelay = 10
-local lastPosition = nil
-local timeStuck = 0
-local sentFriendRequests = {} -- Lưu trữ UserId của những người đã nhận yêu cầu
+-- 📂 Cấu hình file lưu dữ liệu
+local folderPath = "faker/"
+local filePath = folderPath .. LocalPlayer.Name .. ".json"
 
--- Gửi yêu cầu kết bạn tới một người chơi cụ thể
-local function autoSendFriendRequest(targetPlayer)
-    if targetPlayer and not sentFriendRequests[targetPlayer.UserId] and not LocalPlayer:IsFriendsWith(targetPlayer.UserId) then
-        sentFriendRequests[targetPlayer.UserId] = true -- Đánh dấu đã gửi yêu cầu
-        local success, errorMessage = pcall(function()
-            LocalPlayer:RequestFriendship(targetPlayer)
-        end)
-        if success then
-            print("Đã gửi yêu cầu kết bạn tới:", targetPlayer.Name)
-        else
-            print("Không thể gửi yêu cầu kết bạn tới:", targetPlayer.Name, errorMessage)
-        end
-    end
+-- 🌟 Danh sách game
+local bloxFruitsUniverseID = 2753915549
+local bloxFruitsPlaceIDs = {2753915549, 4442272183, 7449423635} -- Sea 1, 2, 3
+
+local popularGameIDs = {
+    6516141723, 286090429, 155615604, 2788229376, 3260590327,
+    142823291, 13772394663, 6284583030, 9498006165
+}
+
+-- 🔄 Biến trạng thái
+local step = 0
+local lastAFKTime = 0
+local totalJumps = 0
+
+-- ⏳ **Thời gian chờ**
+local minBloxTime, maxBloxTime = 7200, 18000  -- 2-5 giờ trong Blox Fruits
+local minGameTime, maxGameTime = 300, 600     -- 5-10 phút trong game khác
+
+-- 📌 Kiểm tra xem có ở Blox Fruits không
+local function isInBloxFruits()
+    return game.GameId == bloxFruitsUniverseID
 end
 
--- Chấp nhận tất cả yêu cầu kết bạn đã nhận
-local function autoAcceptFriendRequests()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and player:IsFriendRequestSent() then
-            local success, errorMessage = pcall(function()
-                LocalPlayer:AcceptFriendRequest(player)
-            end)
-            if success then
-                print("Đã chấp nhận yêu cầu kết bạn từ:", player.Name)
-            else
-                print("Lỗi khi chấp nhận yêu cầu từ:", player.Name, errorMessage)
-            end
-        end
-    end
+-- 🎯 Lấy game hot ngẫu nhiên
+local function getHotGame()
+    return popularGameIDs[math.random(1, #popularGameIDs)]
 end
 
--- Lặp liên tục để kiểm tra yêu cầu kết bạn
-spawn(function()
-    while true do
-        autoAcceptFriendRequests()
-        task.wait(5) -- Kiểm tra yêu cầu kết bạn mỗi 5 giây
-    end
-end)
-
--- Gửi yêu cầu kết bạn đến tất cả người chơi hiện tại
-for _, player in ipairs(Players:GetPlayers()) do
-    if player ~= LocalPlayer then
-        autoSendFriendRequest(player)
-    end
+-- 🔁 Lấy Sea 1 của Blox Fruits để quay về
+local function getBloxFruitsSea1()
+    return 2753915549
 end
 
--- Khi có người chơi mới tham gia, tự động gửi yêu cầu kết bạn
-Players.PlayerAdded:Connect(function(player)
-    autoSendFriendRequest(player)
-end)
+-- 📂 Tạo thư mục nếu chưa có
+if not isfolder(folderPath) then makefolder(folderPath) end
 
--- Chức năng đổi server
-local function hopToServer()
+-- 📂 Đọc dữ liệu từ file nếu đã tồn tại
+if pcall(function() return readfile(filePath) end) then
+    local content = readfile(filePath)
+    local success, data = pcall(function() return HttpService:JSONDecode(content) end)
+    if success and type(data) == "table" then
+        step = data.step or 0
+        lastAFKTime = data.lastAFKTime or 0
+        totalJumps = data.totalJumps or 0
+    else
+        lastAFKTime = os.time()
+    end
+else
+    lastAFKTime = os.time()
+end
+
+-- 📂 Hàm lưu dữ liệu vào file mỗi 5 giây
+local function saveData()
+    local timeNow = os.time()
+    local data = {
+        lastAFKTime = lastAFKTime,
+        totalTimeAFK = timeNow - lastAFKTime, -- Tính thời gian đã trôi qua
+        totalJumps = totalJumps,
+        step = step
+    }
+    writefile(filePath, HttpService:JSONEncode(data))
+end
+
+-- 🚀 Hàm teleport (CẬP NHẬT `lastAFKTime` trước khi teleport)
+local function safeTeleport(targetGameID)
+    if not targetGameID then return end
+    lastAFKTime = os.time() -- ✅ Cập nhật ngay khi teleport
+    totalJumps = totalJumps + 1 -- Tăng số lần nhảy game
+    saveData()
+
     local success, errorMessage = pcall(function()
-        local url = "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
-        local response = HttpService:JSONDecode(game:HttpGet(url))
-        local servers = {}
-        local minPlayers = nil
-
-        for _, server in ipairs(response.data) do
-            if server.id ~= game.JobId and server.playing < server.maxPlayers then
-                if minPlayers == nil or server.playing < minPlayers then
-                    minPlayers = server.playing
-                    servers = {server}
-                elseif server.playing == minPlayers then
-                    table.insert(servers, server)
-                end
-            end
-        end
-
-        if #servers > 0 then
-            local bestServer = servers[math.random(#servers)]
-            TeleportService:TeleportToPlaceInstance(game.PlaceId, bestServer.id, LocalPlayer)
-        else
-            TeleportService:Teleport(game.PlaceId)
-        end
+        TeleportService:Teleport(targetGameID, LocalPlayer)
     end)
 
     if not success then
-        print("Error teleporting: " .. errorMessage)
-        TeleportService:Teleport(game.PlaceId)
-    end
-end
-
--- Kiểm tra nếu có người chơi gần
-local function isNearPlayer()
-    for _, player in pairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-            local playerPosition = player.Character.HumanoidRootPart.Position
-            local myPosition = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character.HumanoidRootPart.Position
-            if myPosition and (playerPosition - myPosition).Magnitude <= checkRadius then
-                return true
-            end
-        end
-    end
-    return false
-end
-
--- Kiểm tra kẹt vị trí
-local function checkStuck()
-    local myPosition = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and LocalPlayer.Character.HumanoidRootPart.Position
-    if myPosition then
-        if lastPosition and (myPosition - lastPosition).Magnitude < 1 then
-            timeStuck = timeStuck + checkDelay
-            if timeStuck >= positionCheckDelay then
-                hopToServer()
-            end
+        print("⚠ [ERROR] Teleport lỗi: " .. errorMessage)
+        if string.find(errorMessage, "restricted") then
+            game:Shutdown()
         else
-            timeStuck = 0
+            task.wait(10)
+            safeTeleport(getHotGame())
         end
-        lastPosition = myPosition
     end
 end
 
--- Vòng lặp chính
-spawn(function()
+-- ⏳ Kiểm tra AFK và nhảy game
+local function checkAFK()
     while true do
-        if isNearPlayer() then
-            print("Người chơi gần phát hiện! Sẽ chuyển server sau 60 giây.")
-            task.wait(60) -- Delay 60 giây trước khi chuyển server
-            hopToServer()
-        end
+        task.wait(1)  -- 🔄 Cập nhật mỗi giây
+        local totalAFKTime = os.time() - lastAFKTime
 
-        checkStuck()
-        task.wait(checkDelay)
+        if step == 0 and isInBloxFruits() then
+            if totalAFKTime >= math.random(minBloxTime, maxBloxTime) then
+                lastAFKTime = os.time()
+                step = 1
+                saveData()
+                safeTeleport(getHotGame())
+            end
+        elseif step == 1 then
+            if totalAFKTime >= math.random(minGameTime, maxGameTime) then
+                lastAFKTime = os.time()
+                step = 2
+                saveData()
+                safeTeleport(getHotGame())
+            end
+        elseif step == 2 then
+            if totalAFKTime >= math.random(minGameTime, maxGameTime) then
+                lastAFKTime = os.time()
+                step = 0
+                saveData()
+                safeTeleport(getBloxFruitsSea1())
+            end
+        end
+    end
+end
+
+-- 🔁 Auto lưu file mỗi 5 giây
+local function autoSaveLoop()
+    while true do
+        task.wait(5)
+        saveData()
+    end
+end
+
+-- 🔁 Theo dõi teleport thành công/thất bại
+LocalPlayer.OnTeleport:Connect(function(state)
+    if state == Enum.TeleportState.Started then
+        lastAFKTime = os.time()
+        saveData()
+    elseif state == Enum.TeleportState.Failed then
+        safeTeleport(getHotGame()) 
     end
 end)
 
-print("Script đã được kích hoạt và đang hoạt động.")
+-- 🚀 Chạy kiểm tra AFK
+task.spawn(checkAFK)
+
+-- 🚀 Chạy auto save file mỗi 5 giây
+task.spawn(autoSaveLoop)
+
+-- 📂 **Ghi file ngay khi execute**
+saveData()
