@@ -27,7 +27,7 @@ getgenv().SettingFarm ={
             ["Skull Guitar"] = false,
             ["Mirror Fractal"] = false,
             ["Cursed Dual Katana"] = false,
-            ["Upgrade Race V2-V3"] = true,
+            ["Upgrade Race V2-V3"] = false,
             ["Auto Pull Lever"] = false,
         },
         ["Select Hop"] = { -- 70% will have it
