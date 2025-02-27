@@ -18,26 +18,26 @@ getgenv().SettingFarm ={
         },
         ["White Screen"] = false,
         ["Lock Fps"] = {
-            ["Enabled"] = false,
-            ["FPS"] = 20,
+            ["Enabled"] = true,
+            ["FPS"] = 15,
         },
         ["Get Items"] = {
             ["Saber"] = true,
             ["Godhuman"] =  true,
-            ["Skull Guitar"] = true,
-            ["Mirror Fractal"] = true,
-            ["Cursed Dual Katana"] = true,
-            ["Upgrade Race V2-V3"] = true,
-            ["Auto Pull Lever"] = true,
+            ["Skull Guitar"] = false,
+            ["Mirror Fractal"] = false,
+            ["Cursed Dual Katana"] = false,
+            ["Upgrade Race V2-V3"] = false,
+            ["Auto Pull Lever"] = false,
         },
         ["Select Hop"] = { -- 70% will have it
-            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = true, 
-            ["Hop Find Dough King Get Mirror Fractal"] = true,
-            ["Hop Find Raids Castle [CDK]"] = true,
-            ["Hop Find Cake Queen [CDK]"] = true,
-            ["Hop Find Soul Reaper [CDK]"] = true,
-            ["Hop Find Darkbeard [SG]"] = true,
-            ["Hop Find Mirage [ Pull Lever ]"] = true,
+            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = false, 
+            ["Hop Find Dough King Get Mirror Fractal"] = false,
+            ["Hop Find Raids Castle [CDK]"] = false,
+            ["Hop Find Cake Queen [CDK]"] = false,
+            ["Hop Find Soul Reaper [CDK]"] = false,
+            ["Hop Find Darkbeard [SG]"] = false,
+            ["Hop Find Mirage [ Pull Lever ]"] = false,
         },
         ["Buy Haki"] = {
             ["Enhancement"] = true,
@@ -87,26 +87,9 @@ while true do
     autoAcceptFriendRequests()
     task.wait(10) -- Lặp lại mỗi 10 giây
 end
-local messagesList = {
-    "Hi!", "What is your name?", "How are you?", "What's up?", "Buy nick at fakervn ⊙ com", "Hello!", "Anyone here?", "Good game!",
-    "Want to team up?", "Add me as a friend!", "Let's play together!", "Can you teach me this game?", "Anyone want to chat?", "I just started, any tips?",
-    "Where are you from?", "Nice to meet you!", "What's your favorite game?", "Do you like this game?", "I'm having fun!",
-    "Do you want to join my squad?", "Hey, let's explore together!", "Can you show me around?", "I'm looking for a partner!",
-    "Add me and let's grind together!", "Anyone up for some fun?", "Let's be friends!", "Do you need help?", "I'm here to play!",
-    "Can you share some tricks?", "This game is awesome!", "Who's the best player here?"
-}
-
 spawn(function()
-    while true do 
-        -- Randomize the wait time between 100 and 500 seconds
-        local waitTime = math.random(100, 500)
-        task.wait(waitTime)
-
-        -- Randomize the message to send
-        local randomIndex = math.random(1, #messagesList)
-        local randomMessage = messagesList[randomIndex]
-
-        -- Fire the chat message
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(randomMessage, "All")
-    end
+while true do wait(300)
+Messages = "buy nick at sokiimarket (•) com"
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
+end
 end)
