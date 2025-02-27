@@ -1,34 +1,95 @@
-script_key = "WS52FFU7T652DLHI433O77X27TQPB57J6LF35KNXXI" -- premium only, u can leave it blank if ur not
-getgenv().Shutdown = true -- Turn on if u are farming bulk accounts
-getgenv().Configs = {
-    ["Team"] = "Marines",
-    ["Gun Farm"] = false, -- Fast farm level, but farming melee is slow
-    ["FPS Boost"] = {
-        ["Enable"] = false,
-        ["FPS Cap"] = 10,
-    },
-    ["Farm Boss Drops"] = {
-        ["Enable"] = false,
-        ["When x2 Exp Expired"] = false
-    },
-    ["Hop"] = {
-        ["Enable"] = true,
-        ["Hop Find Tushita"] = true
-    },
-    ["Auto Collect Berry"] = false,
-    ["Auto Evo Race"] = false,
-    ["Awaken Fruit"] = false,
-    ["Rainbow Haki"] = false,
-    ["Hop Player Near"] = false,
-    ["Skull Guitar"] = true,
-    ["Find Fruit"] = true, -- Will find 1m+ fruit to unlock swan door to access third sea
-    ["Cursed Dual Katana"] = true,
-    ["Switch Melee"] = true,
-    ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
-    ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
-    ["Lock Fragment"] = 0,
-    ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki, ...
-}
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Key = "91fbc6ef653ef40b3a4fc445"
+getgenv().SettingFarm ={
+        ["Hide UI"] = false,
+        ["Reset Teleport"] = {
+            ["Enabled"] = false,
+            ["Delay Reset"] = 3,
+            ["Item Dont Reset"] = {
+                ["Fruit"] = {
+                    ["Enabled"] = true,
+                    ["All Fruit"] = true, 
+                    ["Select Fruit"] = {
+                        ["Enabled"] = false,
+                        ["Fruit"] = {},
+                    },
+                },
+            },
+        },
+        ["White Screen"] = false,
+        ["Lock Fps"] = {
+            ["Enabled"] = true,
+            ["FPS"] = 15,
+        },
+        ["Get Items"] = {
+            ["Saber"] = true,
+            ["Godhuman"] =  true,
+            ["Skull Guitar"] = false,
+            ["Mirror Fractal"] = false,
+            ["Cursed Dual Katana"] = false,
+            ["Upgrade Race V2-V3"] = false,
+            ["Auto Pull Lever"] = false,
+        },
+        ["Select Hop"] = { -- 70% will have it
+            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = false, 
+            ["Hop Find Dough King Get Mirror Fractal"] = false,
+            ["Hop Find Raids Castle [CDK]"] = false,
+            ["Hop Find Cake Queen [CDK]"] = false,
+            ["Hop Find Soul Reaper [CDK]"] = false,
+            ["Hop Find Darkbeard [SG]"] = false,
+            ["Hop Find Mirage [ Pull Lever ]"] = false,
+        },
+        ["Buy Haki"] = {
+            ["Enhancement"] = true,
+            ["Skyjump"] = true,
+            ["Flash Step"] = true,
+            ["Observation"] = true,
+        },
+        ["Sniper Fruit Shop"] = {
+            ["Enabled"] = true, -- Auto Buy Fruit in Shop Mirage and Normal
+            ["Fruit"] = {"Leopard-Leopard","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
+        },
+        ["Lock Fruit"] = {},
+        ["Webhook"] = {
+            ["Enabled"] = false,
+            ["WebhookUrl"] = "",
+        }
+    }
 
-repeat task.wait() pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/kaitun.lua"))() end) until getgenv().Check_Execute
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/new"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
+-- Script Auto Add Friend và Auto Accept Friend Requests
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Hàm tự động gửi yêu cầu kết bạn
+local function autoSendFriendRequest()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and not LocalPlayer:IsFriendsWith(player.UserId) then
+            LocalPlayer:RequestFriendship(player)
+            print("Đã gửi yêu cầu kết bạn tới:", player.Name)
+        end
+    end
+end
+
+-- Hàm tự động chấp nhận yêu cầu kết bạn
+local function autoAcceptFriendRequests()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player:IsFriendRequestSent() then
+            LocalPlayer:AcceptFriendRequest(player)
+            print("Đã chấp nhận yêu cầu kết bạn từ:", player.Name)
+        end
+    end
+end
+
+-- Vòng lặp gửi yêu cầu kết bạn và chấp nhận yêu cầu kết bạn liên tục
+while true do
+    autoSendFriendRequest()
+    autoAcceptFriendRequests()
+    task.wait(10) -- Lặp lại mỗi 10 giây
+end
+spawn(function()
+while true do wait(300)
+Messages = "buy nick at sokiimarket (•) com"
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
+end
+end)
