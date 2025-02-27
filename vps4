@@ -18,8 +18,8 @@ getgenv().SettingFarm ={
         },
         ["White Screen"] = false,
         ["Lock Fps"] = {
-            ["Enabled"] = false,
-            ["FPS"] = 20,
+            ["Enabled"] = true,
+            ["FPS"] = 15,
         },
         ["Get Items"] = {
             ["Saber"] = true,
