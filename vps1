@@ -1,95 +1,31 @@
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Key = "f13a15724cb7ee8e57b5e122"
-getgenv().SettingFarm ={
-        ["Hide UI"] = false,
-        ["Reset Teleport"] = {
-            ["Enabled"] = false,
-            ["Delay Reset"] = 3,
-            ["Item Dont Reset"] = {
-                ["Fruit"] = {
-                    ["Enabled"] = true,
-                    ["All Fruit"] = true, 
-                    ["Select Fruit"] = {
-                        ["Enabled"] = false,
-                        ["Fruit"] = {},
-                    },
-                },
-            },
-        },
-        ["White Screen"] = false,
-        ["Lock Fps"] = {
-            ["Enabled"] = true,
-            ["FPS"] = 15,
-        },
-        ["Get Items"] = {
-            ["Saber"] = true,
-            ["Godhuman"] =  true,
-            ["Skull Guitar"] = false,
-            ["Mirror Fractal"] = false,
-            ["Cursed Dual Katana"] = false,
-            ["Upgrade Race V2-V3"] = false,
-            ["Auto Pull Lever"] = false,
-        },
-        ["Select Hop"] = { -- 70% will have it
-            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = false, 
-            ["Hop Find Dough King Get Mirror Fractal"] = false,
-            ["Hop Find Raids Castle [CDK]"] = false,
-            ["Hop Find Cake Queen [CDK]"] = false,
-            ["Hop Find Soul Reaper [CDK]"] = false,
-            ["Hop Find Darkbeard [SG]"] = false,
-            ["Hop Find Mirage [ Pull Lever ]"] = false,
-        },
-        ["Buy Haki"] = {
-            ["Enhancement"] = true,
-            ["Skyjump"] = true,
-            ["Flash Step"] = true,
-            ["Observation"] = true,
-        },
-        ["Sniper Fruit Shop"] = {
-            ["Enabled"] = true, -- Auto Buy Fruit in Shop Mirage and Normal
-            ["Fruit"] = {"Leopard-Leopard","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
-        },
-        ["Lock Fruit"] = {},
-        ["Webhook"] = {
-            ["Enabled"] = false,
-            ["WebhookUrl"] = "",
-        }
-    }
+script_key="YrypWUvoMklpvVEIlauQyrPnMCjcKqYZ";
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
--- Script Auto Add Friend và Auto Accept Friend Requests
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+getgenv().petsGoConfig = {
+    AUTO_RESTART = true,
+    -- true/false (true = consume, false = automail)
+    CONSUME_CORRUPTED_HUGE_BAIT = true,
+    CONSUME_ALL_ENCHANT_SAFE = false,
+    CONSUME_ALL_MINING_CHEST = true,
+    CONSUME_EVENT_EGG = true, -- Hype eggs not included
+    CONSUME_ALL_THIEVING_CHEST = false,
+    CONSUME_INSTA_LUCK_4 = true,
+    IGNORE_DICE_COMBO = false, -- Consume Insta Luck 3 without combo
+    CONSUME_VAULT_KEY = true,
 
--- Hàm tự động gửi yêu cầu kết bạn
-local function autoSendFriendRequest()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and not LocalPlayer:IsFriendsWith(player.UserId) then
-            LocalPlayer:RequestFriendship(player)
-            print("Đã gửi yêu cầu kết bạn tới:", player.Name)
-        end
-    end
-end
+    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
+    MAILING_WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
+    DISCORD_ID = "1120921298860773456", 
+    WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
 
--- Hàm tự động chấp nhận yêu cầu kết bạn
-local function autoAcceptFriendRequests()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and player:IsFriendRequestSent() then
-            LocalPlayer:AcceptFriendRequest(player)
-            print("Đã chấp nhận yêu cầu kết bạn từ:", player.Name)
-        end
-    end
-end
+    DIAMOND_EGG = true,  -- true = Diamond Egg, false = F2P Egg
+    MINE_ALL_ORES = false,  -- true = all ore, false = runic & event ore
+    
+    MAILING = true,  -- Auto mail
+    SHOW_PET_WEBHOOK_USERNAME = true,
+    MAIL_WEBHOOK_ODDS = 1000000000, -- Minimum Pet Odds To Trigger MAIL Webhook
+    MAIL_PET_ODDS = 1000000000,  -- Minimum Pet Odds To Mail
 
--- Vòng lặp gửi yêu cầu kết bạn và chấp nhận yêu cầu kết bạn liên tục
-while true do
-    autoSendFriendRequest()
-    autoAcceptFriendRequests()
-    task.wait(10) -- Lặp lại mỗi 10 giây
-end
-spawn(function()
-while true do wait(300)
-Messages = "buy nick at sokiimarket (•) com"
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
-end
-end)
+    USERNAME_TO_MAIL = {"CaldwellMitchell0590"}, -- Mail to username, Example : USERNAME_TO_MAIL = {"username1", "username2"} 
+}
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5653ca0a4685e7d4268329988eefdb21.lua"))()
