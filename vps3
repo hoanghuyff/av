@@ -1,60 +1,53 @@
 script_key="XIEzerwUGDNyyBgYBIMUzWocpBgqmcEv";
+
+-- Config with "MIN" = 1-5000 Minimum Quantity to sell
+-- Config with "SELL_PERCENTAGE" -> 1 = 100% RAP, 1.1 = 110% RAP, 0.8 = 80% RAP, , 0.85 = 85% RAP (Any Amount)
 getgenv().petsGoConfig = {
-    AUTO_RESTART = true,
-    -- true/false (true = consume, false = automail)
-    CONSUME_CORRUPTED_HUGE_BAIT = true,
-    CONSUME_ALL_ENCHANT_SAFE = false,
-    CONSUME_ALL_MINING_CHEST = true,
-    CONSUME_EVENT_EGG = true, -- Hype eggs not included
-    CONSUME_ALL_THIEVING_CHEST = false,
-    CONSUME_INSTA_LUCK_4 = true,
-    IGNORE_DICE_COMBO = false, -- Consume Insta Luck 3 without combo
-    CONSUME_VAULT_KEY = true,
+    DISCORD_ID = "1120921298860773456",
+    PLAZA_WEBHOOK_URL = "https://discord.com/api/webhooks/1287634048361037896/Z1F4atFRfvp8qPUnTrHhOZeZgJKP7CGWg75iDb5rpoEn-meF25zBt7MONJVQt58DFreo",
+    MAIL_GEM_WEBHOOK_URL = "https://discord.com/api/webhooks/1312782718097952899/k2oBgCZLGkhhdbSLczToDLrjZui4-vCfwP3L5LzyWPrZbOcBIYxZy5rUbrXVTJd8JqAE",
 
-    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
-    MAILING_WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
-    DISCORD_ID = "1120921298860773456", 
-    WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
-
-    DIAMOND_EGG = true,  -- true = Diamond Egg, false = F2P Egg
-    MINE_ALL_ORES = false,  -- true = all ore, false = runic & event ore
+    -- Plaza hop delay will reset if someone purchase something.
+    PLAZA_HOP_DELAY = 20,  -- (minutes) If no one purchase, server hop
+    BOOTH_RESET_DELAY = 20,  -- (minutes) force reset booth (Reset RAP Prices)
+    AVOID_USERNAME = {""},  -- serverhop when it finds username, You can put multiple usernames
     
-    MAILING = true,  -- Auto mail
-    SHOW_PET_WEBHOOK_USERNAME = true,
-    MAIL_WEBHOOK_ODDS = 1000000000, -- Minimum Pet Odds To Trigger MAIL Webhook
-    MAIL_PET_ODDS = 1000000000,  -- Minimum Pet Odds To Mail
+    -- Pets
+    SELL_100M_PET = true, SELL_PERCENTAGE_100M = 0.9,
+    SELL_500M_PET = true, SELL_PERCENTAGE_500M = 0.9,
+    SELL_SECRET = true, SELL_PERCENTAGE_SECRET = 0.9,
+    SELL_HUGE = true, SELL_SHINY_HUGE = true, SELL_PERCENTAGE_HUGE = 0.9,
+    
+    -- Consumables
+    SELL_CONSUMABLE = true, SELL_CONSUMABLE_MIN = 1, SELL_CONSUMABLE_PERCENTAGE = 0.9,
+    SELL_SCROLL = true, SELL_SCROLL_PERCENTAGE = 1,
+    SELL_BAIT = true, SELL_BAIT_MIN = 10, SELL_BAIT_PERCENTAGE = 0.9,
+    SELL_CHEST = true, SELL_CHEST_MIN = 10, SELL_CHEST_PERCENTAGE = 0.9,
+    SELL_GIFT_BAG = true, SELL_GIFT_BAG_MIN = 1, SELL_GIFT_BAG_PERCENTAGE = 0.9,
+    SELL_ENCHANT_SAFE = true, SELL_ENCHANT_SAFE_MIN = 5, SELL_ENCHANT_SAFE_PERCENTAGE = 0.9,
 
-    USERNAME_TO_MAIL = {"CaldwellMitchell0590"}, -- Mail to username, Example : USERNAME_TO_MAIL = {"username1", "username2"} 
+    -- Potions
+    SELL_POTION = true, SELL_POTION_MIN = 10, SELL_POTION_PERCENTAGE = 0.9,
+    SELL_GOD_POTION = true, SELL_GOD_POTION_PERCENTAGE = 0.9,
+
+    -- Eggs
+    -- SELL_EGG_MIN : [Doesn't apply to Huge/Hype Egg (Default MIN 1)]
+    SELL_EGG = true, SELL_EGG_MIN = 5, SELL_EGG_PERCENTAGE = 0.9,
+    SELL_HUGE_EGG = true, -- true/false
+    SELL_HYPE_EGG = true, -- true/false
+    
+    -- Keys
+    SELL_KEY = true, SELL_KEY_MIN = 10, SELL_KEY_PERCENTAGE = 0.9,
+    SELL_KEY_LOWER = true,  -- true/false, enable selling lower crystal key
+    SELL_KEY_UPPER = true,  -- true/false, enable selling upper crystal key
+
+    -- Tools
+    SELL_FISHING_ROD = true, SELL_FISHING_ROD_PERCENTAGE = 0.9, 
+    SELL_PICKAXE = true, SELL_PICKAXE_PERCENTAGE = 0.9,
+    SELL_LOCKPICK = true, SELL_LOCKPICK_PERCENTAGE = 0.9,
+
+    MAIL_GEMS_USERNAME = {"OlsenDebbie5"},  -- Empty = Disabled Gem Mail, You can put multiple usernames 1% fee
+    MAIL_GEMS_MIN = 100000000,  -- Minimum gems required to send
 }
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e81ea00ef49a917bb1242da4f41dc4f9.lua"))()
--- Script Auto Add Friend và Auto Accept Friend Requests
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- Hàm tự động gửi yêu cầu kết bạn
-local function autoSendFriendRequest()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and not LocalPlayer:IsFriendsWith(player.UserId) then
-            LocalPlayer:RequestFriendship(player)
-            print("Đã gửi yêu cầu kết bạn tới:", player.Name)
-        end
-    end
-end
-
--- Hàm tự động chấp nhận yêu cầu kết bạn
-local function autoAcceptFriendRequests()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player ~= LocalPlayer and player:IsFriendRequestSent() then
-            LocalPlayer:AcceptFriendRequest(player)
-            print("Đã chấp nhận yêu cầu kết bạn từ:", player.Name)
-        end
-    end
-end
-
--- Vòng lặp gửi yêu cầu kết bạn và chấp nhận yêu cầu kết bạn liên tục
-while true do
-    autoSendFriendRequest()
-    autoAcceptFriendRequests()
-    task.wait(10) -- Lặp lại mỗi 10 giây
-end
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/074ae419ea26f2a773d8e592958ec2e8.lua"))() 
