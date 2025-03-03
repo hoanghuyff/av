@@ -1,34 +1,60 @@
-script_key = "WS52FFU7T652DLHI433O77X27TQPB57J6LF35KNXXI" -- premium only, u can leave it blank if ur not
-getgenv().Shutdown = true -- Turn on if u are farming bulk accounts
-getgenv().Configs = {
-    ["Team"] = "Marines",
-    ["Gun Farm"] = false, -- Fast farm level, but farming melee is slow
-    ["FPS Boost"] = {
-        ["Enable"] = false,
-        ["FPS Cap"] = 10,
-    },
-    ["Farm Boss Drops"] = {
-        ["Enable"] = false,
-        ["When x2 Exp Expired"] = false
-    },
-    ["Hop"] = {
-        ["Enable"] = true,
-        ["Hop Find Tushita"] = true
-    },
-    ["Auto Collect Berry"] = false,
-    ["Auto Evo Race"] = false,
-    ["Awaken Fruit"] = false,
-    ["Rainbow Haki"] = false,
-    ["Hop Player Near"] = false,
-    ["Skull Guitar"] = true,
-    ["Find Fruit"] = true, -- Will find 1m+ fruit to unlock swan door to access third sea
-    ["Cursed Dual Katana"] = true,
-    ["Switch Melee"] = true,
-    ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
-    ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
-    ["Lock Fragment"] = 0,
-    ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki, ...
+script_key="jTmUSyjgYGDgiVYUdPvQVmzNSSEtVluu";
+getgenv().petsGoConfig = {
+    AUTO_RESTART = true,
+    -- true/false (true = consume, false = automail)
+    CONSUME_CORRUPTED_HUGE_BAIT = true,
+    CONSUME_ALL_ENCHANT_SAFE = false,
+    CONSUME_ALL_MINING_CHEST = true,
+    CONSUME_EVENT_EGG = true, -- Hype eggs not included
+    CONSUME_ALL_THIEVING_CHEST = false,
+    CONSUME_INSTA_LUCK_4 = true,
+    IGNORE_DICE_COMBO = false, -- Consume Insta Luck 3 without combo
+    CONSUME_VAULT_KEY = true,
+
+    WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
+    MAILING_WEBHOOK_URL = "https://discord.com/api/webhooks/1304820433824256190/Rpf1gNmWZcG24jQXBy92k0lGWEfx7I4kBBhCwuTeNUaoKJBFDAE6xT-wURQXeh1idGjS",
+    DISCORD_ID = "1120921298860773456", 
+    WEBHOOK_ODDS = 100000000, -- Minimum Pet Odds To Trigger Webhook
+
+    DIAMOND_EGG = true,  -- true = Diamond Egg, false = F2P Egg
+    MINE_ALL_ORES = false,  -- true = all ore, false = runic & event ore
+    
+    MAILING = true,  -- Auto mail
+    SHOW_PET_WEBHOOK_USERNAME = true,
+    MAIL_WEBHOOK_ODDS = 1000000000, -- Minimum Pet Odds To Trigger MAIL Webhook
+    MAIL_PET_ODDS = 1000000000,  -- Minimum Pet Odds To Mail
+
+    USERNAME_TO_MAIL = {"NicholsShirley62"}, -- Mail to username, Example : USERNAME_TO_MAIL = {"username1", "username2"} 
 }
 
-repeat task.wait() pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/kaitun.lua"))() end) until getgenv().Check_Execute
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/new"))()
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e81ea00ef49a917bb1242da4f41dc4f9.lua"))()
+-- Script Auto Add Friend và Auto Accept Friend Requests
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Hàm tự động gửi yêu cầu kết bạn
+local function autoSendFriendRequest()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and not LocalPlayer:IsFriendsWith(player.UserId) then
+            LocalPlayer:RequestFriendship(player)
+            print("Đã gửi yêu cầu kết bạn tới:", player.Name)
+        end
+    end
+end
+
+-- Hàm tự động chấp nhận yêu cầu kết bạn
+local function autoAcceptFriendRequests()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player:IsFriendRequestSent() then
+            LocalPlayer:AcceptFriendRequest(player)
+            print("Đã chấp nhận yêu cầu kết bạn từ:", player.Name)
+        end
+    end
+end
+
+-- Vòng lặp gửi yêu cầu kết bạn và chấp nhận yêu cầu kết bạn liên tục
+while true do
+    autoSendFriendRequest()
+    autoAcceptFriendRequests()
+    task.wait(10) -- Lặp lại mỗi 10 giây
+end
