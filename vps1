@@ -1,5 +1,4 @@
 script_key="YrypWUvoMklpvVEIlauQyrPnMCjcKqYZ";
-
 getgenv().petsGoConfig = {
     AUTO_RESTART = true,
     -- true/false (true = consume, false = automail)
