@@ -1,82 +1,253 @@
-wait(10)
-repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
-UserSettings():GetService("UserGameSettings").MasterVolume = 0
-UserSettings():GetService("UserGameSettings").SavedQualityLevel = 1
-workspace.LevelOfDetail = Enum.ModelLevelOfDetail.Disabled
-game:GetService("Lighting").GlobalShadows = false
-game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
-settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
-settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
-settings().Rendering.GraphicsMode = 9
-script_key="UXLmRlwQjxscYUUqSvkTXLcxeLHvNsxX";
-getgenv().Settings = {
-    Sniper = {
-        Active = false,
-        ["Items"] = {
-            SearchTerminal = {
-                [[ Search Items via Trading Terminal, Custom Keywords NOT supported here. ]],
-                ["Nice Egg"] = {Price = "5%", InventoryLimit = 355},
-                ["Huge Night Terror Cat"] = {Price = "50%", UseCosmicValues = true},
-            },
-            ["All Class: Misc"] = {Price = 5},
-            ["All Rarity: Celestial"] = {Price = "50%"},
-            ["Shiny Rainbow Broomstick Cat"] = {Price = "+2%"},
-            ["All Huges"] = {Price = "15m", DetectManipulation = true, AllTypes = true},
-        },
-        ["Switch Servers"] = {Active = true, SecondDelay = 7, OnlyPRO = false},
-        ["Webhook"] = {Active = true, URL = ""},
-        ["Kill Switch"] = {
-            ["Limits Reached"] = false,
-            ["Diamonds Hit: 25m"] = false,
-            ["60 Minutes Timer"] = false,
-            ["^^^ Switch To Selling"] = false,
-        },
-    },
-
-    Seller = {
-        Active = true,
-        ["Items"] = {
-            ["All Huges"] = {Price = "5%", AllTypes = true},
-            ["Coins Potion 5"] = {Price = "5%", Priority = true},
-            ["Fantasy Pack"] = {Price = "5%", Priority = true},
-["Lucky Gift"] = {Price = "5%", Priority = true},
-["Hype Egg 2"] = {Price = "5%", Priority = true},
-["Axolotl Pack"] = {Price = "5%", Priority = true},
-["Pog Pack"] = {Price = "5%", Priority = true},
-["Bigs Pack"] = {Price = "5%", Priority = true},
-["Big Pack"] = {Price = "5%", Priority = true},
-["BIG Pack"] = {Price = "5%", Priority = true},
-["BlG Pack"] = {Price = "5%", Priority = true},
-["Ninja Pack"] = {Price = "5%", Priority = true},
-["Retro Pack"] = {Price = "5%", Priority = true},
-["Daycare egg 5"] = {Price = "5%", Priority = true},
-["Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
-["Huge Blurred Axolotl Card"] = {Price = "5%", Priority = true},
-["Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
-["Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
-["Huge Pog Cat Card"] = {Price = "5%", Priority = true},
-["Golden Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
-["Golden Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
-["Golden Huge Pog Cat Card"] = {Price = "5%", Priority = true},
-["Golden Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
-["Rainbow Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
-["Rainbow Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
-["Shiny Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
-["Shiny Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
-        },
-        ["Switch Servers"] = {Active = true, MinuteDelay = 20, OnlyPRO = false},
-        ["Webhook"] = {Active = true, URL = "https://discord.com/api/webhooks/1076465790959755334/s4MZlDy0ApAbf39gPNBn_ngTvwoikxUsM2jxm4h-SugZ8SJqibWa2ihV5T-xRzHBg5sw"},
-        ["Kill Switch"] = {
-            ["Booth Runout"] = false,
-            ["Diamonds Hit: 1b"] = false,
-            ["60 Minutes Timer"] = false,
-            ["^^^ Switch To Sniping"] = false,
-        },
-        ["Diamonds Sendout"] = {Active = true, Username = "brookefan", Amount = "1b"},
-    },
-
-    [[ Thank you for using System Exodus <3! ]]
+getgenv().Config = {
+    ["Account Hold Gem"] = "",
+    ["Gem"] = "500m",
+    ["Time"] = 10,        -- minutes
+    ["Time Remove"] = 20, -- minutes
 }
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b58d9c50c5ea74f255af40a8f735773.lua"))()
+getgenv().hugemode = {
+    [1] = {
+        ["Min"] = "1m",
+        ["Max"] = "50m",
+        ["% Sell"] = 95,
+    },
+    [2] = {
+        ["Min"] = "51m",
+        ["Max"] = "100m",
+        ["% Sell"] = 55,
+    },
+    [3] = {
+        ["Min"] = "101m",
+        ["Max"] = "500m",
+        ["% Sell"] = 35,
+    },
+    [4] = {
+        ["Min"] = "501m",
+        ["Max"] = "9000m",
+        ["% Sell"] = 15,
+    }
+}
+getgenv().item = {
+    ["Hype Egg 2"] = 95,
+    ["Lucky Gift"] = 75,
+}
+repeat wait() until game:IsLoaded()
+local VirtualUser = game:service 'VirtualUser'
+game:service('Players').LocalPlayer.Idled:connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+repeat
+    wait()
+until game:IsLoaded() and
+    game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and
+    game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MainLeft") and
+    game:GetService("Players").LocalPlayer.PlayerGui.MainLeft.Left.Currency.Diamonds.Diamonds.Visible == true and
+    not game:GetService("Players").LocalPlayer:FindFirstChild("GUIFX Holder")
+spawn(function()
+    repeat wait() until game.Workspace.DistributedGameTime >= 35
+    while wait(getgenv().Config["Time"] * 60) do
+        game:GetService("ReplicatedStorage").Network["Mailbox: Claim All"]:InvokeServer()
+    end
+end)
+local save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+local v_u_5 = require(game.ReplicatedStorage.Library.Functions)
+local totalhuge = 0
+spawn(function()
+    while wait() do
+        totalhuge = 0
+        for i, v in pairs(save.Get().Inventory.Pet) do
+            if string.find(v.id, "Huge") then
+                totalhuge = totalhuge + 1
+            end
+        end
+    end
+end)
+if game.PlaceId == 8737899170 then
+    local TeleportService = game:GetService("TeleportService")
+    if totalhuge >= 5 then
+        TeleportService:Teleport(15588442388)
+    else
+        TeleportService:Teleport(15502339080)
+    end
+end
+
+
+if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
+    function getnearboot()
+        local pos
+        local distance = math.huge
+        local id = nil
+
+        for i, v in next, workspace.TradingPlaza.BoothSpawns:GetChildren() do
+            local boothPosition = v.WorldPivot.Position
+            local playerPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position
+            local currentDistance = (boothPosition - playerPosition).Magnitude
+
+            if currentDistance < distance then
+                distance = currentDistance
+                pos = boothPosition
+                id = v:GetAttribute("ID")
+            end
+        end
+        return pos, id
+    end
+
+    local pos, id = getnearboot()
+
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos + Vector3.new(-5, 5, 0))
+    wait()
+
+    local args = {
+        [1] = tostring(id)
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Booths_ClaimBooth"):InvokeServer(unpack(
+        args))
+    local Items = require(game:GetService("ReplicatedStorage").Library.Items.Types)
+    local v32 = require(game.ReplicatedStorage.Library.Types.Mailbox)
+    local v27 = require(game.ReplicatedStorage.Library.Balancing.Constants)
+    local v26 = require(game.ReplicatedStorage.Library.Client.Save)
+
+    function getgemneed()
+        local l_MailboxDiamondCost_0 = v27.MailboxDiamondCost
+        local v66 = v26.Get()
+        return l_MailboxDiamondCost_0 * math.pow(v32.DiamondCostGrowthRate, v66.MailboxSendsSinceReset)
+    end
+
+    function senditem(iditem)
+        local args =
+        {
+            [1] = getgenv().Config["Account Hold Gem"],
+            [2] = "Made By Honglamx",
+            [3] = "Currency",
+            [4] = iditem,
+            [5] = game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value -
+                getgemneed()
+        }
+        print(game:GetService("ReplicatedStorage").Network["Mailbox: Send"]:InvokeServer(unpack(args)))
+    end
+
+    local v0 = {
+        k = "e3",
+        m = "e6",
+        b = "e9",
+        t = "e12",
+        q = "e15"
+    };
+    ParseNumberSmart = function(v1)
+        if type(v1) == "string" then
+            v1 = v1:gsub("[,%s%c%z]", "");
+            if #v1 > 0 then
+                local v2 = v0[v1:sub(#v1):lower()];
+                if v2 then
+                    v1 = v1:sub(1, #v1 - 1) .. v2;
+                end;
+            end;
+        end;
+        return (tonumber(v1));
+    end;
+    spawn(function()
+        while wait() do
+            repeat wait() until game.Workspace.DistributedGameTime >= 35
+
+            if game:GetService("Players").LocalPlayer.leaderstats["\240\159\146\142 Diamonds"].Value >= ParseNumberSmart(getgenv().Config["Gem"]) then
+                for i, v in pairs(save.Get().Inventory.Currency) do
+                    if v.id == "Diamonds" then
+                        senditem(i)
+                    end
+                end
+            end
+        end
+    end)
+    spawn(function()
+        pcall(function()
+            while wait(getgenv().Config["Time Remove"] * 60) do
+                if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
+                    local plr = game.Players.LocalPlayer
+                    for i, v in next, workspace.__THINGS.Booths:GetChildren() do
+                        if v:GetAttribute("Owner") == plr.UserId then
+                            for i1, v1 in next, v.Pets.BoothTop.PetScroll:GetChildren() do
+                                if v1:IsA("Frame") then
+                                    local args = {
+                                        [1] = v1.Name
+                                    }
+
+                                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild(
+                                        "Booths_RemoveListing")
+                                        :InvokeServer(
+                                            unpack(args))
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end)
+    --[[
+    local petItem = Items.Types["Misc"]:Get(i)
+                        local petRAP = petItem:GetRap() or 0
+                        local args = {
+                            [1] = tostring(i),
+                            [2] = math.floor(petRAP * (getgenv().item[v.id] / 100)),
+                            [3] = 5000
+                        }
+                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild(
+                            "Booths_CreateListing"):InvokeServer(unpack(args))
+    ]]
+    while wait() do
+        if game.PlaceId == 15588442388 or game.PlaceId == 15502339080 then
+            for i, v in save.Get().Inventory do
+                for i1, v1 in next, v do
+                    local am = v1._am or 1
+                    if getgenv().item[v1.id] and i ~= "Pet" then
+                        local petItem = Items.Types[i]:Get(i1)
+                        local petRAP = petItem:GetRAP() or 0
+                        if am >= 15000 and petRAP then
+                            local args = {
+                                [1] = tostring(i1),
+                                [2] = math.floor(petRAP * (getgenv().item[v1.id] / 100)),
+                                [3] = 15000
+                            }
+                            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild(
+                                "Booths_CreateListing"):InvokeServer(unpack(args))
+                        end
+                        if am < 15000 and petRAP then
+                            local args = {
+                                [1] = tostring(i1),
+                                [2] = math.floor(petRAP * (getgenv().item[v1.id] / 100)),
+                                [3] = am
+                            }
+                            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild(
+                                "Booths_CreateListing"):InvokeServer(unpack(args))
+                        end
+                    end
+                end
+            end
+            for i, v in pairs(save.Get().Inventory.Pet) do
+                if string.find(v.id, "Huge") then
+                    local petItem = Items.Types["Pet"]:Get(i)
+                    local petRAP = petItem:GetRAP() or 0
+
+                    for _, range in pairs(getgenv().hugemode) do
+                        local minRAP = ParseNumberSmart(range.Min)
+                        local maxRAP = ParseNumberSmart(range.Max)
+
+                        if minRAP <= petRAP and petRAP <= maxRAP then
+                            local sellPercentage = range["% Sell"]
+                            local price = math.floor(petRAP * (sellPercentage / 100))
+                            local args = {
+                                [1] = tostring(i),
+                                [2] = price,
+                                [3] = v._am or 1
+                            }
+                            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild(
+                                "Booths_CreateListing"):InvokeServer(unpack(args))
+                            task.wait(1)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
