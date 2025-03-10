@@ -1,5 +1,5 @@
 getgenv().Config = {
-    ["Account Hold Gem"] = "",
+    ["Account Hold Gem"] = "khoimi113",
     ["Gem"] = "500m",
     ["Time"] = 10,        -- minutes
     ["Time Remove"] = 20, -- minutes
