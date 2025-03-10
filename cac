@@ -1,7 +1,19 @@
+wait(10)
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players
+repeat task.wait() until game.Players.LocalPlayer
+UserSettings():GetService("UserGameSettings").MasterVolume = 0
+UserSettings():GetService("UserGameSettings").SavedQualityLevel = 1
+workspace.LevelOfDetail = Enum.ModelLevelOfDetail.Disabled
+game:GetService("Lighting").GlobalShadows = false
+game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
+settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+settings().Rendering.GraphicsMode = 9
 script_key="UXLmRlwQjxscYUUqSvkTXLcxeLHvNsxX";
 getgenv().Settings = {
     Sniper = {
-        Active = true,
+        Active = false,
         ["Items"] = {
             SearchTerminal = {
                 [[ Search Items via Trading Terminal, Custom Keywords NOT supported here. ]],
@@ -24,21 +36,45 @@ getgenv().Settings = {
     },
 
     Seller = {
-        Active = false,
+        Active = true,
         ["Items"] = {
-            ["All Huges"] = {Price = "+20%", AllTypes = true},
-            ["Rainbow Cat"] = {Price = "1b", Amount = 5},
-            ["Coins Potion 5"] = {Price = 5, Priority = true},
+            ["All Huges"] = {Price = "5%", AllTypes = true},
+            ["Coins Potion 5"] = {Price = "5%", Priority = true},
+            ["Fantasy Pack"] = {Price = "5%", Priority = true},
+["Lucky Gift"] = {Price = "5%", Priority = true},
+["Hype Egg 2"] = {Price = "5%", Priority = true},
+["Axolotl Pack"] = {Price = "5%", Priority = true},
+["Pog Pack"] = {Price = "5%", Priority = true},
+["Bigs Pack"] = {Price = "5%", Priority = true},
+["Big Pack"] = {Price = "5%", Priority = true},
+["BIG Pack"] = {Price = "5%", Priority = true},
+["BlG Pack"] = {Price = "5%", Priority = true},
+["Ninja Pack"] = {Price = "5%", Priority = true},
+["Retro Pack"] = {Price = "5%", Priority = true},
+["Daycare egg 5"] = {Price = "5%", Priority = true},
+["Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
+["Huge Blurred Axolotl Card"] = {Price = "5%", Priority = true},
+["Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
+["Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
+["Huge Pog Cat Card"] = {Price = "5%", Priority = true},
+["Golden Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
+["Golden Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
+["Golden Huge Pog Cat Card"] = {Price = "5%", Priority = true},
+["Golden Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
+["Rainbow Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
+["Rainbow Huge Storm Axolotl Card"] = {Price = "5%", Priority = true},
+["Shiny Huge Arcade Dog Card"] = {Price = "5%", Priority = true},
+["Shiny Huge Nightmare Dog Card"] = {Price = "5%", Priority = true},
         },
         ["Switch Servers"] = {Active = true, MinuteDelay = 20, OnlyPRO = false},
-        ["Webhook"] = {Active = true, URL = ""},
+        ["Webhook"] = {Active = true, URL = "https://discord.com/api/webhooks/1076465790959755334/s4MZlDy0ApAbf39gPNBn_ngTvwoikxUsM2jxm4h-SugZ8SJqibWa2ihV5T-xRzHBg5sw"},
         ["Kill Switch"] = {
             ["Booth Runout"] = false,
             ["Diamonds Hit: 1b"] = false,
             ["60 Minutes Timer"] = false,
             ["^^^ Switch To Sniping"] = false,
         },
-        ["Diamonds Sendout"] = {Active = false, Username = "", Amount = "1b"},
+        ["Diamonds Sendout"] = {Active = true, Username = "brookefan", Amount = "1b"},
     },
 
     [[ Thank you for using System Exodus <3! ]]
