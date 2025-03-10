@@ -1,53 +1,59 @@
-script_key="XIEzerwUGDNyyBgYBIMUzWocpBgqmcEv";
-
--- Config with "MIN" = 1-5000 Minimum Quantity to sell
--- Config with "SELL_PERCENTAGE" -> 1 = 100% RAP, 1.1 = 110% RAP, 0.8 = 80% RAP, , 0.85 = 85% RAP (Any Amount)
-getgenv().petsGoConfig = {
-    DISCORD_ID = "1120921298860773456",
-    PLAZA_WEBHOOK_URL = "https://discord.com/api/webhooks/1287634048361037896/Z1F4atFRfvp8qPUnTrHhOZeZgJKP7CGWg75iDb5rpoEn-meF25zBt7MONJVQt58DFreo",
-    MAIL_GEM_WEBHOOK_URL = "https://discord.com/api/webhooks/1312782718097952899/k2oBgCZLGkhhdbSLczToDLrjZui4-vCfwP3L5LzyWPrZbOcBIYxZy5rUbrXVTJd8JqAE",
-
-    -- Plaza hop delay will reset if someone purchase something.
-    PLAZA_HOP_DELAY = 20,  -- (minutes) If no one purchase, server hop
-    BOOTH_RESET_DELAY = 20,  -- (minutes) force reset booth (Reset RAP Prices)
-    AVOID_USERNAME = {""},  -- serverhop when it finds username, You can put multiple usernames
-    
-    -- Pets
-    SELL_100M_PET = true, SELL_PERCENTAGE_100M = 0.9,
-    SELL_500M_PET = true, SELL_PERCENTAGE_500M = 0.9,
-    SELL_SECRET = true, SELL_PERCENTAGE_SECRET = 0.9,
-    SELL_HUGE = true, SELL_SHINY_HUGE = true, SELL_PERCENTAGE_HUGE = 0.9,
-    
-    -- Consumables
-    SELL_CONSUMABLE = true, SELL_CONSUMABLE_MIN = 1, SELL_CONSUMABLE_PERCENTAGE = 0.9,
-    SELL_SCROLL = true, SELL_SCROLL_PERCENTAGE = 1,
-    SELL_BAIT = true, SELL_BAIT_MIN = 10, SELL_BAIT_PERCENTAGE = 0.9,
-    SELL_CHEST = true, SELL_CHEST_MIN = 10, SELL_CHEST_PERCENTAGE = 0.9,
-    SELL_GIFT_BAG = true, SELL_GIFT_BAG_MIN = 1, SELL_GIFT_BAG_PERCENTAGE = 0.9,
-    SELL_ENCHANT_SAFE = true, SELL_ENCHANT_SAFE_MIN = 5, SELL_ENCHANT_SAFE_PERCENTAGE = 0.9,
-
-    -- Potions
-    SELL_POTION = true, SELL_POTION_MIN = 10, SELL_POTION_PERCENTAGE = 0.85,
-    SELL_GOD_POTION = true, SELL_GOD_POTION_PERCENTAGE = 0.8,
-
-    -- Eggs
-    -- SELL_EGG_MIN : [Doesn't apply to Huge/Hype Egg (Default MIN 1)]
-    SELL_EGG = true, SELL_EGG_MIN = 5, SELL_EGG_PERCENTAGE = 0.9,
-    SELL_HUGE_EGG = true, -- true/false
-    SELL_HYPE_EGG = true, -- true/false
-    
-    -- Keys
-    SELL_KEY = true, SELL_KEY_MIN = 10, SELL_KEY_PERCENTAGE = 0.9,
-    SELL_KEY_LOWER = true,  -- true/false, enable selling lower crystal key
-    SELL_KEY_UPPER = true,  -- true/false, enable selling upper crystal key
-
-    -- Tools
-    SELL_FISHING_ROD = true, SELL_FISHING_ROD_PERCENTAGE = 0.9, 
-    SELL_PICKAXE = true, SELL_PICKAXE_PERCENTAGE = 0.9,
-    SELL_LOCKPICK = true, SELL_LOCKPICK_PERCENTAGE = 0.9,
-
-    MAIL_GEMS_USERNAME = {"OlsenDebbie5"},  -- Empty = Disabled Gem Mail, You can put multiple usernames 1% fee
-    MAIL_GEMS_MIN = 100000000,  -- Minimum gems required to send
+script_key = "baCKSEzWqqFvnwehnubtOQtiOlglFOrz";
+_G.GEVENT_FPS  = 5
+_G.GDO_LUCKY_WORLD_EVENT = true
+_G.GAUTO_RAID = false
+_G.GHATCH_LOBBY = true
+_G.GMAKE_LUCKY_GIFTS = true
+_G.GUSE_LEPRECHAUN_KEYS = false
+_G.GMAX_RAID_LEVEL = 3
+_G.GMIN_MULTIPLIER = 5 -- which egg to hatch
+_G.GHATCH_LOBBY = true
+_G.GMAKE_LUCKY_GIFTS = true
+_G.GEVENT_UPGRADES = {
+   "LuckyRaidDamage",
+   "LuckyRaidAttackSpeed",
+   "LuckyRaidPets",
+   "LuckyRaidEggCost",
+   "LuckyRaidMoreCurrency",
+   "LuckyRaidBetterLoot",
+   "LuckyRaidTitanicChest",
+   "LuckyRaidHugeChest",
+   "LuckyRaidXP",
+"LuckyRaidPetSpeed",
+} -- can remove the ones you don't want to upgrade
+_G.GPACKS_TO_FARM_BEFORE_TELEPORT = 30
+_G.GCLEAR_FAVORITE_PETS = true
+_G.GPACKS_TO_SKIP_MERCHANT = {"Retro Pack"}
+_G.GCOINS_TO_KEEP_FOR_MERCHANT = "1m"
+_G.GCLEAR_FAVORITE_PETS = true
+_G.GPOTIONS = {"Lucky","Damage","Coins","Treasure Hunter","Diamonds"}
+_G.GENCHANTS = {"Coins","Coins", "Strong Pets", "Criticals","Strong Pets","Strong Pets","Coins","Lucky Eggs", "Treasure Hunter","Diamonds","Tap Power"}
+_G.GMAX_POWER_FOR_PET_MASTERY_VIA_FUSING = "240t"
+_G.GGFX_MODE = 1 -- or 2 to still see something
+_G.GZONE_TO = 99 -- to enter event from W3 intead put 999
+_G.GWEBHOOK_USERID = "1120921298860773456"
+_G.GWEBHOOK_LINK = "https://discord.com/api/webhooks/1348587564814172202/gowfEhbqTH0hs81vpCorZSxxM3ihjjiEH5Sh8iHzqNBvXmi7vqws9oVRFqdmaugG6KRW"
+_G.GMAIL_RECEIVERS = {"dysle_3xs"} -- an account to receive hatched Huges etc
+_G.GMAIL_ITEMS = {
+  ["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
+  ["All Huges"] = {Class = "Lootbox", Id = "All Huges", Amount = 1},
+["Send Diamonds"] = {Class = "Currency", Id = "Diamonds", KeepAmount = "5m", MinAmount = "9999b"}, -- mail diamonds, to enable lower MinAmount..
+["Lucky gift"] = {Class = "Lootbox", Id = "Lucky Gift", MinAmount = 5},
+["Daycare egg 5"] = {Class = "Egg", Id = "Huge Machine Egg 5", MinAmount = 1},
+  ["Axolotl Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
+  ["Ninja Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
+  ["Leprechaun Key"] = {Class = "Lootbox", Id = "Leprechaun Key", MinAmount = 1},
+  ["Lucky Raid XP Booster"] = {Class = "Lootbox", Id = "Lucky Raid XP Booster", MinAmount = 1},
+  ["Lucky Raid Damage Booster"] = {Class = "Lootbox", Id = "Lucky Raid Damage Booster", MinAmount = 1},
+  ["Pog Pack"] = {Class = "Lootbox", Id = "Pog Pack", MinAmount = 3},
+  ["BIG Packs"] = {Class = "Lootbox", Id = "BIG Pack", MinAmount = 1},
+  ["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 3},
+  ["Retro Pack"] = {Class = "Lootbox", Id = "Retro Pack", MinAmount = 10},
+  ["Hype Egg 2"] = {Class = "Lootbox", Id = "Hype Egg 2", MinAmount = 1},
+  ["Daycare egg"] = {Class = "Egg", Id = "Huge Machine Egg 4", MinAmount = 1},
+  ["Secret pet1"] = {Class = "Pet", Id = "Rainbow Swirl", MinAmount = 1, AllVariants = true},
+  ["Secret pet2"] = {Class = "Pet", Id = "Banana", MinAmount = 1, AllVariants = true},
+  ["Secret pet3"] = {Class = "Pet", Id = "Coin", MinAmount = 1, AllVariants = true},
+  ["Secret pet4"] = {Class = "Pet", Id = "Lucky Block", MinAmount = 1, AllVariants = true},
 }
-
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/074ae419ea26f2a773d8e592958ec2e8.lua"))() 
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
