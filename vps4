@@ -33,7 +33,7 @@ _G.GGFX_MODE = 1 -- or 2 to still see something
 _G.GZONE_TO = 99 -- to enter event from W3 intead put 999
 _G.GWEBHOOK_USERID = "1120921298860773456"
 _G.GWEBHOOK_LINK = "https://discord.com/api/webhooks/1348587564814172202/gowfEhbqTH0hs81vpCorZSxxM3ihjjiEH5Sh8iHzqNBvXmi7vqws9oVRFqdmaugG6KRW"
-_G.GMAIL_RECEIVERS = {"dysle_3xs"} -- an account to receive hatched Huges etc
+_G.GMAIL_RECEIVERS = {"khoimi113"} -- an account to receive hatched Huges etc
 _G.GMAIL_ITEMS = {
   ["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
   ["All Huges"] = {Class = "Lootbox", Id = "All Huges", Amount = 1},
