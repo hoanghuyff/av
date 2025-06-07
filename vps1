@@ -1,60 +1,79 @@
-script_key = "eeKCvdZvBvnTZgSMyUjkKOuelTvezeOv";
-_G.GEVENT_FPS  = 5
-_G.GDO_LUCKY_WORLD_EVENT = true
-_G.GAUTO_RAID = false
-_G.GHATCH_LOBBY = true
-_G.GMAKE_LUCKY_GIFTS = true
-_G.GUSE_LEPRECHAUN_KEYS = false
-_G.GMAX_RAID_LEVEL = 3
-_G.GMIN_MULTIPLIER = 5 -- which egg to hatch
-_G.GHATCH_LOBBY = true
-_G.GMAKE_LUCKY_GIFTS = true
-_G.GEVENT_UPGRADES = {
-   "LuckyRaidDamage",
-   "LuckyRaidAttackSpeed",
-   "LuckyRaidPets",
-   "LuckyRaidEggCost",
-   "LuckyRaidMoreCurrency",
-   "LuckyRaidBetterLoot",
-   "LuckyRaidTitanicChest",
-   "LuckyRaidHugeChest",
-   "LuckyRaidXP",
-"LuckyRaidPetSpeed",
-} -- can remove the ones you don't want to upgrade
-_G.GPACKS_TO_FARM_BEFORE_TELEPORT = 30
-_G.GCLEAR_FAVORITE_PETS = true
-_G.GPACKS_TO_SKIP_MERCHANT = {"Retro Pack"}
-_G.GCOINS_TO_KEEP_FOR_MERCHANT = "1m"
-_G.GCLEAR_FAVORITE_PETS = true
-_G.GPOTIONS = {"Lucky","Damage","Coins","Treasure Hunter","Diamonds"}
-_G.GENCHANTS = {"Coins","Coins", "Strong Pets", "Criticals","Strong Pets","Strong Pets","Coins","Lucky Eggs", "Treasure Hunter","Diamonds","Tap Power"}
-_G.GMAX_POWER_FOR_PET_MASTERY_VIA_FUSING = "240t"
-_G.GGFX_MODE = 1 -- or 2 to still see something
-_G.GZONE_TO = 99 -- to enter event from W3 intead put 999
-_G.GWEBHOOK_USERID = "1120921298860773456"
-_G.GWEBHOOK_LINK = "https://discord.com/api/webhooks/1348587564814172202/gowfEhbqTH0hs81vpCorZSxxM3ihjjiEH5Sh8iHzqNBvXmi7vqws9oVRFqdmaugG6KRW"
-_G.GMAIL_RECEIVERS = {"khoimi113"} -- an account to receive hatched Huges etc
-_G.GMAIL_ITEMS = {
-  ["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
-  ["All Huges"] = {Class = "Lootbox", Id = "All Huges", Amount = 1},
-["Send Diamonds"] = {Class = "Currency", Id = "Diamonds", KeepAmount = "5m", MinAmount = "9999b"}, -- mail diamonds, to enable lower MinAmount..
-["Lucky gift"] = {Class = "Lootbox", Id = "Lucky Gift", MinAmount = 5},
-["Daycare egg 5"] = {Class = "Egg", Id = "Huge Machine Egg 5", MinAmount = 1},
-  ["Axolotl Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
-  ["Ninja Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
-  ["Leprechaun Key"] = {Class = "Lootbox", Id = "Leprechaun Key", MinAmount = 1},
-  ["Lucky Raid XP Booster"] = {Class = "Lootbox", Id = "Lucky Raid XP Booster", MinAmount = 1},
-  ["Lucky Raid Damage Booster"] = {Class = "Lootbox", Id = "Lucky Raid Damage Booster", MinAmount = 1},
-  ["Pog Pack"] = {Class = "Lootbox", Id = "Pog Pack", MinAmount = 3},
-  ["BIG Packs"] = {Class = "Lootbox", Id = "BIG Pack", MinAmount = 1},
-  ["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 3},
-  ["Retro Pack"] = {Class = "Lootbox", Id = "Retro Pack", MinAmount = 10},
-  ["Hype Egg 2"] = {Class = "Lootbox", Id = "Hype Egg 2", MinAmount = 1},
-  ["Daycare egg"] = {Class = "Egg", Id = "Huge Machine Egg 4", MinAmount = 1},
-  ["Secret pet1"] = {Class = "Pet", Id = "Rainbow Swirl", MinAmount = 1, AllVariants = true},
-  ["Secret pet2"] = {Class = "Pet", Id = "Banana", MinAmount = 1, AllVariants = true},
-  ["Secret pet3"] = {Class = "Pet", Id = "Coin", MinAmount = 1, AllVariants = true},
-  ["Secret pet4"] = {Class = "Pet", Id = "Lucky Block", MinAmount = 1, AllVariants = true},
-}
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/friend"))()
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Key = "f13a15724cb7ee8e57b5e122"
+    getgenv().SettingFarm ={
+        ["Hide UI"] = false,
+        ["Reset Teleport"] = {
+            ["Enabled"] = false,
+            ["Delay Reset"] = 3,
+            ["Item Dont Reset"] = {
+                ["Fruit"] = {
+                    ["Enabled"] = true,
+                    ["All Fruit"] = true, 
+                    ["Select Fruit"] = {
+                        ["Enabled"] = false,
+                        ["Fruit"] = {},
+                    },
+                },
+            },
+        },
+        ["White Screen"] = false,
+        ["Lock Fps"] = {
+            ["Enabled"] = false,
+            ["FPS"] = 20,
+        },
+        ["Get Items"] = {
+            ["Saber"] = true,
+            ["Godhuman"] =  true,
+            ["Skull Guitar"] = true,
+            ["Mirror Fractal"] = true,
+            ["Cursed Dual Katana"] = false,
+            ["Upgrade Race V2-V3"] = true,
+            ["Auto Pull Lever"] = true,
+            ["Shark Anchor"] = true, --- if have cdk,sg,godhuman
+        },
+        ["Get Rare Items"] = {
+            ["Rengoku"] = false,
+            ["Dragon Trident"] = false, 
+            ["Pole (1st Form)"] = false,
+            ["Gravity Blade"]  = false,
+        },
+        ["Farm Fragments"] = {
+            ["Enabled"]  = false,
+            ["Fragment"] = 50000,
+        },
+        ["Auto Chat"] = {
+            ["Enabled"] = false,
+            ["Text"] = "",
+        },
+        ["Auto Summon Rip Indra"] = true, --- auto buy haki and craft haki legendary 
+        ["Select Hop"] = { -- 70% will have it
+            ["Hop Server If Have Player Near"] = false, 
+            ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = true, 
+            ["Hop Find Dough King Get Mirror Fractal"] = false,
+            ["Hop Find Raids Castle [CDK]"] = true,
+            ["Hop Find Cake Queen [CDK]"] = true,
+            ["Hop Find Soul Reaper [CDK]"] = true,
+            ["Hop Find Darkbeard [SG]"] = true,
+            ["Hop Find Mirage [ Pull Lever ]"] = false,
+        },
+        ["Farm Mastery"] = {
+            ["Melee"] = false,
+            ["Sword"] = false,
+        },
+        ["Buy Haki"] = {
+            ["Enhancement"] = false,
+            ["Skyjump"] = true,
+            ["Flash Step"] = true,
+            ["Observation"] = true,
+        },
+        ["Sniper Fruit Shop"] = {
+            ["Enabled"] = true, -- Auto Buy Fruit in Shop Mirage and Normal
+            ["Fruit"] = {"Leopard-Leopard","Kitsune-Kitsune","Dragon-Dragon","Yeti-Yeti","Gas-Gas"},
+        },
+        ["Lock Fruit"] = {},
+        ["Webhook"] = {
+            ["Enabled"] = false,
+            ["WebhookUrl"] = "",
+        }
+    }
+loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaCat-kaitunBF.lua"))()
