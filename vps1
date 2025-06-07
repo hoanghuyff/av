@@ -16,6 +16,13 @@ _G.MainSettings = {
     ["LockFruitsRaid"] = {
         [1] = "Dough-Dough",
         [2] = "Dragon-Dragon",
+        [3] = "Kitsune-Kitsune",
+        [4] = "Leopard-Leopard",
+        [5] = "T-Rex-T-Rex",
+        [6] = "Yeti-Yeti",
+        [7] = "Gas-Gas",
+        [8] = "Gravity-Gravity",,
+
     }
 }
 _G.SharkAnchor_Settings = {
