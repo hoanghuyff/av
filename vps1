@@ -1,5 +1,5 @@
 -- Max level, godhuman, cdk, sgt
-script_key = "S2PIJKMPWS5ZZCNU43FPZM5HXGYA" -- premium only, u can leave it blank if ur not
+script_key = "WOAIRBVJRODKJJUO433O77X27TQPP4PP7HF35KNXXI" -- premium only, u can leave it blank if ur not
 getgenv().Shutdown = false -- Turn on if u are farming bulk accounts
 getgenv().Configs = {
     ["Team"] = "Marines",
