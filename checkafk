@@ -15,7 +15,7 @@ end
 local character, humanoidRootPart = waitForCharacter()
 local lastPosition = humanoidRootPart.Position
 local idleTime = 0
-local kickTime = 60  -- 60 giây không di chuyển sẽ bị kick
+local kickTime = 120  -- 60 giây không di chuyển sẽ bị kick
 
 -- Hàm kiểm tra AFK
 local function checkAFK()
