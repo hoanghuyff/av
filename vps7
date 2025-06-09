@@ -1,60 +1,56 @@
-script_key = "qZgTqloKUQWRmDPhcBQpCXBnPwZFbDGG";
-_G.GEVENT_FPS  = 5
-_G.GDO_LUCKY_WORLD_EVENT = true
-_G.GAUTO_RAID = false
-_G.GHATCH_LOBBY = true
-_G.GMAKE_LUCKY_GIFTS = true
-_G.GUSE_LEPRECHAUN_KEYS = false
-_G.GMAX_RAID_LEVEL = 3
-_G.GMIN_MULTIPLIER = 5 -- which egg to hatch
-_G.GHATCH_LOBBY = true
-_G.GMAKE_LUCKY_GIFTS = true
-_G.GEVENT_UPGRADES = {
-   "LuckyRaidDamage",
-   "LuckyRaidAttackSpeed",
-   "LuckyRaidPets",
-   "LuckyRaidEggCost",
-   "LuckyRaidMoreCurrency",
-   "LuckyRaidBetterLoot",
-   "LuckyRaidTitanicChest",
-   "LuckyRaidHugeChest",
-   "LuckyRaidXP",
-"LuckyRaidPetSpeed",
-} -- can remove the ones you don't want to upgrade
-_G.GPACKS_TO_FARM_BEFORE_TELEPORT = 30
-_G.GCLEAR_FAVORITE_PETS = true
-_G.GPACKS_TO_SKIP_MERCHANT = {"Retro Pack"}
-_G.GCOINS_TO_KEEP_FOR_MERCHANT = "1m"
-_G.GCLEAR_FAVORITE_PETS = true
-_G.GPOTIONS = {"Lucky","Damage","Coins","Treasure Hunter","Diamonds"}
-_G.GENCHANTS = {"Coins","Coins", "Strong Pets", "Criticals","Strong Pets","Strong Pets","Coins","Lucky Eggs", "Treasure Hunter","Diamonds","Tap Power"}
-_G.GMAX_POWER_FOR_PET_MASTERY_VIA_FUSING = "240t"
-_G.GGFX_MODE = 1 -- or 2 to still see something
-_G.GZONE_TO = 99 -- to enter event from W3 intead put 999
-_G.GWEBHOOK_USERID = "1120921298860773456"
-_G.GWEBHOOK_LINK = "https://discord.com/api/webhooks/1348587564814172202/gowfEhbqTH0hs81vpCorZSxxM3ihjjiEH5Sh8iHzqNBvXmi7vqws9oVRFqdmaugG6KRW"
-_G.GMAIL_RECEIVERS = {"khoimi113"} -- an account to receive hatched Huges etc
-_G.GMAIL_ITEMS = {
-  ["All Huges"] = {Class = "Pet", Id = "All Huges", Amount = 1},
-  ["All Huges"] = {Class = "Lootbox", Id = "All Huges", Amount = 1},
-["Send Diamonds"] = {Class = "Currency", Id = "Diamonds", KeepAmount = "5m", MinAmount = "9999b"}, -- mail diamonds, to enable lower MinAmount..
-["Lucky gift"] = {Class = "Lootbox", Id = "Lucky Gift", MinAmount = 5},
-["Daycare egg 5"] = {Class = "Egg", Id = "Huge Machine Egg 5", MinAmount = 1},
-  ["Axolotl Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
-  ["Ninja Pack"] = {Class = "Lootbox", Id = "Axolotl Pack", MinAmount = 3},
-  ["Leprechaun Key"] = {Class = "Lootbox", Id = "Leprechaun Key", MinAmount = 1},
-  ["Lucky Raid XP Booster"] = {Class = "Lootbox", Id = "Lucky Raid XP Booster", MinAmount = 1},
-  ["Lucky Raid Damage Booster"] = {Class = "Lootbox", Id = "Lucky Raid Damage Booster", MinAmount = 1},
-  ["Pog Pack"] = {Class = "Lootbox", Id = "Pog Pack", MinAmount = 3},
-  ["BIG Packs"] = {Class = "Lootbox", Id = "BIG Pack", MinAmount = 1},
-  ["Fantasy Pack"] = {Class = "Lootbox", Id = "Fantasy Pack", MinAmount = 3},
-  ["Retro Pack"] = {Class = "Lootbox", Id = "Retro Pack", MinAmount = 10},
-  ["Hype Egg 2"] = {Class = "Lootbox", Id = "Hype Egg 2", MinAmount = 1},
-  ["Daycare egg"] = {Class = "Egg", Id = "Huge Machine Egg 4", MinAmount = 1},
-  ["Secret pet1"] = {Class = "Pet", Id = "Rainbow Swirl", MinAmount = 1, AllVariants = true},
-  ["Secret pet2"] = {Class = "Pet", Id = "Banana", MinAmount = 1, AllVariants = true},
-  ["Secret pet3"] = {Class = "Pet", Id = "Coin", MinAmount = 1, AllVariants = true},
-  ["Secret pet4"] = {Class = "Pet", Id = "Lucky Block", MinAmount = 1, AllVariants = true},
+-- Max level, godhuman, cdk, sgt
+script_key = "S2PIJKMPWS5ZZCNU43FPZM5HXGYA" -- premium only, u can leave it blank if ur not
+getgenv().Shutdown = false -- Turn on if u are farming bulk accounts
+getgenv().Configs = {
+    ["Team"] = "Marines",
+    ["FPS Boost"] = {
+        ["Enable"] = true,
+        ["FPS Cap"] = 15,
+    },
+    ["Farm Boss Drops"] = {
+        ["Enable"] = false,
+        ["When x2 Exp Expired"] = false
+    },
+    ["Hop"] = { -- premium only
+        ["Enable"] = false,
+        ["Hop Find Tushita"] = false,
+        ["Hop Find Valkyrie Helm"] = false,
+        ["Hop Find Mirror Fractal"] = false,
+        ["Hop Find Darkbeard"] = false, -- For skull guitar
+        ["Hop Find Soul Reaper"] = false, -- For CDK
+        ["Hop Find Mirage"] = false, -- For pull lever
+        ["Find Fruit"] = false, -- Will find 1m+ fruit to unlock swan door to access third sea
+    },
+    ["Farm Mastery"] = {
+        ["Enable"] = false,
+        ["Farm Mastery Weapons"] = {"Sword", "Gun", "Blox Fruit"}, -- Blox Fruit, Gun (left -> right: High -> Low Priority)
+        ["Swords To Farm"] = {"Cursed Dual Katana"},
+        ["Guns To Farm"] = {"Skull Guitar"},
+        ["Mastery Health (%)"] = 40 -- For Blox Fruit, Gun
+    },
+    ["Farm Config"] = {
+        ["First Farm At Sky"] = true,
+        ["Farm Bone Get x2 Exp"] = true
+    },
+    ["Trackstat"] = {
+        ["Enable"] = false,
+        ["Key"] = "", -- Get from xerohub.click
+        ["Device"] = "test" -- u can put any name here
+    },
+    ["Auto Spawn rip_indra"] = false,
+    ["Auto Spawn Dough King"] = false,
+    ["Auto Pull Lever"] = false,
+    ["Auto Collect Berry"] = false,
+    ["Auto Evo Race"] = false,
+    ["Awaken Fruit"] = false,
+    ["Rainbow Haki"] = false,
+    ["Hop Player Near"] = false,
+    ["Skull Guitar"] = false,
+    ["Cursed Dual Katana"] = false,
+    ["Switch Melee"] = true,
+    ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
+    ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
+    ["Lock Fragment"] = 30000,
+    ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki, ...
 }
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34915da4ad87a5028e1fd64efbe3543f.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/friend"))()
+repeat task.wait() pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/kaitun.lua"))() end) until getgenv().Check_Execute
