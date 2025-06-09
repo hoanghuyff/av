@@ -1,0 +1,32 @@
+-- Script để phát hiện AFK và kick ra khỏi game
+
+local player = game.Players.LocalPlayer
+local humanoid = player.Character and player.Character:WaitForChild("Humanoid")
+local lastPosition = player.Character.HumanoidRootPart.Position
+local idleTime = 0
+local kickTime = 60 -- Thời gian không di chuyển (giây) trước khi kick
+
+-- Hàm kiểm tra xem người chơi có di chuyển không
+local function checkAFK()
+    while true do
+        wait(1)  -- Chờ 1 giây trước khi kiểm tra lại
+        
+        local currentPosition = player.Character.HumanoidRootPart.Position
+        if currentPosition == lastPosition then
+            idleTime = idleTime + 1
+        else
+            idleTime = 0  -- Reset lại thời gian nếu di chuyển
+        end
+        
+        lastPosition = currentPosition
+        
+        -- Nếu người chơi không di chuyển trong thời gian kickTime, kick khỏi game
+        if idleTime >= kickTime then
+            player:Kick("Bạn đã bị kick vì không hoạt động trong " .. kickTime .. " giây.")
+            break
+        end
+    end
+end
+
+-- Bắt đầu kiểm tra AFK
+checkAFK()
