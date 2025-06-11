@@ -1,6 +1,28 @@
+local messages = {
+    "Gõ “sokiimarket blox fruit” trên G g là ra shop xịn!",
+    "Shop acc cực rẻ 👉 tìm sokiimarket (dot) com trên G g",
+    "Sokii Market – uy tín 100%! Search “sokiimarket bloxfruit”",
+    "Shop bán acc bí mật... tìm \"sokiimarket\" là biết",
+    "Có 1 shop mà dân cày đều biết... gõ \"sokiimarket bloxfruit\"",
+    "Gõ sokiimarket bloxfruit, có code giảm 50% chờ bạn!",
+    "Shop Sokii tặng acc mỗi ngày! Gõ sokiimarket (dot) com trên Gu gồ nha!",
+    "Vào sokiimarket (dot) com thử xem có gì bất ngờ không 😏",
+    "Shop acc giảm 50%, chỉ cần tìm “sokiimarket” trên Gu gồ",
+    "Chỗ tui mua acc giá rẻ: sokiimarket chấm com, gõ thử trên gu gồ",
+    "Shop acc uy tín: s o k i i m a r k e t chấm c o m",
+    "Tìm “s0kii market c0m” trên gờ gồ, có bất ngờ 😏",
+    "Ai chưa thử sokii market là mất nửa cuộc đời",
+    "Vào sokiimarket nhận acc random mỗi tối",
+    "Nạp 10k nhận acc thử – chỉ có tại SokiiMarket",
+    "Sokiimarket – nơi acc xịn rẻ hơn trà sữa",
+    "Acc 500k chỉ còn 99k – tin không? Tìm SokiiMarket"
+}
+
 spawn(function()
-while true do wait(60)
-Messages = "buy nick at sokiimarket (•) com"
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
-end
+    while true do
+        wait(60) -- 5 phút
+        local randomIndex = math.random(1, #messages)
+        local msg = messages[randomIndex]
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
 end)
