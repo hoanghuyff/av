@@ -1,0 +1,6 @@
+spawn(function()
+while true do wait(60)
+Messages = "buy nick at sokiimarket (•) com"
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Messages, "All")
+end
+end)
