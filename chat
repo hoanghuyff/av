@@ -42,10 +42,7 @@ local messages = {
     "Shop acc uy tín: s o k i i m a r k e t chấm c o m",
     "Tìm “s0kii market c0m” trên gờ gồ, có bất ngờ 😏",
     "Ai chưa thử sokii market là mất nửa cuộc đời",
-    "Vào sokiimarket nhận acc random mỗi tối",
-    "Nạp 10k nhận acc thử – chỉ có tại SokiiMarket",
-    "Sokiimarket – nơi acc xịn rẻ hơn trà sữa",
-    "Acc 500k chỉ còn 99k – tin không? Tìm SokiiMarket"
+    "Nạp 10k nhận acc thử – chỉ có tại SokiiMarket"
 }
 
 spawn(function()
