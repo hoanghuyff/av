@@ -37,12 +37,9 @@ local messages = {
     "Gõ sokiimarket bloxfruit, có code giảm 50% chờ bạn!",
     "Shop Sokii tặng acc mỗi ngày! Gõ sokiimarket (dot) com trên Gu gồ nha!",
     "Vào sokiimarket (dot) com thử xem có gì bất ngờ không 😏",
-    "Shop acc giảm 50%, chỉ cần tìm “sokiimarket” trên Gu gồ",
     "Chỗ tui mua acc giá rẻ: sokiimarket chấm com, gõ thử trên gu gồ",
     "Shop acc uy tín: s o k i i m a r k e t chấm c o m",
-    "Tìm “s0kii market c0m” trên gờ gồ, có bất ngờ 😏",
-    "Ai chưa thử sokii market là mất nửa cuộc đời",
-    "Nạp 10k nhận acc thử – chỉ có tại SokiiMarket"
+    "Tìm “s0kii market c0m” trên gờ gồ, có bất ngờ 😏"
 }
 
 spawn(function()
