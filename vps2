@@ -1,6 +1,6 @@
 -- Max level, godhuman, cdk, sgt
 script_key = "S2PIJKMPWS5ZZCNU43FPZM5HXGYA" -- premium only, u can leave it blank if ur not
-getgenv().Shutdown = false -- Turn on if u are farming bulk accounts
+getgenv().Shutdown = true -- Turn on if u are farming bulk accounts
 getgenv().Configs = {
     ["Team"] = "Marines",
     ["FPS Boost"] = {
