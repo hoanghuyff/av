@@ -47,11 +47,11 @@ getgenv().Configs = {
     ["Hop Player Near"] = false,
     ["Skull Guitar"] = false,
     ["Cursed Dual Katana"] = false,
-    ["Switch Melee"] = false,
+    ["Switch Melee"] = true,
     ["Eat Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
     ["Snipe Fruit"] = "", -- leave blank for none, put the fruit name like this example: Smoke Fruit, T-Rex Fruit, ...
     ["Lock Fragment"] = 0,
-    ["Buy Stuffs"] = false -- buso, geppo, soru, ken haki, ...
+    ["Buy Stuffs"] = true -- buso, geppo, soru, ken haki, ...
 }
 repeat task.wait() pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/kaitun.lua"))() end) until getgenv().Check_Execute
 loadstring(game:HttpGet("https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/chat"))()
