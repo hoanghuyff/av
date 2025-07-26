@@ -1,14 +1,34 @@
 getgenv().ConfigsKaitun = {
- ["Low Cpu"] = true,
+["Block Pet Gift"] = true, 
+["Low Cpu"] = true,
+
+ ["Rejoin When Update"] = false,
 
  ["Limit Tree"] = {
-  ["Limit"] = 200,
-  ["Destroy Untill"] = 100,
+  ["Limit"] = 500,
+  ["Destroy Untill"] = 500,
+
   ["Safe Tree"] = {
-  "Moon Blossom",
-  "Fossilight",
+   "Bone Blossom",
+   "Fossilight",
+   "Cacao",
+   "Sugar Apple",
+   "Ember Lily",
+   "Beanstalk",
+   "Giant Pinecone",
+   "Pepper",
+   "Burning Bud",
+   "Grape",
+   "Maple Apple",
+   "Sunflower",
+   "Elephant Ears",
+   "Dragon Pepper",
+   "Mango",
+   "Coconut",
   }
  },
+
+
  Seed = {
   Buy = {
    Mode = "Auto", -- Custom , Auto
@@ -20,42 +40,28 @@ getgenv().ConfigsKaitun = {
     "Orange Tulip",
     "Watermelon",
     "Mushroom",
-    "Avocado",
-    "Feijoa",
-    "Cauliflower",
-    "Loquat",
-    "Green Apple",
     "Nightshade",
-    "Firefly Fern",
-    "Soft Sunshine",
-    "Zen Rocks",
-    "Hinomai",
     "Beanstalk",
-    "Ember Lily",
-    "Sunflower",
-    "Sugar Apple",
-    "Burning Bud",
-    "Giant Pinecone",
-    "Spiked Mango",
    }
   },
   Place = {
-   Mode = "Lock", -- Select , Lock
+   Mode = "Select", -- Select , Lock
    Select = {
-    "Maple Apple",
-    "Sunflower",
-    "Dragon Pepper",
-    "Elephant Ears",
-    "Moon Melon",
-    "Easter Egg",
-    "Moon Mango",
+    "Cacao",
+    "Sugar Apple",
+    "Ember Lily",
+    "Beanstalk",
+    "Giant Pinecone",
+    "Pepper",
+    "Burning Bud",
+    "Mushroom",
     "Bone Blossom",
-    "Fossilight",
+       "Maple Apple",
+       "Grape",
+    "Mango",
+       "Coconut",
    },
    Lock = {
-    "IDK",
- "IDK",
- "IDK"
    }
   }
  },
@@ -67,115 +73,150 @@ getgenv().ConfigsKaitun = {
  },
 
  Events = {
-  Dino = true,
-
   ["Traveling Shop"] = {
-   "IDK",
-   "IDK",
+   "Bald Eagle",
    "Night Staff",
-   "Bee Egg"
+   "Star Caller",
+   "Bee Egg",
   },
   Craft = {
    "Lightning Rod",
    "Anti Bee Egg",
-   "Primal Egg",
   },
   Shop = {
- "Zen Egg",
-},
- Restocks_limit = 16000000,
- MinimumChi = 10
+   "Zen Egg",
+  },
+  Restocks_limit = 64000000,
+  MinimumChi = 10
  },
 
  Gear = {
   Buy = { 
-         "Medium Treat",
-         "Master Sprinkler",
-  "Godly Sprinkler",
-  "Advanced Sprinkler",
-  "Basic Sprinkler",
-  "Lightning Rod",
-  "Level Up Lollipop",
-  "Medium Toy",
+   "Master Sprinkler",
+   "Godly Sprinkler",
+   "Advanced Sprinkler",
+   "Basic Sprinkler",
+   "Lightning Rod",
+   "Level Up Lollipop",
+   "Medium Treat",
+   "Medium Toy",
   },
   Lock = {
    "Godly Sprinkler",
+            "Master Sprinkler",
+            "Level Up Lollipop"
   },
  },
 
  Eggs = {
   Place = {
-   "Common Summer Egg",
-   "Zen Egg",
-   "Primal Egg", 
-   "Dinosaur Egg",
-   "Bug Egg",
-   "Anti Bee Egg",
-   "Paradise Egg",
+      "Common Summer Egg",      
+      "Zen Egg",
   },
   Buy = {
    "Anti Bee Egg",
-   "Zen Egg",
    "Paradise Egg",
    "Bee Egg",
    "Night Egg",
    "Bug Egg",
-   "Common Summer Egg"
+   "Common Summer Egg",
   }
  },
 
  Pets = {
- ["Start Delete Pet At"] = 40, 
- ["Upgrade Slot"] = {
+  ["Start Delete Pet At"] = 40,
+  ["Upgrade Slot"] = {
    ["Pet"] = {
-    ["Starfish"] = { 5, 76 },
+    ["Starfish"] = { 8, 76 },
    },
    ["Limit Upgrade"] = 5,
    ["Equip When Done"] = {
-    ["Starfish"] = { 8, 76 },
+    ["Starfish"] = { 2, 76,1 },
+    ["Tanchozuru"] = { 7, 999 },
    },
   },
+  Locked_Pet_Age = 60, -- pet that age > 60 will lock
   Locked = {
    "T-Rex",
-   "Kitsune",
    "Dragonfly",
-   "Raccon",
-   "Fennec Fox",
    "Spinosaurus",
+   "Raccoon",
+   "Fennec Fox",
+   "Corrupted Kitsune",
    "Disco Bee",
    "Butterfly",
    "Mimic Octopus",
+   "Kitsune",
    ["Starfish"] = 20,
+   ["Tanchozuru"] = 8,
   },
-  LockPet_Weight = 4, -- if Weight >= 10 they will locked,
+  LockPet_Weight = 8, -- if Weight >= 10 they will locked,
   Instant_Sell = {
+   "Dog",
+   "Bunny",
+   "Golden Lab",
+   "Triceratops",
+   "Stegosaurus",
+   "Raptor",
+   "Seagull",
+   "Parasaurolophus",
+   "Pachycephalosaurus",
+   "Iguanodon",
+   "Shiba Inu",
+   "Nihonzaru",
+   "Tanuki",
+   "Kappa",
+   "Caterpillar",
+   "Snail",
+   "Giant Ant",
+   "Praying Mantis",
+   "Ankylosaurus",
+   "Ostrich",
+   "Peacock",
+   "Scarlet Macaw",
+   "Capybara",
+   "Wasp",
+   "Tarantula Hawk",
+   "Moth",
+   "Bee",
+   "Honey Bee",
+   "Bear Bee",
+   "Petal Bee",
+   "Grey Mouse",
+   "Brown Mouse",
+   "Squirrel",
+   "Red Giant Ant",
+   "Hedgehog",
+   "Mole",
+   "Kodama",
+   "Maneki-neko",
+   "Raiju"
+   "Frog",
+   "Echo Frog",
+   "Night Owl",
+   "Brontosaurus",
+   "Dilophosaurus",
+   "Pterodactyl",
+   "Crab",
   }
  },
 
  Webhook = {
   UrlPet = "https://discord.com/api/webhooks/1398222248401440789/XcG_auua5IgKE32_Ay47_LNo0Kl63MYU0nqu2egvh4p3HOEqMB8AojYT33-dtxen-S3N",
   UrlSeed = "https://discord.com/api/webhooks/1398222060001427517/Cbr4naOIli8GuD9MWASve3vVLqJmdrPNQKRTbVR7ig9ZbXBEOIJ7zG0NZ3XKSNSTON_5",
-  PcName = "PC1",
+  PcName = "pc1",
 
   Noti = {
    Seeds = {
-    "IDK",
-    "IDK",
-    "IDK",
+    "Sunflower",
+    "Dragon Pepper",
+    "Elephant Ears",
    },
    SeedPack = {
     "Idk",
    },
    Pets = {
-    "Dragonfly",
-    "Spinosaurus",
-    "T-Rex",
-    "Kitsune",
-    "Raccoon",
-    "Disco Bee",
-    "Fennec Fox",
-    "Butterfly",
-    "Mimic Octopus",
+           "Kitsune",
    },
    Pet_Weight_Noti = true,
   }
@@ -183,5 +224,3 @@ getgenv().ConfigsKaitun = {
 }
 License = "EEjFXfFxGuhs9xagvKF85yc6ZwTbXqik"
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()
-_G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456" , Note = "Pc", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/refs/heads/main/gag"))()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/friend'))()
