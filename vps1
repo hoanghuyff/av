@@ -127,12 +127,12 @@ getgenv().ConfigsKaitun = {
   ["Start Delete Pet At"] = 40,
   ["Upgrade Slot"] = {
    ["Pet"] = {
-    ["Starfish"] = { 8, 76 },
+    ["Starfish"] = { 5, 76 },
    },
    ["Limit Upgrade"] = 5,
    ["Equip When Done"] = {
-    ["Starfish"] = { 2, 76,1 },
-    ["Tanchozuru"] = { 7, 999 },
+    ["Tanchozuru"] = { 1, 999 },
+    ["Starfish"] = { 7, 76,1 },
    },
   },
   Locked_Pet_Age = 60, -- pet that age > 60 will lock
@@ -148,7 +148,7 @@ getgenv().ConfigsKaitun = {
    "Mimic Octopus",
    "Kitsune",
    ["Starfish"] = 20,
-   ["Tanchozuru"] = 8,
+   ["Tanchozuru"] = 1,
   },
   LockPet_Weight = 8, -- if Weight >= 10 they will locked,
   Instant_Sell = {
@@ -190,7 +190,7 @@ getgenv().ConfigsKaitun = {
    "Mole",
    "Kodama",
    "Maneki-neko",
-   "Raiju",
+   "Raiju"
    "Frog",
    "Echo Frog",
    "Night Owl",
@@ -202,8 +202,8 @@ getgenv().ConfigsKaitun = {
  },
 
  Webhook = {
-  UrlPet = "https://discord.com/api/webhooks/1398222248401440789/XcG_auua5IgKE32_Ay47_LNo0Kl63MYU0nqu2egvh4p3HOEqMB8AojYT33-dtxen-S3N",
-  UrlSeed = "https://discord.com/api/webhooks/1398222060001427517/Cbr4naOIli8GuD9MWASve3vVLqJmdrPNQKRTbVR7ig9ZbXBEOIJ7zG0NZ3XKSNSTON_5",
+  UrlPet = "",
+  UrlSeed = "",
   PcName = "pc1",
 
   Noti = {
