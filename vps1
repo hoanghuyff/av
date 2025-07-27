@@ -73,12 +73,12 @@ getgenv().ConfigsKaitun = {
 	Events = {
 		["Zen Event"] = {
 			["Restocking"] = { -- Minimumthing to restock
-				Max_Restocks_Price = 50_000_000,
-				Minimum_Money = 10_000_000,
+				Max_Restocks_Price = 5_000_000,
+				Minimum_Money = 5_000_000,
 				Minimum_Chi = 200
 			},
 			["Doing"] = {
-				Minimum_Money = 30_000_000, -- minimum money to start play this event
+				Minimum_Money = 10_000_000, -- minimum money to start play this event
 				First_Upgrade_Tree = 4,
 				Maximum_Chi = 250,
 			}
@@ -94,7 +94,7 @@ getgenv().ConfigsKaitun = {
 		Shop = {
 			"Zen Egg",
 		},
-		Start_Do_Honey = 2_000_000 -- start trade fruit for honey at money
+		Start_Do_Honey = 900_000 -- start trade fruit for honey at money
 	},
 
 	Gear = {
@@ -119,29 +119,17 @@ getgenv().ConfigsKaitun = {
 
 	Eggs = {
 		Place = {
-			"Zen Egg",
-			"Primal Egg",
-			"Dinosaur Egg",
-			"Oasis Egg",
-			"Anti Bee Egg",
-			"Night Egg",
-			"Bug Egg",
-			"Paradise Egg",
-			"Bee Egg",
-			"Rare Summer Egg",
-			"Mythical Egg",
-			"Common Egg",
+			"Common Summer Egg", 
+                        "Zen Egg",
 		},
 		Buy = {
-			"Bee Egg",
+			"Common Summer Egg",
+                        "Bee Egg",
 			"Oasis Egg",
 			"Paradise Egg",
 			"Anti Bee Egg",
 			"Night Egg",
-			"Rare Summer Egg",
 			"Bug Egg",
-			"Mythical Egg",
-			"Common Egg",
 		}
 	},
 
@@ -153,8 +141,8 @@ getgenv().ConfigsKaitun = {
 			},
 			["Limit Upgrade"] = 5,
 			["Equip When Done"] = {
-				["Tanchozuru"] = { 1, 100, 1 },
 				["Starfish"] = { 7, 100, 1 },
+                                ["Tanchozuru"] = { 1, 100, 1 },
 			},
 		},
 		Locked_Pet_Age = 60, -- pet that age > 60 will lock
@@ -169,8 +157,8 @@ getgenv().ConfigsKaitun = {
    "Butterfly",
    "Mimic Octopus",
    "Kitsune",
-   ["Starfish"] = 20,
-   ["Tanchozuru"] = 2,
+   ["Starfish"] = 40,
+   ["Tanchozuru"] = 1,
 		},
 		LockPet_Weight = 7, -- if Weight >= 10 they will locked,
 		Instant_Sell = {		
@@ -179,7 +167,7 @@ getgenv().ConfigsKaitun = {
 	},
 
 	Webhook = {
-		UrlPet = "xxx",
+		UrlPet = "",
 		UrlSeed = "xxx",
 		PcName = "xxx",
 
