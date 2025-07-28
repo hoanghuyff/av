@@ -74,11 +74,11 @@ getgenv().ConfigsKaitun = {
 		["Zen Event"] = {
 			["Restocking"] = { -- Minimumthing to restock
 				Max_Restocks_Price = 5_000_000,
-				Minimum_Money = 5_000_000,
+				Minimum_Money = 1_000_000,
 				Minimum_Chi = 200
 			},
 			["Doing"] = {
-				Minimum_Money = 10_000_000, -- minimum money to start play this event
+				Minimum_Money = 3_000_000, -- minimum money to start play this event
 				First_Upgrade_Tree = 4,
 				Maximum_Chi = 250,
 			}
@@ -169,7 +169,7 @@ getgenv().ConfigsKaitun = {
 	Webhook = {
 		UrlPet = "https://discord.com/api/webhooks/1398222248401440789/XcG_auua5IgKE32_Ay47_LNo0Kl63MYU0nqu2egvh4p3HOEqMB8AojYT33-dtxen-S3N",
 		UrlSeed = "https://discord.com/api/webhooks/1398222060001427517/Cbr4naOIli8GuD9MWASve3vVLqJmdrPNQKRTbVR7ig9ZbXBEOIJ7zG0NZ3XKSNSTON_5",
-		PcName = "PC",
+		PcName = "xxx",
 
 		Noti = {
 			Seeds = {
