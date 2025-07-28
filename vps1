@@ -196,4 +196,3 @@ getgenv().ConfigsKaitun = {
 License = "EEjFXfFxGuhs9xagvKF85yc6ZwTbXqik"
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()
 _G.Config = { UserID = "a24b2abf-94cc-4408-b64a-dc96756929e1", discord_id = "1120921298860773456" , Note = "Pc", } loadstring(game:HttpGet("https://raw.githubusercontent.com/skadidau/unfazedfree/refs/heads/main/gag"))()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/hoanghuyff/av/refs/heads/main/friend'))()
