@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-getgenv().Key = "b15f518ad2d4c98c5165a6a3"
+getgenv().Key = ""
     getgenv().SettingFarm ={
         ["Hide UI"] = true,
         ["Reset Teleport"] = {
@@ -16,7 +16,7 @@ getgenv().Key = "b15f518ad2d4c98c5165a6a3"
                 },
             },
         },
-        ["White Screen"] = true,
+        ["White Screen"] = false,
         ["Lock Fps"] = {
             ["Enabled"] = true,
             ["FPS"] = 15,
@@ -47,7 +47,7 @@ getgenv().Key = "b15f518ad2d4c98c5165a6a3"
         },
         ["Auto Summon Rip Indra"] = false, --- auto buy haki and craft haki legendary 
         ["Select Hop"] = { -- 70% will have it
-            ["Hop Server If Have Player Near"] = true, 
+            ["Hop Server If Have Player Near"] = false, 
             ["Hop Find Rip Indra Get Valkyrie Helm or Get Tushita"] = false, 
             ["Hop Find Dough King Get Mirror Fractal"] = false,
             ["Hop Find Raids Castle [CDK]"] = false,
