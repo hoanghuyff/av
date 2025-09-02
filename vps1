@@ -38,7 +38,7 @@ getgenv().Key = "f13a15724cb7ee8e57b5e122"
             ["Gravity Blade"]  = false,
         },
         ["Farm Fragments"] = {
-            ["Enabled"]  = true,
+            ["Enabled"]  = false,
             ["Fragment"] = 20000,
         },
         ["Auto Chat"] = {
